@@ -31,9 +31,9 @@
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(255,122,26,0.12), transparent 28%),
-        linear-gradient(180deg, #111214 0%, #0c0c0d 100%);
-      color: var(--text);
+        radial-gradient(circle at top right, rgba(255,122,26,0.08), transparent 24%),
+        linear-gradient(180deg, #eeeeef 0%, #e4e4e7 100%);
+      color: #161616;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -150,8 +150,8 @@
     .mini-site,
     .summary-box,
     .toast {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border: 1px solid rgba(255,255,255,0.07);
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,248,250,0.96));
+      border: 1px solid rgba(0,0,0,0.08);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
     }
@@ -167,7 +167,7 @@
       align-items: center;
       gap: 8px;
       background: var(--accent-soft);
-      color: #ffd4b1;
+      color: #9a4e16;
       border: 1px solid rgba(255,122,26,0.25);
       padding: 8px 12px;
       border-radius: 999px;
@@ -190,7 +190,7 @@
     }
 
     .hero p {
-      color: var(--muted);
+      color: #555960;
       font-size: 1.07rem;
       line-height: 1.75;
       max-width: 60ch;
@@ -312,7 +312,7 @@
 
     .service-card p {
       margin: 0;
-      color: var(--muted);
+      color: #5b6168;
       line-height: 1.8;
     }
 
@@ -327,7 +327,7 @@
     .service-points li {
       display: flex;
       gap: 10px;
-      color: #e5e5e7;
+      color: #1f2328;
       align-items: center;
     }
 
@@ -520,7 +520,7 @@
     }
 
     .subtext {
-      color: var(--muted);
+      color: #5c6168;
       line-height: 1.7;
       margin: 0 0 22px;
       max-width: 70ch;
@@ -559,7 +559,7 @@
 
     .field label {
       font-size: 0.95rem;
-      color: #ececee;
+      color: #1b1d21;
       font-weight: 700;
     }
 
@@ -567,9 +567,9 @@
     .field textarea,
     .field select {
       width: 100%;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.09);
-      color: var(--white);
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.12);
+      color: #17181c;
       padding: 14px 14px;
       border-radius: 14px;
       outline: none;
@@ -661,12 +661,12 @@
     .summary-list {
       display: grid;
       gap: 10px;
-      color: var(--muted);
+      color: #565c63;
       font-size: 0.95rem;
     }
 
     .summary-list strong {
-      color: var(--white);
+      color: #17181c;
       font-weight: 700;
     }
 
@@ -704,14 +704,14 @@
 
     .footer {
       padding: 0 0 60px;
-      color: var(--muted);
+      color: #565c63;
     }
 
     .footer-card {
       padding: 24px 28px;
       border-radius: var(--radius-xl);
-      border: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.92);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -869,7 +869,7 @@
       <div class="container footer">
         <div class="footer-card">
           <div>
-            <strong style="display:block;color:var(--white);margin-bottom:6px;">Triple C Website Development</strong>
+            <strong style="display:block;color:#17181c;margin-bottom:6px;">Triple C Website Development</strong>
             <span>Premium presentation. Clear process. Serious small business websites.</span>
           </div>
           <button class="back-btn" type="button" onclick="showView('new-site')">Build a Website Request</button>
@@ -1076,7 +1076,17 @@
         { name: 'Navy', value: '#17324d' },
         { name: 'Forest', value: '#1f5745' },
         { name: 'Burgundy', value: '#712331' },
-        { name: 'Royal Blue', value: '#2463eb' }
+        { name: 'Royal Blue', value: '#2463eb' },
+        { name: 'Teal', value: '#0f766e' },
+        { name: 'Emerald', value: '#0f9f6e' },
+        { name: 'Deep Red', value: '#9f1d35' },
+        { name: 'Plum', value: '#6f3fa8' },
+        { name: 'Gold', value: '#c9931a' },
+        { name: 'Mustard', value: '#d4a017' },
+        { name: 'Sky Blue', value: '#3b82f6' },
+        { name: 'Steel Blue', value: '#406882' },
+        { name: 'Chocolate', value: '#6b4423' },
+        { name: 'Olive', value: '#667a2f' }
       ],
       secondary: [
         { name: 'Charcoal', value: '#25262b' },
@@ -1086,7 +1096,17 @@
         { name: 'Muted Blue', value: '#7a94b8' },
         { name: 'Deep Green', value: '#244739' },
         { name: 'Taupe', value: '#93897f' },
-        { name: 'Light Gray', value: '#d7d7db' }
+        { name: 'Light Gray', value: '#d7d7db' },
+        { name: 'Sage', value: '#9caf88' },
+        { name: 'Sand', value: '#d7c2a3' },
+        { name: 'Dusty Rose', value: '#c69797' },
+        { name: 'Lavender Gray', value: '#b7b0c8' },
+        { name: 'Seafoam', value: '#9dc7bf' },
+        { name: 'Slate Blue', value: '#6b7a99' },
+        { name: 'Soft Gold', value: '#d6b86a' },
+        { name: 'Stone', value: '#b6b0a7' },
+        { name: 'Ice Blue', value: '#c7dceb' },
+        { name: 'Clay', value: '#b3846a' }
       ],
       third: [
         { name: 'White', value: '#ffffff' },
@@ -1096,7 +1116,11 @@
         { name: 'Warm Gray', value: '#d7d0c8' },
         { name: 'Sand', value: '#dcc8ac' },
         { name: 'Silver', value: '#bcc0c7' },
-        { name: 'Cool Gray', value: '#cfd6dd' }
+        { name: 'Cool Gray', value: '#cfd6dd' },
+        { name: 'Mist', value: '#eef2f3' },
+        { name: 'Soft Beige', value: '#ede5d8' },
+        { name: 'Pearl', value: '#f8f8f6' },
+        { name: 'Pale Blue', value: '#e7eff7' }
       ]
     };
 
