@@ -70,6 +70,7 @@
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
+      color: #ffffff;
     }
 
     .brand-mark {
@@ -150,8 +151,8 @@
     .mini-site,
     .summary-box,
     .toast {
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,248,250,0.96));
-      border: 1px solid rgba(0,0,0,0.08);
+      background: linear-gradient(180deg, #ededf0, #e6e6ea);
+      border: 2px solid rgba(0,0,0,0.7);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
     }
@@ -594,11 +595,14 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      max-height: 174px;
+      overflow-y: auto;
+      padding-right: 6px;
     }
 
     .color-option {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 999px;
       border: 2px solid rgba(255,255,255,0.35);
       cursor: pointer;
@@ -787,7 +791,7 @@
         <div class="brand-mark"><span>CCC</span></div>
         <div>
           <div>Triple C</div>
-          <div style="font-size:0.72rem;color:var(--muted);font-weight:600;letter-spacing:0.08em;">Website Development</div>
+          <div style="font-size:0.72rem;color:#d7d7db;font-weight:600;letter-spacing:0.08em;">Website Development</div>
         </div>
       </div>
       <div class="nav-links">
@@ -1072,41 +1076,65 @@
         { name: 'Orange', value: '#ff7a1a' },
         { name: 'Black', value: '#111111' },
         { name: 'White', value: '#f6f6f6' },
+        { name: 'Charcoal', value: '#25262b' },
         { name: 'Slate', value: '#5c6670' },
+        { name: 'Graphite', value: '#41444b' },
         { name: 'Navy', value: '#17324d' },
-        { name: 'Forest', value: '#1f5745' },
-        { name: 'Burgundy', value: '#712331' },
+        { name: 'Midnight Blue', value: '#0f172a' },
         { name: 'Royal Blue', value: '#2463eb' },
+        { name: 'Sky Blue', value: '#3b82f6' },
+        { name: 'Ocean Blue', value: '#1d4ed8' },
+        { name: 'Steel Blue', value: '#406882' },
+        { name: 'Powder Blue', value: '#93c5fd' },
         { name: 'Teal', value: '#0f766e' },
+        { name: 'Sea Green', value: '#2f855a' },
+        { name: 'Forest', value: '#1f5745' },
         { name: 'Emerald', value: '#0f9f6e' },
+        { name: 'Sage Green', value: '#6b8f71' },
+        { name: 'Olive', value: '#667a2f' },
+        { name: 'Burgundy', value: '#712331' },
         { name: 'Deep Red', value: '#9f1d35' },
         { name: 'Plum', value: '#6f3fa8' },
         { name: 'Gold', value: '#c9931a' },
         { name: 'Mustard', value: '#d4a017' },
-        { name: 'Sky Blue', value: '#3b82f6' },
-        { name: 'Steel Blue', value: '#406882' },
         { name: 'Chocolate', value: '#6b4423' },
-        { name: 'Olive', value: '#667a2f' }
+        { name: 'Sand', value: '#d7c2a3' },
+        { name: 'Cool Gray', value: '#9ca3af' },
+        { name: 'Light Gray', value: '#d1d5db' },
+        { name: 'Silver', value: '#bcc0c7' },
+        { name: 'Warm Gray', value: '#a8a29e' }
       ],
       secondary: [
         { name: 'Charcoal', value: '#25262b' },
         { name: 'Graphite', value: '#41444b' },
         { name: 'Cream', value: '#f0ece5' },
         { name: 'Soft Orange', value: '#ffb173' },
+        { name: 'Burnt Orange', value: '#ea7b2c' },
+        { name: 'Light Gray', value: '#d7d7db' },
+        { name: 'Stone Gray', value: '#b6b0a7' },
+        { name: 'Cool Gray', value: '#cfd6dd' },
         { name: 'Muted Blue', value: '#7a94b8' },
+        { name: 'Slate Blue', value: '#6b7a99' },
+        { name: 'Ice Blue', value: '#c7dceb' },
+        { name: 'Dusty Blue', value: '#8da9c4' },
+        { name: 'Pale Blue', value: '#dbeafe' },
+        { name: 'Seafoam', value: '#9dc7bf' },
+        { name: 'Sage', value: '#9caf88' },
+        { name: 'Mint', value: '#b7e4c7' },
+        { name: 'Moss', value: '#7c9a6d' },
         { name: 'Deep Green', value: '#244739' },
         { name: 'Taupe', value: '#93897f' },
-        { name: 'Light Gray', value: '#d7d7db' },
-        { name: 'Sage', value: '#9caf88' },
         { name: 'Sand', value: '#d7c2a3' },
+        { name: 'Soft Gold', value: '#d6b86a' },
         { name: 'Dusty Rose', value: '#c69797' },
         { name: 'Lavender Gray', value: '#b7b0c8' },
-        { name: 'Seafoam', value: '#9dc7bf' },
-        { name: 'Slate Blue', value: '#6b7a99' },
-        { name: 'Soft Gold', value: '#d6b86a' },
-        { name: 'Stone', value: '#b6b0a7' },
-        { name: 'Ice Blue', value: '#c7dceb' },
-        { name: 'Clay', value: '#b3846a' }
+        { name: 'Clay', value: '#b3846a' },
+        { name: 'Pearl Gray', value: '#e5e7eb' },
+        { name: 'Off White', value: '#f5f4f1' },
+        { name: 'Beige', value: '#e7dbc9' },
+        { name: 'Soft Black', value: '#2d2d2d' },
+        { name: 'Blue Gray', value: '#94a3b8' },
+        { name: 'Olive Gray', value: '#8b8f6a' }
       ],
       third: [
         { name: 'White', value: '#ffffff' },
