@@ -71,6 +71,67 @@
     a { color: inherit; text-decoration: none; }
     button, input, textarea, select { font: inherit; }
 
+    .tech-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      opacity: 0.5;
+      overflow: hidden;
+    }
+
+    .tech-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .circuit-base path {
+      fill: none;
+      stroke: rgba(90, 90, 96, 0.22);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .circuit-glow path {
+      fill: none;
+      stroke: rgba(255, 122, 26, 0.9);
+      stroke-width: 2.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 8 92;
+      animation: techFlow 8s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(255,122,26,0.45));
+    }
+
+    .circuit-glow path:nth-child(2) { animation-duration: 9.5s; animation-delay: -1.3s; }
+    .circuit-glow path:nth-child(3) { animation-duration: 11s; animation-delay: -3s; }
+    .circuit-glow path:nth-child(4) { animation-duration: 8.8s; animation-delay: -2.2s; }
+    .circuit-glow path:nth-child(5) { animation-duration: 10.6s; animation-delay: -4.4s; }
+    .circuit-glow path:nth-child(6) { animation-duration: 7.8s; animation-delay: -1s; }
+    .circuit-glow path:nth-child(7) { animation-duration: 9.2s; animation-delay: -2.7s; }
+    .circuit-glow path:nth-child(8) { animation-duration: 11.4s; animation-delay: -5s; }
+
+    .circuit-nodes circle {
+      fill: rgba(255, 122, 26, 0.55);
+      filter: drop-shadow(0 0 5px rgba(255,122,26,0.35));
+      animation: nodePulse 4.4s ease-in-out infinite;
+    }
+
+    .circuit-nodes circle:nth-child(2n) { animation-delay: -1.2s; }
+    .circuit-nodes circle:nth-child(3n) { animation-delay: -2.1s; }
+
+    @keyframes techFlow {
+      from { stroke-dashoffset: 100; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes nodePulse {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.18); }
+    }
+
     .container {
       width: min(calc(100% - 32px), var(--max));
       margin: 0 auto;
@@ -831,7 +892,24 @@
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .circuit-glow path,
+      .circuit-nodes circle,
+      .hero-copy,
+      .hero-panel,
+      .service-card,
+      .builder-panel,
+      .form-panel,
+      .process-card,
+      .trust-card {
+        animation: none !important;
+      }
+    }
+
     @media (max-width: 760px) {
+      .tech-bg {
+        opacity: 0.28;
+      }
       .hero { padding-top: 56px; }
       .hero-copy,
       .hero-panel,
@@ -854,6 +932,45 @@
   </style>
 </head>
 <body>
+  <div class="tech-bg" aria-hidden="true">
+    <svg class="tech-svg" viewBox="0 0 1600 900" preserveAspectRatio="none">
+      <g class="circuit-base">
+        <path d="M0 120 H180 L220 160 H360 L420 100 H620" />
+        <path d="M0 220 H140 L200 280 H340 L420 220 H700" />
+        <path d="M0 340 H260 L320 280 H520 L600 360 H860" />
+        <path d="M0 470 H220 L280 420 H470 L560 500 H760" />
+        <path d="M0 620 H180 L250 560 H420 L520 660 H760" />
+        <path d="M0 760 H260 L330 700 H520 L640 820 H900" />
+        <path d="M1600 120 H1420 L1380 160 H1240 L1180 100 H980" />
+        <path d="M1600 240 H1460 L1400 300 H1260 L1180 230 H900" />
+        <path d="M1600 380 H1380 L1320 320 H1160 L1060 400 H860" />
+        <path d="M1600 540 H1440 L1380 480 H1220 L1120 560 H900" />
+        <path d="M1600 700 H1420 L1340 630 H1180 L1080 740 H860" />
+        <path d="M800 0 V180 L760 220 V360 L830 430 V620 L780 680 V900" />
+        <path d="M680 0 V140 L620 200 V340 L700 420 V560 L650 640 V900" />
+        <path d="M920 0 V130 L980 190 V340 L900 430 V580 L960 660 V900" />
+        <path d="M1080 0 V180 L1140 240 V420 L1060 500 V900" />
+        <path d="M520 0 V160 L460 240 V430 L540 520 V900" />
+      </g>
+      <g class="circuit-glow">
+        <path d="M0 120 H180 L220 160 H360 L420 100 H620" pathLength="100" />
+        <path d="M0 340 H260 L320 280 H520 L600 360 H860" pathLength="100" />
+        <path d="M0 620 H180 L250 560 H420 L520 660 H760" pathLength="100" />
+        <path d="M1600 240 H1460 L1400 300 H1260 L1180 230 H900" pathLength="100" />
+        <path d="M1600 540 H1440 L1380 480 H1220 L1120 560 H900" pathLength="100" />
+        <path d="M800 0 V180 L760 220 V360 L830 430 V620 L780 680 V900" pathLength="100" />
+        <path d="M920 0 V130 L980 190 V340 L900 430 V580 L960 660 V900" pathLength="100" />
+        <path d="M520 0 V160 L460 240 V430 L540 520 V900" pathLength="100" />
+      </g>
+      <g class="circuit-nodes">
+        <circle cx="180" cy="120" r="4" /><circle cx="220" cy="160" r="4" /><circle cx="420" cy="100" r="4" />
+        <circle cx="320" cy="280" r="4" /><circle cx="600" cy="360" r="4" /><circle cx="250" cy="560" r="4" />
+        <circle cx="1380" cy="480" r="4" /><circle cx="1400" cy="300" r="4" /><circle cx="1180" cy="230" r="4" />
+        <circle cx="760" cy="220" r="4" /><circle cx="830" cy="430" r="4" /><circle cx="980" cy="190" r="4" />
+        <circle cx="540" cy="520" r="4" /><circle cx="780" cy="680" r="4" /><circle cx="960" cy="660" r="4" />
+      </g>
+    </svg>
+  </div>
   <header class="topbar">
     <div class="container nav">
       <div class="brand">
@@ -1367,25 +1484,46 @@
     }
 
     function buildWebsiteRequestEmailBody(formData) {
-      return `New Website Request\n\n` +
-        `Primary Contact Name: ${formData.contactName}\n` +
-        `Business Name: ${formData.businessName}\n` +
-        `Primary Phone Number: ${formData.phoneNumber}\n` +
-        `Primary Email: ${formData.emailAddress}\n\n` +
-        `Primary Color: ${selectionState.primary.name}\n` +
-        `Secondary Color: ${selectionState.secondary.name}\n` +
-        `Third Color: ${selectionState.third.name}\n` +
-        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}\n\n` +
-        `Business Description:\n${formData.businessDescription}`;
+      return `New Website Request
+
+` +
+        `Primary Contact Name: ${formData.contactName}
+` +
+        `Business Name: ${formData.businessName}
+` +
+        `Primary Phone Number: ${formData.phoneNumber}
+` +
+        `Primary Email: ${formData.emailAddress}
+
+` +
+        `Primary Color: ${selectionState.primary.name}
+` +
+        `Secondary Color: ${selectionState.secondary.name}
+` +
+        `Third Color: ${selectionState.third.name}
+` +
+        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}
+
+` +
+        `Business Description:
+${formData.businessDescription}`;
     }
 
     function buildChangeRequestEmailBody(formData) {
-      return `Website Change Request\n\n` +
-        `Business Name: ${formData.businessName}\n` +
-        `Primary Name: ${formData.primaryName}\n` +
-        `Primary Contact Number: ${formData.phone}\n` +
-        `Primary Email: ${formData.email}\n\n` +
-        `Requested Changes:\n${formData.requestedChanges}`;
+      return `Website Change Request
+
+` +
+        `Business Name: ${formData.businessName}
+` +
+        `Primary Name: ${formData.primaryName}
+` +
+        `Primary Contact Number: ${formData.phone}
+` +
+        `Primary Email: ${formData.email}
+
+` +
+        `Requested Changes:
+${formData.requestedChanges}`;
     }
 
     document.getElementById('newSiteForm')?.addEventListener('submit', (e) => {
