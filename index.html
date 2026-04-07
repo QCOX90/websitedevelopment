@@ -31,9 +31,39 @@
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top right, rgba(255,122,26,0.08), transparent 24%),
-        linear-gradient(180deg, #eeeeef 0%, #e4e4e7 100%);
+        radial-gradient(circle at 12% 18%, rgba(255,122,26,0.08), transparent 20%),
+        radial-gradient(circle at 88% 14%, rgba(255,255,255,0.65), transparent 16%),
+        radial-gradient(circle at 78% 72%, rgba(255,122,26,0.05), transparent 22%),
+        linear-gradient(180deg, #efeff1 0%, #e5e5e8 100%);
       color: #161616;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.22), transparent 70%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.45), transparent 18%),
+        radial-gradient(circle at 76% 20%, rgba(255,122,26,0.06), transparent 16%),
+        radial-gradient(circle at 68% 78%, rgba(255,255,255,0.35), transparent 20%);
+      filter: blur(18px);
+      z-index: -1;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -161,6 +191,18 @@
       padding: 44px;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      right: -110px;
+      top: -80px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,122,26,0.10), transparent 68%);
+      pointer-events: none;
     }
 
     .eyebrow {
@@ -294,6 +336,7 @@
       padding: 30px;
       position: relative;
       overflow: hidden;
+      animation: fadeUp 0.65s ease both;
     }
 
     .service-card::after {
@@ -367,6 +410,7 @@
     .builder-panel,
     .form-panel {
       padding: 28px;
+      animation: fadeUp 0.65s ease both;
     }
 
     .mini-site {
@@ -693,6 +737,36 @@
       box-shadow: 0 16px 34px rgba(255,122,26,0.24);
     }
 
+    .hero-copy,
+    .hero-panel,
+    .metric-card,
+    .service-card,
+    .builder-panel,
+    .form-panel,
+    .mini-site,
+    .summary-box,
+    .footer-card {
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+
+    .hero-copy:hover,
+    .hero-panel:hover,
+    .service-card:hover,
+    .builder-panel:hover,
+    .form-panel:hover,
+    .mini-site:hover,
+    .summary-box:hover,
+    .footer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 46px rgba(0,0,0,0.12);
+      border-color: rgba(255,122,26,0.45);
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,122,26,0.35);
+    }
+
     .helper {
       color: #222222;
       font-size: 0.92rem;
@@ -754,7 +828,81 @@
       font-size: 0.9rem;
     }
 
+        .process-grid,
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .process-card,
+    .trust-card {
+      padding: 24px;
+      border-radius: 24px;
+      border: 2px solid rgba(0,0,0,0.7);
+      background: linear-gradient(180deg, #ededf0, #e6e6ea);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .process-number {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #ff7a1a;
+      color: #111;
+      font-weight: 900;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 24px rgba(255,122,26,0.22);
+    }
+
+    .process-card h3,
+    .trust-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .process-card p,
+    .trust-card p {
+      margin: 0;
+      color: #222222;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links a {
+      color: #222222;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover {
+      color: #ff7a1a;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 1100px) {
+      .process-grid,
+      .trust-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .hero-grid,
       .builder-wrap,
       .form-wrap {
@@ -768,6 +916,10 @@
     }
 
     @media (max-width: 760px) {
+      .process-grid,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
       .hero { padding-top: 56px; }
       .hero-copy,
       .hero-panel,
@@ -839,6 +991,64 @@
       <div class="container section">
         <div class="section-heading">
           <div>
+            <h2>How it works</h2>
+            <p>A refined process helps every client know exactly what happens next, from first request to completed delivery.</p>
+          </div>
+        </div>
+        <div class="process-grid">
+          <article class="process-card">
+            <div class="process-number">01</div>
+            <h3>Submit your request</h3>
+            <p>Choose whether you need a new website or updates to your current one, then send the details through a guided form.</p>
+          </article>
+          <article class="process-card">
+            <div class="process-number">02</div>
+            <h3>We review your project</h3>
+            <p>Your goals, features, design direction, and business details are reviewed so the quote is based on real scope.</p>
+          </article>
+          <article class="process-card">
+            <div class="process-number">03</div>
+            <h3>Receive your quote</h3>
+            <p>You receive a clearer estimate, timeline, and next steps so the project starts with structure and transparency.</p>
+          </article>
+          <article class="process-card">
+            <div class="process-number">04</div>
+            <h3>Build and refine</h3>
+            <p>Once approved, the design and development process begins with a focus on clean presentation and business credibility.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="container section">
+        <div class="section-heading">
+          <div>
+            <h2>Why clients choose Triple C</h2>
+            <p>Built for businesses that want a cleaner online presence, stronger first impressions, and a professional development process.</p>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <article class="trust-card">
+            <h3>Modern, clean presentation</h3>
+            <p>Layouts are designed to look polished, structured, and current without feeling overdesigned or distracting.</p>
+          </article>
+          <article class="trust-card">
+            <h3>Small business focused</h3>
+            <p>Every build is shaped around what smaller businesses actually need: clarity, speed, mobile usability, and strong branding.</p>
+          </article>
+          <article class="trust-card">
+            <h3>Clear communication</h3>
+            <p>Clients know what is being built, what information is needed, and what the next step is throughout the process.</p>
+          </article>
+          <article class="trust-card">
+            <h3>Professional user experience</h3>
+            <p>From hover states to form structure and layout spacing, details are refined so the site feels intentional and premium.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="container section">
+        <div class="section-heading">
+          <div>
             <h2>Choose what you need</h2>
             <p>Your website should feel like an extension of your business. Start with a new build or request changes to an existing site.</p>
           </div>
@@ -874,7 +1084,13 @@
         <div class="footer-card">
           <div>
             <strong style="display:block;color:#17181c;margin-bottom:6px;">Triple C Website Development</strong>
-            <span>Premium presentation. Clear process. Serious small business websites.</span>
+            <span>Professional websites for businesses that want to look established, current, and credible online.</span>
+          </div>
+          <div class="footer-links">
+            <a href="#" onclick="showView('home'); return false;">Home</a>
+            <a href="#" onclick="showView('new-site'); return false;">Need a Website?</a>
+            <a href="#" onclick="showView('changes'); return false;">Request Changes</a>
+            <a href="mailto:qcoxbusiness@outlook.com">qcoxbusiness@outlook.com</a>
           </div>
           <button class="back-btn" type="button" onclick="showView('new-site')">Build a Website Request</button>
         </div>
