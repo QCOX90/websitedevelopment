@@ -1239,8 +1239,9 @@
 
               <div class="form-actions">
                 <button class="submit-btn" type="submit">Submit This Website to Our Team</button>
+                <button class="back-btn" type="button" id="downloadStarterBtn" style="color:#222; border-color:rgba(0,0,0,0.16);">Download Starter HTML</button>
               </div>
-              <div class="helper">This uses your visitor's email app to open a prefilled message with their selections.</div>
+              <div class="helper">This version downloads a starter HTML file and opens a prefilled email summary. Plain GitHub Pages plus mailto cannot attach a generated file to an email automatically.</div>
             </form>
           </div>
         </div>
@@ -1484,10 +1485,264 @@
     }
 
     function buildWebsiteRequestEmailBody(formData) {
-      return `New Website Request
+      return `New Website Request\n\n` +
+        `Primary Contact Name: ${formData.contactName}\n` +
+        `Business Name: ${formData.businessName}\n` +
+        `Primary Phone Number: ${formData.phoneNumber}\n` +
+        `Primary Email: ${formData.emailAddress}\n\n` +
+        `Primary Color: ${selectionState.primary.name}\n` +
+        `Secondary Color: ${selectionState.secondary.name}\n` +
+        `Third Color: ${selectionState.third.name}\n` +
+        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}\n\n` +
+        `Business Description:\n${formData.businessDescription}\n\n` +
+        `Starter HTML file: downloaded locally in the browser.\n` +
+        `Note: mailto on GitHub Pages cannot attach generated files automatically.`;
+    }
 
-` +
-        `Primary Contact Name: ${formData.contactName}
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function slugify(value) {
+      return String(value || 'starter-site')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'starter-site';
+    }
+
+    function generateServicesMarkup(description) {
+      const base = [
+        'Professional service tailored to your business',
+        'Clean presentation for desktop and mobile users',
+        'Clear calls to action and contact flow'
+      ];
+      const extra = description
+        .split(/[\.\n,]/)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .slice(0, 3);
+      return [...base, ...extra].slice(0, 6).map(item => `<li>${escapeHtml(item)}</li>`).join('');
+    }
+
+    function generateFeatureCards() {
+      const selected = selectionState.features.length ? selectionState.features : ['Custom Website Build'];
+      return selected.map(feature => `
+        <div class="feature-card">${escapeHtml(feature)}</div>
+      `).join('');
+    }
+
+    function generateStarterHtml(formData) {
+      const business = escapeHtml(formData.businessName || 'Business Name');
+      const contact = escapeHtml(formData.contactName || 'Primary Contact');
+      const phone = escapeHtml(formData.phoneNumber || '(555) 555-5555');
+      const email = escapeHtml(formData.emailAddress || 'name@business.com');
+      const description = escapeHtml(formData.businessDescription || 'Describe your business here.');
+      const primary = selectionState.primary.value;
+      const secondary = selectionState.secondary.value;
+      const third = selectionState.third.value;
+      const servicesMarkup = generateServicesMarkup(formData.businessDescription || '');
+      const featureCards = generateFeatureCards();
+      const bookingButton = selectionState.features.includes('Booking Integration')
+        ? '<a class="btn btn-primary" href="#contact">Book Now</a>'
+        : '<a class="btn btn-primary" href="#contact">Contact Us</a>';
+      const gallerySection = selectionState.features.includes('Gallery / Portfolio') ? `
+        <section class="section alt">
+          <div class="container">
+            <div class="section-heading">
+              <h2>Featured Work</h2>
+              <p>Replace these cards with client photos, project images, or business highlights.</p>
+            </div>
+            <div class="gallery-grid">
+              <div class="gallery-card">Add Image</div>
+              <div class="gallery-card">Add Image</div>
+              <div class="gallery-card">Add Image</div>
+            </div>
+          </div>
+        </section>` : '';
+      const testimonialSection = selectionState.features.includes('Testimonials') ? `
+        <section class="section">
+          <div class="container">
+            <div class="section-heading">
+              <h2>What Clients Say</h2>
+              <p>Replace these with real testimonials for the business.</p>
+            </div>
+            <div class="testimonial-grid">
+              <div class="testimonial-card"><strong>Client Name</strong><p>Great service and a professional experience from start to finish.</p></div>
+              <div class="testimonial-card"><strong>Client Name</strong><p>Easy to work with, responsive, and very happy with the results.</p></div>
+            </div>
+          </div>
+        </section>` : '';
+
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${business}</title>
+  <style>
+    :root {
+      --primary: ${primary};
+      --secondary: ${secondary};
+      --third: ${third};
+      --text: #141414;
+      --muted: #4b5563;
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --line: rgba(0,0,0,0.10);
+      --radius: 22px;
+      --shadow: 0 16px 34px rgba(0,0,0,0.08);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f3f4f6 0%, #eceef2 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .topbar { background: var(--secondary); color: var(--third); }
+    .nav { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; flex-wrap:wrap; }
+    .brand { font-weight:800; letter-spacing:0.04em; text-transform:uppercase; }
+    .hero { padding: 82px 0 56px; }
+    .hero-card, .info-card, .feature-card, .gallery-card, .testimonial-card, .footer-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 40px; }
+    .eyebrow { display:inline-flex; padding:8px 12px; border-radius:999px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.7rem); line-height:0.96; margin:18px 0 14px; letter-spacing:-0.05em; }
+    p { color: var(--muted); line-height:1.8; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:14px 18px; border-radius:999px; font-weight:800; }
+    .btn-primary { background: var(--primary); color: #111; }
+    .btn-secondary { background: white; border:1px solid var(--line); }
+    .section { padding: 18px 0 72px; }
+    .section.alt { background: rgba(255,255,255,0.45); }
+    .section-heading { margin-bottom: 22px; }
+    .section-heading h2 { margin:0 0 8px; font-size: clamp(1.8rem, 3vw, 2.8rem); letter-spacing:-0.04em; }
+    .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid { display:grid; gap:20px; }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .gallery-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .testimonial-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .feature-card, .gallery-card, .testimonial-card, .info-card { padding:24px; }
+    .gallery-card { min-height: 180px; display:grid; place-items:center; color: var(--muted); }
+    ul { padding-left: 18px; color: var(--muted); line-height:1.8; }
+    .contact-card { background: var(--secondary); color: var(--third); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .contact-card p, .contact-card a { color: var(--third); opacity: 0.92; }
+    .footer { padding: 0 0 48px; }
+    .footer-card { padding:22px 24px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    @media (max-width: 900px) {
+      .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero-card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">${business}</div>
+      <div>${phone}</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="eyebrow">Professional Website</div>
+        <h1>${business}</h1>
+        <p>${description}</p>
+        <div class="hero-actions">
+          ${bookingButton}
+          <a class="btn btn-secondary" href="#features">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>What We Offer</h2>
+        <p>Replace these cards and text with the client's actual services, specialties, and business strengths.</p>
+      </div>
+      <div class="feature-grid">
+        ${featureCards}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-heading">
+        <h2>About the Business</h2>
+        <p>Starter content generated from the request details.</p>
+      </div>
+      <div class="info-card">
+        <p><strong>Primary Contact:</strong> ${contact}</p>
+        <p>${description}</p>
+        <ul>${servicesMarkup}</ul>
+      </div>
+    </div>
+  </section>
+
+  ${gallerySection}
+  ${testimonialSection}
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <p>Replace or expand this section with address, hours, map links, booking tools, or form integrations.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 style="margin-top:0;">Get in Touch</h3>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Business:</strong> ${business}</p>
+        </div>
+        <div class="info-card">
+          <h3 style="margin-top:0;">Next Steps</h3>
+          <p>Use this starter template as the base site, then swap in the real logo, photos, services, testimonials, and any booking or map links needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <strong>${business}</strong>
+        <span>${phone} · ${email}</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>`;
+    }
+
+    function downloadTextFile(filename, content) {
+      const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
 ` +
         `Business Name: ${formData.businessName}
 ` +
@@ -1536,10 +1791,28 @@ ${formData.requestedChanges}`;
         businessDescription: document.getElementById('businessDescription').value
       };
 
+      const starterHtml = generateStarterHtml(formData);
+      const fileName = `${slugify(formData.businessName || 'starter-site')}-starter.html`;
+      downloadTextFile(fileName, starterHtml);
+
       const subject = encodeURIComponent(`New Website Request - ${formData.businessName}`);
       const body = encodeURIComponent(buildWebsiteRequestEmailBody(formData));
       window.location.href = `mailto:qcoxbusiness@outlook.com?subject=${subject}&body=${body}`;
-      showToast('Our team will reach out to you as soon as possible with an update and estimate for your website!');
+      showToast('Starter HTML downloaded. Your prefilled email is opening now.');
+    });
+
+    document.getElementById('downloadStarterBtn')?.addEventListener('click', () => {
+      const formData = {
+        contactName: document.getElementById('contactName')?.value || '',
+        businessName: document.getElementById('businessName')?.value || 'starter-site',
+        phoneNumber: document.getElementById('phoneNumber')?.value || '',
+        emailAddress: document.getElementById('emailAddress')?.value || '',
+        businessDescription: document.getElementById('businessDescription')?.value || ''
+      };
+      const starterHtml = generateStarterHtml(formData);
+      const fileName = `${slugify(formData.businessName || 'starter-site')}-starter.html`;
+      downloadTextFile(fileName, starterHtml);
+      showToast('Starter HTML file downloaded.');
     });
 
     document.getElementById('changeRequestForm')?.addEventListener('submit', (e) => {
