@@ -224,13 +224,6 @@
     .view { display: none; }
     .view.active { display: block; }
 
-    .panel {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      border: 2px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-    }
-
     .hero {
       padding: 88px 0 48px;
     }
@@ -882,14 +875,9 @@
       .hero-grid,
       .builder-wrap,
       .form-wrap { grid-template-columns: 1fr; }
-
       .process-grid,
       .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-      .mini-site {
-        position: static;
-        order: -1;
-      }
+      .mini-site { position: static; order: -1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -901,15 +889,11 @@
       .builder-panel,
       .form-panel,
       .process-card,
-      .trust-card {
-        animation: none !important;
-      }
+      .trust-card { animation: none !important; }
     }
 
     @media (max-width: 760px) {
-      .tech-bg {
-        opacity: 0.28;
-      }
+      .tech-bg { opacity: 0.28; }
       .hero { padding-top: 56px; }
       .hero-copy,
       .hero-panel,
@@ -971,6 +955,7 @@
       </g>
     </svg>
   </div>
+
   <header class="topbar">
     <div class="container nav">
       <div class="brand">
@@ -1183,7 +1168,7 @@
           <div class="builder-panel">
             <button class="back-btn" type="button" onclick="showView('home')" style="margin-bottom:16px; color:#222; border-color:rgba(0,0,0,0.16);">← Back to Home</button>
             <h2>Website Request Builder</h2>
-            <p class="subtext">Choose your color direction, select the features you need, then send your website request to our team. This version uses a prefilled email when the form is submitted to <strong>qcoxbusiness@outlook.com</strong>.</p>
+            <p class="subtext">Choose your color direction, select the features you need, then send your website request to our team. This version downloads a starter HTML file and opens a prefilled email summary to <strong>qcoxbusiness@outlook.com</strong>.</p>
 
             <form id="newSiteForm">
               <div class="form-section">
@@ -1241,7 +1226,7 @@
                 <button class="submit-btn" type="submit">Submit This Website to Our Team</button>
                 <button class="back-btn" type="button" id="downloadStarterBtn" style="color:#222; border-color:rgba(0,0,0,0.16);">Download Starter HTML</button>
               </div>
-              <div class="helper">This version downloads a starter HTML file and opens a prefilled email summary. Plain GitHub Pages plus mailto cannot attach a generated file to an email automatically.</div>
+              <div class="helper">GitHub Pages can download a generated file and open an email summary, but it cannot attach the file to the email automatically.</div>
             </form>
           </div>
         </div>
@@ -1485,18 +1470,51 @@
     }
 
     function buildWebsiteRequestEmailBody(formData) {
-      return `New Website Request\n\n` +
-        `Primary Contact Name: ${formData.contactName}\n` +
-        `Business Name: ${formData.businessName}\n` +
-        `Primary Phone Number: ${formData.phoneNumber}\n` +
-        `Primary Email: ${formData.emailAddress}\n\n` +
-        `Primary Color: ${selectionState.primary.name}\n` +
-        `Secondary Color: ${selectionState.secondary.name}\n` +
-        `Third Color: ${selectionState.third.name}\n` +
-        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}\n\n` +
-        `Business Description:\n${formData.businessDescription}\n\n` +
-        `Starter HTML file: downloaded locally in the browser.\n` +
+      return `New Website Request
+
+` +
+        `Primary Contact Name: ${formData.contactName}
+` +
+        `Business Name: ${formData.businessName}
+` +
+        `Primary Phone Number: ${formData.phoneNumber}
+` +
+        `Primary Email: ${formData.emailAddress}
+
+` +
+        `Primary Color: ${selectionState.primary.name}
+` +
+        `Secondary Color: ${selectionState.secondary.name}
+` +
+        `Third Color: ${selectionState.third.name}
+` +
+        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}
+
+` +
+        `Business Description:
+${formData.businessDescription}
+
+` +
+        `Starter HTML file: downloaded locally in the browser.
+` +
         `Note: mailto on GitHub Pages cannot attach generated files automatically.`;
+    }
+
+    function buildChangeRequestEmailBody(formData) {
+      return `Website Change Request
+
+` +
+        `Business Name: ${formData.businessName}
+` +
+        `Primary Name: ${formData.primaryName}
+` +
+        `Primary Contact Number: ${formData.phone}
+` +
+        `Primary Email: ${formData.email}
+
+` +
+        `Requested Changes:
+${formData.requestedChanges}`;
     }
 
     function escapeHtml(value) {
@@ -1504,7 +1522,7 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/\"/g, '&quot;')
+        .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
 
@@ -1523,7 +1541,8 @@
         'Clear calls to action and contact flow'
       ];
       const extra = description
-        .split(/[\.\n,]/)
+        .split(/[\.
+,]/)
         .map(s => s.trim())
         .filter(Boolean)
         .slice(0, 3);
@@ -1532,9 +1551,7 @@
 
     function generateFeatureCards() {
       const selected = selectionState.features.length ? selectionState.features : ['Custom Website Build'];
-      return selected.map(feature => `
-        <div class="feature-card">${escapeHtml(feature)}</div>
-      `).join('');
+      return selected.map(feature => `<div class="feature-card">${escapeHtml(feature)}</div>`).join('');
     }
 
     function generateStarterHtml(formData) {
@@ -1600,26 +1617,16 @@
       --max: 1180px;
     }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg, #f3f4f6 0%, #eceef2 100%);
-    }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--text); background: linear-gradient(180deg, #f3f4f6 0%, #eceef2 100%); }
     a { color: inherit; text-decoration: none; }
     .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
     .topbar { background: var(--secondary); color: var(--third); }
     .nav { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; flex-wrap:wrap; }
     .brand { font-weight:800; letter-spacing:0.04em; text-transform:uppercase; }
     .hero { padding: 82px 0 56px; }
-    .hero-card, .info-card, .feature-card, .gallery-card, .testimonial-card, .footer-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
+    .hero-card, .info-card, .feature-card, .gallery-card, .testimonial-card, .footer-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
     .hero-card { padding: 40px; }
-    .eyebrow { display:inline-flex; padding:8px 12px; border-radius:999px; background: color-mix(in srgb, var(--primary) 12%, white); color: var(--primary); font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+    .eyebrow { display:inline-flex; padding:8px 12px; border-radius:999px; background: rgba(255,122,26,0.12); color: var(--primary); font-size:0.82rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
     h1 { font-size: clamp(2.4rem, 5vw, 4.7rem); line-height:0.96; margin:18px 0 14px; letter-spacing:-0.05em; }
     p { color: var(--muted); line-height:1.8; }
     .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
@@ -1642,10 +1649,7 @@
     .contact-card p, .contact-card a { color: var(--third); opacity: 0.92; }
     .footer { padding: 0 0 48px; }
     .footer-card { padding:22px 24px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-    @media (max-width: 900px) {
-      .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid { grid-template-columns: 1fr; }
-      .hero-card { padding: 28px; }
-    }
+    @media (max-width: 900px) { .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid { grid-template-columns: 1fr; } .hero-card { padding: 28px; } }
   </style>
 </head>
 <body>
@@ -1655,7 +1659,6 @@
       <div>${phone}</div>
     </div>
   </header>
-
   <section class="hero">
     <div class="container">
       <div class="hero-card">
@@ -1669,19 +1672,15 @@
       </div>
     </div>
   </section>
-
   <section id="features" class="section">
     <div class="container">
       <div class="section-heading">
         <h2>What We Offer</h2>
         <p>Replace these cards and text with the client's actual services, specialties, and business strengths.</p>
       </div>
-      <div class="feature-grid">
-        ${featureCards}
-      </div>
+      <div class="feature-grid">${featureCards}</div>
     </div>
   </section>
-
   <section class="section alt">
     <div class="container">
       <div class="section-heading">
@@ -1695,10 +1694,8 @@
       </div>
     </div>
   </section>
-
   ${gallerySection}
   ${testimonialSection}
-
   <section id="contact" class="section">
     <div class="container">
       <div class="section-heading">
@@ -1719,7 +1716,6 @@
       </div>
     </div>
   </section>
-
   <footer class="footer">
     <div class="container">
       <div class="footer-card">
@@ -1742,43 +1738,6 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-    }
-` +
-        `Business Name: ${formData.businessName}
-` +
-        `Primary Phone Number: ${formData.phoneNumber}
-` +
-        `Primary Email: ${formData.emailAddress}
-
-` +
-        `Primary Color: ${selectionState.primary.name}
-` +
-        `Secondary Color: ${selectionState.secondary.name}
-` +
-        `Third Color: ${selectionState.third.name}
-` +
-        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}
-
-` +
-        `Business Description:
-${formData.businessDescription}`;
-    }
-
-    function buildChangeRequestEmailBody(formData) {
-      return `Website Change Request
-
-` +
-        `Business Name: ${formData.businessName}
-` +
-        `Primary Name: ${formData.primaryName}
-` +
-        `Primary Contact Number: ${formData.phone}
-` +
-        `Primary Email: ${formData.email}
-
-` +
-        `Requested Changes:
-${formData.requestedChanges}`;
     }
 
     document.getElementById('newSiteForm')?.addEventListener('submit', (e) => {
