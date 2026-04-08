@@ -1574,108 +1574,205 @@ ${formData.requestedChanges}`;
     }
 
     function generateStarterHtml(formData) {
-      return `<!-- ===============================
-TRIPLE C GENERATED STARTER TEMPLATE
-=============================== -->
+      const business = escapeHtml(formData.businessName || 'Business Name');
+      const contact = escapeHtml(formData.contactName || 'Primary Contact');
+      const phone = escapeHtml(formData.phoneNumber || '(555) 555-5555');
+      const email = escapeHtml(formData.emailAddress || 'name@business.com');
+      const description = escapeHtml(formData.businessDescription || 'Describe your business here.');
+      const primary = selectionState.primary.value;
+      const secondary = selectionState.secondary.value;
+      const third = selectionState.third.value;
+
+      const selectedFeatures = selectionState.features.length
+        ? selectionState.features.map(feature => `- ${feature}`).join('\n')
+        : '- Custom Website Build';
+
+      return `<!-- =========================================
+TRIPLE C GENERATED RAW CODE TEMPLATE
+Generated from client selections
+Paste this into a new index.html file and edit it
+========================================= -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${escapeHtml(formData.businessName)}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${business}</title>
+  <style>
+    /* ===============================
+       EASY EDIT AREA
+    =============================== */
+    :root {
+      --primary: ${primary};
+      --secondary: ${secondary};
+      --third: ${third};
+      --text: #141414;
+      --bg: #f5f5f7;
+      --max: 1180px;
+    }
 
-<style>
-/* ===== EASY EDIT COLORS ===== */
-:root {
-  --primary: ${selectionState.primary.value};
-  --secondary: ${selectionState.secondary.value};
-  --third: ${selectionState.third.value};
-}
+    /* ===============================
+       BASIC RESET
+    =============================== */
+    * { box-sizing: border-box; }
 
-/* ===== BASIC RESET ===== */
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f5f5f5;
-  color: #111;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-/* ===== HEADER ===== */
-.header {
-  background: var(--secondary);
-  color: var(--third);
-  padding: 20px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* ===== HERO ===== */
-.hero {
-  padding: 60px 20px;
-  background: var(--primary);
-  color: #111;
-}
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
 
-/* ===== SECTION ===== */
-.section {
-  padding: 40px 20px;
-}
+    /* ===============================
+       HEADER
+    =============================== */
+    .topbar {
+      background: var(--secondary);
+      color: var(--third);
+      padding: 18px 0;
+    }
 
-/* ===== FOOTER ===== */
-.footer {
-  background: var(--secondary);
-  color: var(--third);
-  padding: 20px;
-}
-</style>
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    /* ===============================
+       HERO
+    =============================== */
+    .hero {
+      background: var(--primary);
+      padding: 72px 0;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .hero p {
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    /* ===============================
+       GENERAL SECTIONS
+    =============================== */
+    .section {
+      padding: 56px 0;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    /* ===============================
+       CONTACT / FOOTER
+    =============================== */
+    .contact-box,
+    .footer {
+      background: var(--secondary);
+      color: var(--third);
+      padding: 24px;
+    }
+
+    .footer {
+      margin-top: 40px;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- ===== HEADER ===== -->
-<div class="header">
-  <h2>${escapeHtml(formData.businessName)}</h2>
-</div>
+  <!-- ===============================
+       HEADER
+  =============================== -->
+  <header class="topbar">
+    <div class="container">
+      <div class="brand">${business}</div>
+    </div>
+  </header>
 
-<!-- ===== HERO ===== -->
-<div class="hero">
-  <h1>${escapeHtml(formData.businessName)}</h1>
-  <p>${escapeHtml(formData.businessDescription)}</p>
-</div>
+  <!-- ===============================
+       HERO
+  =============================== -->
+  <section class="hero">
+    <div class="container">
+      <h1>${business}</h1>
+      <p>${description}</p>
+    </div>
+  </section>
 
-<!-- ===== FEATURES ===== -->
-<div class="section">
-  <h2>Features</h2>
-  <ul>
-${selectionState.features.map(f => `    <li>${escapeHtml(f)}</li>`).join('\n')}
-  </ul>
-</div>
+  <!-- ===============================
+       FEATURES SELECTED
+  =============================== -->
+  <section class="section">
+    <div class="container">
+      <h2>Selected Features</h2>
+      <pre>${selectedFeatures}</pre>
+    </div>
+  </section>
 
-<!-- ===== CONTACT ===== -->
-<div class="section">
-  <h2>Contact</h2>
-  <p>${escapeHtml(formData.contactName)}</p>
-  <p>${escapeHtml(formData.phoneNumber)}</p>
-  <p>${escapeHtml(formData.emailAddress)}</p>
-</div>
+  <!-- ===============================
+       ABOUT / NOTES
+  =============================== -->
+  <section class="section">
+    <div class="container">
+      <h2>About This Business</h2>
+      <p>${description}</p>
+    </div>
+  </section>
 
-<!-- ===== FOOTER ===== -->
-<div class="footer">
-  <p>${escapeHtml(formData.businessName)}</p>
-</div>
+  <!-- ===============================
+       CONTACT
+  =============================== -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Contact</h2>
+        <p><strong>Primary Contact:</strong> ${contact}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Email:</strong> ${email}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===============================
+       FOOTER
+  =============================== -->
+  <footer class="footer">
+    <div class="container">
+      <p>${business}</p>
+    </div>
+  </footer>
 
 </body>
 </html>
 
-/* ===============================
-NOTES FOR YOU (DELETE LATER)
-===============================
-
-1. Replace text with client info
-2. Add sections as needed
-3. Style using your main site design
-4. Paste into GitHub as index.html
-
-=============================== */`;
+/* =========================================
+NOTES FOR YOU
+1. This is raw code text meant for editing.
+2. Replace sample sections with the client's real content.
+3. Add gallery, testimonials, forms, maps, or booking tools as needed.
+4. Paste into GitHub as index.html when ready.
+========================================= */`;
     }
 
     function downloadTextFile(filename, content) {
