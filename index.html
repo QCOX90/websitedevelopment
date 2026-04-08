@@ -1582,197 +1582,256 @@ ${formData.requestedChanges}`;
       const primary = selectionState.primary.value;
       const secondary = selectionState.secondary.value;
       const third = selectionState.third.value;
+      const servicesMarkup = generateServicesMarkup(formData.businessDescription || '');
+      const featureCards = generateFeatureCards();
 
-      const selectedFeatures = selectionState.features.length
-        ? selectionState.features.map(feature => `- ${feature}`).join('\n')
-        : '- Custom Website Build';
+      const bookingButton = selectionState.features.includes('Booking Integration')
+        ? '<a class="btn btn-primary" href="#contact">Book Now</a>'
+        : '<a class="btn btn-primary" href="#contact">Contact Us</a>';
 
-      return `<!-- =========================================
-TRIPLE C GENERATED RAW CODE TEMPLATE
-Generated from client selections
-Paste this into a new index.html file and edit it
-========================================= -->
+      const gallerySection = selectionState.features.includes('Gallery / Portfolio')
+        ? `
+      <section class="section alt">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Featured Work</h2>
+            <p>Replace these cards with client photos, project images, or business highlights.</p>
+          </div>
+          <div class="gallery-grid">
+            <div class="gallery-card">Add Image</div>
+            <div class="gallery-card">Add Image</div>
+            <div class="gallery-card">Add Image</div>
+          </div>
+        </div>
+      </section>`
+        : '';
 
-<!DOCTYPE html>
+      const testimonialSection = selectionState.features.includes('Testimonials')
+        ? `
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <h2>What Clients Say</h2>
+            <p>Replace these with real testimonials for the business.</p>
+          </div>
+          <div class="testimonial-grid">
+            <div class="testimonial-card">
+              <strong>Client Name</strong>
+              <p>Great service and a professional experience from start to finish.</p>
+            </div>
+            <div class="testimonial-card">
+              <strong>Client Name</strong>
+              <p>Easy to work with, responsive, and very happy with the results.</p>
+            </div>
+          </div>
+        </div>
+      </section>`
+        : '';
+
+      return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${business}</title>
   <style>
-    /* ===============================
-       EASY EDIT AREA
-    =============================== */
     :root {
       --primary: ${primary};
       --secondary: ${secondary};
       --third: ${third};
       --text: #141414;
+      --muted: #4b5563;
       --bg: #f5f5f7;
+      --card: #ffffff;
+      --line: rgba(0,0,0,0.10);
+      --radius: 22px;
+      --shadow: 0 16px 34px rgba(0,0,0,0.08);
       --max: 1180px;
     }
-
-    /* ===============================
-       BASIC RESET
-    =============================== */
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
+      font-family: Inter, Arial, sans-serif;
       color: var(--text);
+      background: linear-gradient(180deg, #f3f4f6 0%, #eceef2 100%);
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(calc(100% - 32px), var(--max));
-      margin: 0 auto;
-    }
-
-    /* ===============================
-       HEADER
-    =============================== */
-    .topbar {
-      background: var(--secondary);
-      color: var(--third);
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+    .topbar { background: var(--secondary); color: var(--third); }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
       padding: 18px 0;
+      flex-wrap: wrap;
     }
-
-    .brand {
-      font-size: 1.4rem;
-      font-weight: 800;
+    .brand { font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hero { padding: 82px 0 56px; }
+    .hero-card, .info-card, .feature-card, .gallery-card, .testimonial-card, .footer-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 40px; }
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,122,26,0.12);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
-
-    /* ===============================
-       HERO
-    =============================== */
-    .hero {
-      background: var(--primary);
-      padding: 72px 0;
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.7rem);
+      line-height: 0.96;
+      margin: 18px 0 14px;
+      letter-spacing: -0.05em;
     }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: 3rem;
-      line-height: 1;
+    p { color: var(--muted); line-height: 1.8; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 800;
     }
-
-    .hero p {
-      max-width: 700px;
-      line-height: 1.7;
+    .btn-primary { background: var(--primary); color: #111; }
+    .btn-secondary { background: white; border: 1px solid var(--line); }
+    .section { padding: 18px 0 72px; }
+    .section.alt { background: rgba(255,255,255,0.45); }
+    .section-heading { margin-bottom: 22px; }
+    .section-heading h2 {
+      margin: 0 0 8px;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      letter-spacing: -0.04em;
     }
-
-    /* ===============================
-       GENERAL SECTIONS
-    =============================== */
-    .section {
-      padding: 56px 0;
+    .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid {
+      display: grid;
+      gap: 20px;
     }
-
-    .section h2 {
-      margin-top: 0;
-      font-size: 2rem;
+    .feature-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .gallery-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .testimonial-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .feature-card, .gallery-card, .testimonial-card, .info-card { padding: 24px; }
+    .gallery-card {
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
     }
-
-    ul {
-      line-height: 1.8;
-    }
-
-    /* ===============================
-       CONTACT / FOOTER
-    =============================== */
-    .contact-box,
-    .footer {
+    ul { padding-left: 18px; color: var(--muted); line-height: 1.8; }
+    .contact-card {
       background: var(--secondary);
       color: var(--third);
-      padding: 24px;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
     }
-
-    .footer {
-      margin-top: 40px;
+    .contact-card p, .contact-card a { color: var(--third); opacity: 0.92; }
+    .footer { padding: 0 0 48px; }
+    .footer-card {
+      padding: 22px 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 900px) {
+      .feature-grid, .gallery-grid, .testimonial-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-card { padding: 28px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- ===============================
-       HEADER
-  =============================== -->
   <header class="topbar">
-    <div class="container">
+    <div class="container nav">
       <div class="brand">${business}</div>
+      <div>${phone}</div>
     </div>
   </header>
 
-  <!-- ===============================
-       HERO
-  =============================== -->
   <section class="hero">
     <div class="container">
-      <h1>${business}</h1>
-      <p>${description}</p>
-    </div>
-  </section>
-
-  <!-- ===============================
-       FEATURES SELECTED
-  =============================== -->
-  <section class="section">
-    <div class="container">
-      <h2>Selected Features</h2>
-      <pre>${selectedFeatures}</pre>
-    </div>
-  </section>
-
-  <!-- ===============================
-       ABOUT / NOTES
-  =============================== -->
-  <section class="section">
-    <div class="container">
-      <h2>About This Business</h2>
-      <p>${description}</p>
-    </div>
-  </section>
-
-  <!-- ===============================
-       CONTACT
-  =============================== -->
-  <section class="section">
-    <div class="container">
-      <div class="contact-box">
-        <h2>Contact</h2>
-        <p><strong>Primary Contact:</strong> ${contact}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Email:</strong> ${email}</p>
+      <div class="hero-card">
+        <div class="eyebrow">Professional Website</div>
+        <h1>${business}</h1>
+        <p>${description}</p>
+        <div class="hero-actions">
+          ${bookingButton}
+          <a class="btn btn-secondary" href="#features">Learn More</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===============================
-       FOOTER
-  =============================== -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>What We Offer</h2>
+        <p>Replace these cards and text with the client's actual services, specialties, and business strengths.</p>
+      </div>
+      <div class="feature-grid">${featureCards}</div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-heading">
+        <h2>About the Business</h2>
+        <p>Starter content generated from the request details.</p>
+      </div>
+      <div class="info-card">
+        <p><strong>Primary Contact:</strong> ${contact}</p>
+        <p>${description}</p>
+        <ul>${servicesMarkup}</ul>
+      </div>
+    </div>
+  </section>
+
+  ${gallerySection}
+  ${testimonialSection}
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <p>Replace or expand this section with address, hours, map links, booking tools, or form integrations.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 style="margin-top:0;">Get in Touch</h3>
+          <p><strong>Phone:</strong> ${phone}</p>
+          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Business:</strong> ${business}</p>
+        </div>
+        <div class="info-card">
+          <h3 style="margin-top:0;">Next Steps</h3>
+          <p>Use this starter template as the base site, then swap in the real logo, photos, services, testimonials, and any booking or map links needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
-      <p>${business}</p>
+      <div class="footer-card">
+        <strong>${business}</strong>
+        <span>${phone} · ${email}</span>
+      </div>
     </div>
   </footer>
-
 </body>
-</html>
-
-/* =========================================
-NOTES FOR YOU
-1. This is raw code text meant for editing.
-2. Replace sample sections with the client's real content.
-3. Add gallery, testimonials, forms, maps, or booking tools as needed.
-4. Paste into GitHub as index.html when ready.
-========================================= */`;
+</html>`;
     }
 
     function downloadTextFile(filename, content) {
