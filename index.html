@@ -1949,5 +1949,27 @@ ${formData.requestedChanges}`;
     renderFeatures();
     updatePreview();
   </script>
+  <!-- NETLIFY FORM DETECTION (DO NOT REMOVE) -->
+<form name="website-request" method="POST" data-netlify="true" hidden>
+  <input type="hidden" name="form-name" value="website-request">
+  <input type="text" name="contactName">
+  <input type="text" name="businessName">
+  <input type="text" name="phoneNumber">
+  <input type="email" name="emailAddress">
+  <textarea name="businessDescription"></textarea>
+  <input type="text" name="selectedFeatures">
+  <input type="text" name="primaryColor">
+  <input type="text" name="secondaryColor">
+  <input type="text" name="thirdColor">
+</form>
+
+<form name="change-request" method="POST" data-netlify="true" hidden>
+  <input type="hidden" name="form-name" value="change-request">
+  <input type="text" name="businessName">
+  <input type="text" name="primaryName">
+  <input type="text" name="phone">
+  <input type="email" name="email">
+  <textarea name="requestedChanges"></textarea>
+</form>
 </body>
 </html>
