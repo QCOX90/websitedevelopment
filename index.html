@@ -1194,6 +1194,7 @@
               <input type="hidden" name="primaryColor" id="primaryColorField">
               <input type="hidden" name="secondaryColor" id="secondaryColorField">
               <input type="hidden" name="thirdColor" id="thirdColorField">
+              <input type="hidden" name="generatedCode" id="generatedCodeField">
               <div class="form-section">
                 <h3>1. Choose your color direction</h3>
                 <div class="color-group">
@@ -1893,8 +1894,11 @@ ${formData.requestedChanges}`;
       };
 
       const starterHtml = generateStarterHtml(formData);
-      const fileName = `${slugify(formData.businessName || 'starter-site')}-starter.html`;
-      downloadTextFile(fileName, starterHtml);
+
+      const generatedCodeField = document.getElementById('generatedCodeField');
+      if (generatedCodeField) {
+        generatedCodeField.value = starterHtml;
+      }
 
       const payload = new FormData(form);
 
@@ -1961,6 +1965,7 @@ ${formData.requestedChanges}`;
   <input type="text" name="primaryColor">
   <input type="text" name="secondaryColor">
   <input type="text" name="thirdColor">
+  <textarea name="generatedCode"></textarea>
 </form>
 
 <form name="change-request" method="POST" data-netlify="true" hidden>
