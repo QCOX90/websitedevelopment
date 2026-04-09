@@ -1185,8 +1185,15 @@
             <h2>Website Request Builder</h2>
             <p class="subtext">Choose your color direction, select the features you need, then send your website request to our team. This version uses a prefilled email when the form is submitted to <strong>qcoxbusiness@outlook.com</strong>.</p>
 
-            <form id="newSiteForm" name="website-request" method="POST" data-netlify="true">
+            <form id="newSiteForm" name="website-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="website-request">
+              <p hidden>
+                <label>Don’t fill this out: <input name="bot-field"></label>
+              </p>
+              <input type="hidden" name="selectedFeatures" id="selectedFeaturesField">
+              <input type="hidden" name="primaryColor" id="primaryColorField">
+              <input type="hidden" name="secondaryColor" id="secondaryColorField">
+              <input type="hidden" name="thirdColor" id="thirdColorField">
               <div class="form-section">
                 <h3>1. Choose your color direction</h3>
                 <div class="color-group">
@@ -1267,7 +1274,11 @@
             <h2>Request Changes to Your Current Website</h2>
             <p class="subtext">Use this form for updates, edits, redesign requests, image swaps, pricing changes, new sections, or other website revisions.</p>
 
-            <form id="changeRequestForm">
+            <form id="changeRequestForm" name="change-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="change-request">
+              <p hidden>
+                <label>Don’t fill this out: <input name="bot-field"></label>
+              </p>
               <div class="grid-2">
                 <div class="field">
                   <label for="changeBusinessName">Business Name</label>
@@ -1439,6 +1450,11 @@
       const previewContactBlock = document.getElementById('previewContactBlock');
       const summaryList = document.getElementById('summaryList');
 
+      const selectedFeaturesField = document.getElementById('selectedFeaturesField');
+      const primaryColorField = document.getElementById('primaryColorField');
+      const secondaryColorField = document.getElementById('secondaryColorField');
+      const thirdColorField = document.getElementById('thirdColorField');
+
       if (previewBusinessName) previewBusinessName.textContent = businessName;
       if (previewFooter) previewFooter.textContent = `${selectionState.secondary.name} + ${selectionState.third.name} footer accent area`;
       if (previewPrimaryBtn) previewPrimaryBtn.textContent = selectionState.features.includes('Booking Integration') ? 'Book Now' : 'Contact Us';
@@ -1471,6 +1487,21 @@
           <div><strong>Third Color:</strong> ${selectionState.third.name}</div>
           <div><strong>Selected Features:</strong> ${selectionState.features.length ? selectionState.features.join(', ') : 'None yet'}</div>
         `;
+      }
+
+      if (selectedFeaturesField) {
+        selectedFeaturesField.value = selectionState.features.length
+          ? selectionState.features.join(', ')
+          : 'None selected';
+      }
+      if (primaryColorField) {
+        primaryColorField.value = selectionState.primary.name;
+      }
+      if (secondaryColorField) {
+        secondaryColorField.value = selectionState.secondary.name;
+      }
+      if (thirdColorField) {
+        thirdColorField.value = selectionState.third.name;
       }
     }
 
@@ -1848,8 +1879,11 @@ ${formData.requestedChanges}`;
     }
 
 
-    document.getElementById('newSiteForm')?.addEventListener('submit', (e) => {
+    document.getElementById('newSiteForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      const form = e.target;
+
       const formData = {
         contactName: document.getElementById('contactName').value,
         businessName: document.getElementById('businessName').value,
@@ -1862,26 +1896,46 @@ ${formData.requestedChanges}`;
       const fileName = `${slugify(formData.businessName || 'starter-site')}-starter.html`;
       downloadTextFile(fileName, starterHtml);
 
-      const subject = encodeURIComponent(`New Website Request - ${formData.businessName}`);
-      const body = encodeURIComponent(buildWebsiteRequestEmailBody(formData));
-      window.location.href = `mailto:qcoxbusiness@outlook.com?subject=${subject}&body=${body}`;
-      showToast('Our team will reach out to you as soon as possible with an update and estimate for your website!');
+      const payload = new FormData(form);
+
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(payload).toString()
+        });
+
+        if (response.ok) {
+          showToast('Request submitted successfully. We will reach out as soon as possible.');
+        } else {
+          showToast('Submission failed. Please try again.');
+        }
+      } catch (error) {
+        showToast('Submission failed. Please try again.');
+      }
     });
 
-    document.getElementById('changeRequestForm')?.addEventListener('submit', (e) => {
+    document.getElementById('changeRequestForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const formData = {
-        businessName: document.getElementById('changeBusinessName').value,
-        primaryName: document.getElementById('changePrimaryName').value,
-        phone: document.getElementById('changePhone').value,
-        email: document.getElementById('changeEmail').value,
-        requestedChanges: document.getElementById('requestedChanges').value
-      };
 
-      const subject = encodeURIComponent(`Website Change Request - ${formData.businessName}`);
-      const body = encodeURIComponent(buildChangeRequestEmailBody(formData));
-      window.location.href = `mailto:qcoxbusiness@outlook.com?subject=${subject}&body=${body}`;
-      showToast('Our team will review your requested changes and reach out as soon as possible.');
+      const form = e.target;
+      const payload = new FormData(form);
+
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(payload).toString()
+        });
+
+        if (response.ok) {
+          showToast('Change request submitted successfully.');
+        } else {
+          showToast('Submission failed. Please try again.');
+        }
+      } catch (error) {
+        showToast('Submission failed. Please try again.');
+      }
     });
 
     ['contactName', 'businessName', 'phoneNumber', 'emailAddress'].forEach(id => {
