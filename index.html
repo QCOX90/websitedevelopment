@@ -1185,7 +1185,8 @@
             <h2>Website Request Builder</h2>
             <p class="subtext">Choose your color direction, select the features you need, then send your website request to our team. This version uses a prefilled email when the form is submitted to <strong>qcoxbusiness@outlook.com</strong>.</p>
 
-            <form id="newSiteForm">
+            <form id="newSiteForm" name="website-request" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="website-request">
               <div class="form-section">
                 <h3>1. Choose your color direction</h3>
                 <div class="color-group">
