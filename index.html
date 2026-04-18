@@ -1116,7 +1116,7 @@
       </div>
 
       <div class="container footer">
-        <div class="footer-card">
+        <div class="footer-card" id="homeContactSection">
           <div>
             <strong style="display:block;color:#17181c;margin-bottom:6px;">Triple C Website Development</strong>
             <span>Professional websites for businesses that want to look established, current, and credible online.</span>
@@ -1147,8 +1147,8 @@
                   <h3 class="preview-title" id="previewBusinessName">Your Business Name</h3>
                   <p class="preview-text">A clean, professional site preview updates here as your client choices are selected.</p>
                   <div class="preview-actions">
-                    <button class="preview-btn-primary" id="previewPrimaryBtn">Book / Contact</button>
-                    <button class="preview-btn-secondary">Learn More</button>
+                    <button class="preview-btn-primary" id="previewPrimaryBtn" type="button" onclick="goToHomeContacts()">Book / Contact</button>
+                    <button class="preview-btn-secondary" type="button" onclick="openPreviewAssistant()">Learn More</button>
                   </div>
                 </div>
 
@@ -1388,6 +1388,35 @@
       const el = document.getElementById(id);
       if (el) el.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToHomeContacts() {
+      showView('home');
+      setTimeout(() => {
+        const contactSection = document.getElementById('homeContactSection');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 120);
+    }
+
+    function openPreviewAssistant() {
+      const chatToggle = document.getElementById('tcChatToggle');
+      if (!chatToggle) return;
+
+      const isExpanded = chatToggle.getAttribute('aria-expanded') === 'true';
+      if (!isExpanded) {
+        chatToggle.click();
+      }
+
+      setTimeout(() => {
+        const chatInput = document.getElementById('tcChatInput');
+        const chatSend = document.getElementById('tcChatSend');
+        if (chatInput && chatSend) {
+          chatInput.value = 'Tell me about your services and pricing';
+          chatSend.click();
+        }
+      }, 260);
     }
 
     function makeColorButtons(targetId, setName) {
