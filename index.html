@@ -164,14 +164,13 @@
       color: #ffffff;
     }
 
-   .brand-mark {
-  width: 180px;        /* slightly bigger */
+  .brand-mark {
+  width: 180px;
   height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* REMOVE the box look */
   background: transparent;
   border: none;
   box-shadow: none;
@@ -977,14 +976,14 @@
   <header class="topbar">
     <div class="container nav">
       <div class="brand">
-       <div class="brand-mark">
-  <img src="logo-orange.png" alt="Triple C Logo" style="width:100%; height:100%; object-fit:contain;">
+  <div class="brand-mark">
+    <img src="logo-orange.png" alt="Triple C Logo">
+  </div>
+  <div>
+    <div>Triple C</div>
+    <div class="brand-sub">Website Development</div>
+  </div>
 </div>
-        <div>
-          <div>Triple C</div>
-          <div class="brand-sub">Website Development</div>
-        </div>
-      </div>
       <div class="nav-links">
         <button type="button" onclick="showView('home')">Home</button>
         <button type="button" onclick="showView('new-site')">Need a Website?</button>
@@ -1730,7 +1729,7 @@ ${formData.requestedChanges}`;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      padding: 18px 0;
+      padding: 6px 0;
       flex-wrap: wrap;
     }
     .brand { font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
@@ -1818,13 +1817,17 @@ ${formData.requestedChanges}`;
       .hero-card { padding: 28px; }
     }
 
-    .brand-mark img {
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
 .brand-mark:hover img {
   transform: scale(1.05);
 }
+
   </style>
 </head>
 <body>
