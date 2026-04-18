@@ -2088,6 +2088,7 @@ ${formData.requestedChanges}`;
     background:
       radial-gradient(circle at top right, rgba(255,122,26,0.08), transparent 22%),
       linear-gradient(180deg, #f6f6f8 0%, #ececef 100%);
+    min-height: 0;
   }
 
   .tc-msg {
@@ -2166,6 +2167,8 @@ ${formData.requestedChanges}`;
     border-top: 1px solid rgba(0,0,0,0.08);
     display: grid;
     gap: 10px;
+    max-height: 46%;
+    overflow-y: auto;
   }
 
   .tc-chat-input-row {
@@ -2190,8 +2193,7 @@ ${formData.requestedChanges}`;
     box-shadow: 0 0 0 4px rgba(255,122,26,0.12);
   }
 
-  .tc-chat-send,
-  .tc-chat-action {
+  .tc-chat-send {
     background: #ff7a1a;
     color: #111;
     font-weight: 900;
@@ -2225,6 +2227,18 @@ ${formData.requestedChanges}`;
     resize: vertical;
   }
 
+  .tc-chat-action {
+    background: #ff7a1a;
+    color: #111;
+    font-weight: 900;
+    padding: 14px 14px;
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(255,122,26,0.18);
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+  }
+
   .tc-lead-helper {
     font-size: 0.78rem;
     color: #555;
@@ -2255,7 +2269,11 @@ ${formData.requestedChanges}`;
       left: 12px;
       bottom: 96px;
       width: auto;
-      height: min(76vh, 600px);
+      height: min(82vh, 680px);
+    }
+
+    .tc-chat-input-wrap {
+      max-height: 52%;
     }
   }
 </style>
@@ -2294,7 +2312,7 @@ ${formData.requestedChanges}`;
       <textarea id="tcLeadNeed" placeholder="What do you need help with?"></textarea>
       <button class="tc-chat-action" type="button" id="tcLeadSubmit">Send Lead Info</button>
       <div class="tc-lead-helper">
-        This prepares a lead summary and opens your email app so it can be sent to Quinn at qcoxbusiness@outlook.com.
+        Fill this out and your request will be submitted directly through the site.
       </div>
     </div>
 
@@ -2304,6 +2322,15 @@ ${formData.requestedChanges}`;
     </div>
   </div>
 </div>
+
+<form name="chat-lead" netlify netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="chat-lead" />
+  <input type="text" name="name" />
+  <input type="text" name="business" />
+  <input type="email" name="email" />
+  <input type="tel" name="phone" />
+  <textarea name="message"></textarea>
+</form>
 
 <script>
   (function () {
@@ -2384,7 +2411,7 @@ ${formData.requestedChanges}`;
         addActionButtons([
           { label: 'Services', onClick: () => handleUserMessage('Services') },
           { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') },
-          { label: 'Start a Project', onClick: () => handleUserMessage('Start a Project') }
+          { label: 'Start Service', onClick: goToNewSite }
         ]);
         welcomeShown = true;
       }
@@ -2398,10 +2425,6 @@ ${formData.requestedChanges}`;
     function showLeadForm() {
       leadForm.classList.add('show');
       messages.scrollTop = messages.scrollHeight;
-    }
-
-    function hideLeadForm() {
-      leadForm.classList.remove('show');
     }
 
     function goToNewSite() {
@@ -2572,7 +2595,7 @@ ${formData.requestedChanges}`;
       if (hasKeyword(msg, keywordGroups.start) || hasKeyword(msg, keywordGroups.booking)) {
         showLeadForm();
         return {
-          text: "If you want to get started, the best move is to click Start Service and fill out the Website Request form.\n\nIf you'd rather talk first, contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.\n\nYou can also fill out the short lead form below and I’ll prepare a summary.",
+          text: "If you want to get started, the best move is to click Start Service and fill out the Website Request form.\n\nIf you'd rather talk first, contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.\n\nYou can also fill out the short lead form below and I’ll submit your request through the site.",
           actions: [
             { label: 'Start Service', onClick: goToNewSite },
             { label: 'Contact Quinn', onClick: goToContact }
@@ -2612,31 +2635,43 @@ ${formData.requestedChanges}`;
       const business = leadFields.business.value.trim();
       const email = leadFields.email.value.trim();
       const phone = leadFields.phone.value.trim();
-      const need = leadFields.need.value.trim();
+      const message = leadFields.need.value.trim();
 
-      if (!name || !business || !email || !phone || !need) {
-        addMessage("Please fill out all the lead fields so I can prepare the summary correctly.");
+      if (!name || !business || !email || !phone || !message) {
+        addMessage("Please fill out all the lead fields before submitting.");
         return;
       }
 
-      const subject = encodeURIComponent("New Triple C Website Lead");
-      const body = encodeURIComponent(
-`New lead summary
+      const payload = new URLSearchParams();
+      payload.append("form-name", "chat-lead");
+      payload.append("name", name);
+      payload.append("business", business);
+      payload.append("email", email);
+      payload.append("phone", phone);
+      payload.append("message", message);
 
-Name: ${name}
-Business Name: ${business}
-Email: ${email}
-Phone: ${phone}
+      fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: payload.toString()
+      })
+      .then((response) => {
+        if (!response.ok) throw new Error("Submission failed");
 
-What they need:
-${need}
+        addMessage("Perfect — your request was sent directly to Quinn. He’ll reach out soon.", "bot");
 
-Source:
-Website chatbox`
-      );
-
-      addMessage("Thanks — I prepared the lead summary. Your email app will open so it can be sent to Quinn.", 'bot');
-      window.location.href = `mailto:qcoxbusiness@outlook.com?subject=${subject}&body=${body}`;
+        leadFields.name.value = "";
+        leadFields.business.value = "";
+        leadFields.email.value = "";
+        leadFields.phone.value = "";
+        leadFields.need.value = "";
+        leadForm.classList.remove('show');
+      })
+      .catch(() => {
+        addMessage("Something went wrong submitting your request. Please contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.", "bot");
+      });
     }
 
     toggleBtn.addEventListener('click', openChat);
