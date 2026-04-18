@@ -1165,10 +1165,23 @@
                   <div class="preview-badge">Brand Preview</div>
                   <h3 class="preview-title" id="previewBusinessName">Your Business Name</h3>
                   <p class="preview-text">A clean, professional site preview updates here as your client choices are selected.</p>
-                  <div class="preview-actions">
-                    <button class="preview-btn-primary" id="previewPrimaryBtn">Book / Contact</button>
-                    <button class="preview-btn-secondary">Learn More</button>
-                  </div>
+                 <div class="preview-actions">
+  <button
+    class="preview-btn-primary"
+    id="previewPrimaryBtn"
+    type="button"
+    onclick="showView('new-site')"
+  >
+    Book / Contact
+  </button>
+  <button
+    class="preview-btn-secondary"
+    type="button"
+    onclick="document.getElementById('tcChatToggle').click()"
+  >
+    Learn More
+  </button>
+</div>
                 </div>
 
                 <div class="preview-section">
@@ -1428,7 +1441,12 @@
         wrap.appendChild(btn);
       });
     }
-
+    function openSmartAssistant() {
+  const chatToggle = document.getElementById('tcChatToggle');
+  if (chatToggle) {
+    chatToggle.click();
+  }
+}
     function renderFeatures() {
       const wrap = document.getElementById('featureOptions');
       if (!wrap) return;
