@@ -1977,44 +1977,65 @@ ${formData.requestedChanges}`;
   <textarea name="requestedChanges"></textarea>
 </form>
 
-  <!-- Triple C Assistant Chatbox -->
+<!-- Triple C Smart Assistant -->
 <style>
-  .tc-chat-toggle {
+  .tc-chat-wrap {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: 64px;
-    height: 64px;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tc-chat-toggle {
+    width: 66px;
+    height: 66px;
     border: none;
     border-radius: 999px;
-    background: linear-gradient(135deg, #ff7a1a, #ff9a4d);
+    background: linear-gradient(135deg, #ff7a1a, #ff9d52);
     color: #111;
-    font-size: 1.45rem;
+    font-size: 1.55rem;
     font-weight: 900;
     cursor: pointer;
     box-shadow: 0 16px 34px rgba(255,122,26,0.28);
-    z-index: 9999;
     transition: transform 0.22s ease, box-shadow 0.22s ease;
   }
 
   .tc-chat-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 38px rgba(255,122,26,0.34);
+    box-shadow: 0 22px 40px rgba(255,122,26,0.34);
+  }
+
+  .tc-chat-label {
+    background: rgba(47,47,51,0.96);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    text-align: center;
+    white-space: nowrap;
   }
 
   .tc-chatbox {
     position: fixed;
-    right: 20px;
-    bottom: 96px;
-    width: min(92vw, 390px);
-    height: min(78vh, 600px);
+    right: 18px;
+    bottom: 106px;
+    width: min(92vw, 400px);
+    height: min(78vh, 620px);
     display: none;
     flex-direction: column;
-    background: linear-gradient(180deg, #f2f2f4, #e6e6ea);
-    border: 2px solid rgba(0,0,0,0.72);
-    border-radius: 24px;
-    box-shadow: 0 24px 46px rgba(0,0,0,0.18);
     overflow: hidden;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #f1f1f4, #e7e7eb);
+    border: 2px solid rgba(0,0,0,0.72);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.18);
     z-index: 9998;
   }
 
@@ -2023,39 +2044,38 @@ ${formData.requestedChanges}`;
   }
 
   .tc-chat-header {
-    padding: 16px 18px;
-    background: #2f2f33;
+    background: rgba(47,47,51,0.98);
     color: #fff;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 16px 18px;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    align-items: center;
-    gap: 10px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
   }
 
-  .tc-chat-header-title {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .tc-chat-header-title strong {
+  .tc-chat-header strong {
+    display: block;
     font-size: 1rem;
-    letter-spacing: 0.02em;
+    margin-bottom: 4px;
   }
 
-  .tc-chat-header-title span {
-    font-size: 0.8rem;
+  .tc-chat-header span {
+    display: block;
     color: #d7d7db;
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   .tc-chat-close {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.22);
     color: #fff;
+    border: 1px solid rgba(255,255,255,0.22);
     border-radius: 999px;
     padding: 8px 12px;
     cursor: pointer;
+    font-weight: 700;
+    flex: none;
   }
 
   .tc-chat-messages {
@@ -2066,12 +2086,12 @@ ${formData.requestedChanges}`;
     flex-direction: column;
     gap: 12px;
     background:
-      radial-gradient(circle at top right, rgba(255,122,26,0.08), transparent 20%),
+      radial-gradient(circle at top right, rgba(255,122,26,0.08), transparent 22%),
       linear-gradient(180deg, #f6f6f8 0%, #ececef 100%);
   }
 
   .tc-msg {
-    max-width: 86%;
+    max-width: 88%;
     padding: 12px 14px;
     border-radius: 18px;
     line-height: 1.6;
@@ -2091,7 +2111,44 @@ ${formData.requestedChanges}`;
     align-self: flex-end;
     background: #ff7a1a;
     color: #111;
-    font-weight: 600;
+    font-weight: 700;
+  }
+
+  .tc-inline-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: -4px;
+    margin-bottom: 4px;
+  }
+
+  .tc-inline-btn,
+  .tc-quick-btn,
+  .tc-chat-send,
+  .tc-chat-action {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .tc-inline-btn,
+  .tc-quick-btn {
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.82);
+    border: 1px solid rgba(0,0,0,0.12);
+    color: #181818;
+    font-size: 0.82rem;
+    font-weight: 800;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .tc-inline-btn:hover,
+  .tc-quick-btn:hover {
+    transform: translateY(-1px);
+    border-color: #ff7a1a;
+    color: #ff7a1a;
   }
 
   .tc-chat-quick {
@@ -2100,28 +2157,13 @@ ${formData.requestedChanges}`;
     gap: 8px;
     flex-wrap: wrap;
     background: #ececef;
-  }
-
-  .tc-quick-btn {
-    border: 1px solid rgba(0,0,0,0.12);
-    background: rgba(255,255,255,0.75);
-    border-radius: 999px;
-    padding: 9px 12px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    color: #1a1a1a;
-  }
-
-  .tc-quick-btn:hover {
-    border-color: #ff7a1a;
-    color: #ff7a1a;
+    border-top: 1px solid rgba(0,0,0,0.05);
   }
 
   .tc-chat-input-wrap {
     padding: 14px;
-    border-top: 1px solid rgba(0,0,0,0.08);
     background: #f3f3f5;
+    border-top: 1px solid rgba(0,0,0,0.08);
     display: grid;
     gap: 10px;
   }
@@ -2136,30 +2178,26 @@ ${formData.requestedChanges}`;
     border: 1px solid rgba(0,0,0,0.14);
     border-radius: 14px;
     padding: 12px 14px;
-    font: inherit;
+    background: #fff;
+    color: #17181c;
     outline: none;
-    background: white;
   }
 
-  .tc-chat-input:focus {
-    border-color: rgba(255,122,26,0.65);
+  .tc-chat-input:focus,
+  .tc-lead-form input:focus,
+  .tc-lead-form textarea:focus {
+    border-color: rgba(255,122,26,0.60);
     box-shadow: 0 0 0 4px rgba(255,122,26,0.12);
   }
 
   .tc-chat-send,
   .tc-chat-action {
-    border: none;
     background: #ff7a1a;
     color: #111;
-    font-weight: 800;
-    border-radius: 14px;
+    font-weight: 900;
     padding: 12px 14px;
-    cursor: pointer;
-  }
-
-  .tc-chat-send:hover,
-  .tc-chat-action:hover {
-    filter: brightness(0.98);
+    border-radius: 14px;
+    box-shadow: 0 12px 24px rgba(255,122,26,0.18);
   }
 
   .tc-lead-form {
@@ -2177,41 +2215,61 @@ ${formData.requestedChanges}`;
     border: 1px solid rgba(0,0,0,0.14);
     border-radius: 12px;
     padding: 11px 12px;
-    font: inherit;
     background: #fff;
+    color: #17181c;
+    outline: none;
+  }
+
+  .tc-lead-form textarea {
+    min-height: 92px;
+    resize: vertical;
   }
 
   .tc-lead-helper {
     font-size: 0.78rem;
     color: #555;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   @media (max-width: 760px) {
+    .tc-chat-wrap {
+      right: 14px;
+      bottom: 14px;
+    }
+
     .tc-chat-toggle {
-      right: 16px;
-      bottom: 16px;
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
+    }
+
+    .tc-chat-label {
+      font-size: 0.72rem;
+      padding: 7px 10px;
+      max-width: 150px;
+      white-space: normal;
+      line-height: 1.35;
     }
 
     .tc-chatbox {
       right: 12px;
       left: 12px;
-      bottom: 88px;
+      bottom: 96px;
       width: auto;
-      height: min(74vh, 580px);
+      height: min(76vh, 600px);
     }
   }
 </style>
 
-<button class="tc-chat-toggle" id="tcChatToggle" aria-label="Open Triple C Assistant">💬</button>
+<div class="tc-chat-wrap">
+  <button class="tc-chat-toggle" id="tcChatToggle" type="button" aria-label="Open chat assistant">💬</button>
+  <div class="tc-chat-label">Chat with Smart Assistant</div>
+</div>
 
-<div class="tc-chatbox" id="tcChatbox" aria-live="polite">
+<div class="tc-chatbox" id="tcChatbox" aria-live="polite" aria-label="Triple C Smart Assistant">
   <div class="tc-chat-header">
-    <div class="tc-chat-header-title">
-      <strong>Triple C Assistant</strong>
-      <span>Friendly professional help for pricing, services, and starting your project</span>
+    <div>
+      <strong>Triple C Smart Assistant</strong>
+      <span>Ask about pricing, services, branding, business cards, maintenance, domains, hosting, or getting started.</span>
     </div>
     <button class="tc-chat-close" id="tcChatClose" type="button">Close</button>
   </div>
@@ -2223,7 +2281,7 @@ ${formData.requestedChanges}`;
     <button class="tc-quick-btn" type="button" data-quick="Website Pricing">Website Pricing</button>
     <button class="tc-quick-btn" type="button" data-quick="Digital Business Cards">Digital Business Cards</button>
     <button class="tc-quick-btn" type="button" data-quick="Branding">Branding</button>
-    <button class="tc-quick-btn" type="button" data-quick="Contact">Contact</button>
+    <button class="tc-quick-btn" type="button" data-quick="Domains & Hosting">Domains & Hosting</button>
     <button class="tc-quick-btn" type="button" data-quick="Start a Project">Start a Project</button>
   </div>
 
@@ -2233,20 +2291,15 @@ ${formData.requestedChanges}`;
       <input type="text" id="tcLeadBusiness" placeholder="Business name" />
       <input type="email" id="tcLeadEmail" placeholder="Email address" />
       <input type="tel" id="tcLeadPhone" placeholder="Phone number" />
-      <textarea id="tcLeadNeed" rows="3" placeholder="What do you need help with?"></textarea>
+      <textarea id="tcLeadNeed" placeholder="What do you need help with?"></textarea>
       <button class="tc-chat-action" type="button" id="tcLeadSubmit">Send Lead Info</button>
       <div class="tc-lead-helper">
-        This sends a lead summary to Quinn using your visitor’s email app. For automatic lead delivery later, connect Formspree, Netlify Forms, or EmailJS.
+        This prepares a lead summary and opens your email app so it can be sent to Quinn at qcoxbusiness@outlook.com.
       </div>
     </div>
 
     <div class="tc-chat-input-row">
-      <input
-        class="tc-chat-input"
-        id="tcChatInput"
-        type="text"
-        placeholder="Ask about services, pricing, branding, or getting started..."
-      />
+      <input class="tc-chat-input" id="tcChatInput" type="text" placeholder="Ask about websites, pricing, branding, domains, or your business type..." />
       <button class="tc-chat-send" id="tcChatSend" type="button">Send</button>
     </div>
   </div>
@@ -2274,69 +2327,24 @@ ${formData.requestedChanges}`;
 
     let welcomeShown = false;
 
-    const responses = {
-      services: `Triple C offers:
-• Web design
-• Digital marketing support
-• Branding
-• Digital business cards
-• Website maintenance
-• Online business consulting
-
-Everything is built around helping businesses look cleaner, more professional, and more appealing online.`,
-
-      pricing: `Basic websites with no features typically start around $300. Most projects usually range from $500–$900 depending on features and scope.
-
-Monthly maintenance plans are also available, and pricing can vary depending on the size of the project.`,
-
-      digitalMarketing: `Triple C can help market your business by improving your photos, descriptions, and overall presentation so your site looks more appealing and helps sell your business or products better.
-
-That can include stronger wording, cleaner layouts, upgraded visuals, and effects that make the site feel more polished.`,
-
-      branding: `Triple C can help keep everything consistent with your brand colors and overall look.
-
-That can include:
-• brand color consistency
-• digital and physical business cards
-• logo work
-• product naming ideas
-• making your site and brand feel more unified`,
-
-      maintenance: `Maintenance can include:
-• text changes
-• image swaps
-• new sections
-• pricing updates
-• layout improvements
-• general cleanup
-• ongoing monthly support
-
-It’s built for businesses that want to keep their site current without having to handle everything themselves.`,
-
-      consulting: `Online business consulting can include:
-• helping your business get online
-• helping choose domains and hosting
-• setting up a website and business email
-• improving your digital presence
-• helping shape a better online strategy`,
-
-      contact: `You can contact Quinn directly at:
-Phone: 901-569-8890
-Email: qcoxbusiness@outlook.com
-
-If you already know the kind of site you want, you can also use the Website Request form on this site and send a demo or reference of the style you want.`,
-
-      startProject: `If you want to get started, I recommend using the Website Request form on this site.
-
-If you'd rather talk first, contact Quinn directly:
-Phone: 901-569-8890
-Email: qcoxbusiness@outlook.com
-
-If you'd like, I can also collect your contact info here and prepare a lead summary.`,
-
-      businessCards: `Triple C can create digital business cards and physical business card designs that match your branding and make your business look more polished and current.`,
-
-      leadPrompt: `I can help collect your info for a project lead. Fill out the short form below and I’ll prepare a summary for Quinn.`
+    const keywordGroups = {
+      lawncare: ['lawncare', 'lawn care', 'landscaping', 'landscape', 'mowing', 'yard', 'grass cutting'],
+      food: ['restaurant', 'food truck', 'bbq', 'barbecue', 'catering', 'kitchen', 'bakery', 'cafe'],
+      beauty: ['salon', 'barber', 'barbershop', 'lashes', 'nails', 'spa', 'beauty'],
+      fitness: ['gym', 'fitness', 'trainer', 'workout'],
+      auto: ['auto', 'garage', 'mechanic', 'detailing', 'car wash'],
+      medical: ['therapy', 'clinic', 'medical', 'dental', 'doctor', 'chiropractic'],
+      realEstate: ['real estate', 'realtor', 'property', 'homes'],
+      booking: ['booking', 'appointments', 'schedule', 'book now', 'reservation'],
+      pricing: ['price', 'pricing', 'cost', 'how much', 'quote', 'budget'],
+      services: ['services', 'what do you do', 'what can you do', 'help with'],
+      branding: ['branding', 'logo', 'brand colors', 'product name', 'brand'],
+      maintenance: ['maintenance', 'edits', 'changes', 'update my site', 'fix my site', 'website updates'],
+      hosting: ['domain', 'hosting', 'business email'],
+      timeline: ['timeline', 'how long', 'turnaround', 'how fast'],
+      contact: ['contact', 'phone', 'email', 'call'],
+      start: ['start', 'project', 'website request', 'demo', 'reference', 'get started'],
+      businessCards: ['digital business card', 'business cards', 'business card', 'qr card']
     };
 
     function addMessage(text, sender = 'bot') {
@@ -2347,15 +2355,39 @@ If you'd like, I can also collect your contact info here and prepare a lead summ
       messages.scrollTop = messages.scrollHeight;
     }
 
-    function showWelcome() {
-      if (welcomeShown) return;
-      addMessage("Hi, I’m the Triple C assistant. I can help with website pricing, services, and getting your project started.");
-      welcomeShown = true;
+    function addActionButtons(buttons) {
+      if (!buttons || !buttons.length) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'tc-inline-actions';
+
+      buttons.forEach(btn => {
+        const el = document.createElement('button');
+        el.className = 'tc-inline-btn';
+        el.type = 'button';
+        el.textContent = btn.label;
+        el.addEventListener('click', btn.onClick);
+        wrap.appendChild(el);
+      });
+
+      messages.appendChild(wrap);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hasKeyword(text, list) {
+      return list.some(item => text.includes(item));
     }
 
     function openChat() {
       chatbox.classList.add('open');
-      showWelcome();
+      if (!welcomeShown) {
+        addMessage("Hi, I’m the Triple C assistant. I can help with website pricing, services, and getting your project started.");
+        addActionButtons([
+          { label: 'Services', onClick: () => handleUserMessage('Services') },
+          { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') },
+          { label: 'Start a Project', onClick: () => handleUserMessage('Start a Project') }
+        ]);
+        welcomeShown = true;
+      }
       setTimeout(() => input.focus(), 80);
     }
 
@@ -2372,59 +2404,207 @@ If you'd like, I can also collect your contact info here and prepare a lead summ
       leadForm.classList.remove('show');
     }
 
-    function getResponse(message) {
+    function goToNewSite() {
+      if (typeof showView === 'function') {
+        showView('new-site');
+        closeChat();
+      }
+    }
+
+    function goToChanges() {
+      if (typeof showView === 'function') {
+        showView('changes');
+        closeChat();
+      }
+    }
+
+    function goToContact() {
+      window.location.href = 'mailto:qcoxbusiness@outlook.com';
+    }
+
+    function buildReply(message) {
       const msg = message.toLowerCase();
 
-      if (msg.includes('price') || msg.includes('pricing') || msg.includes('cost') || msg.includes('how much')) {
-        return responses.pricing;
+      if (hasKeyword(msg, keywordGroups.lawncare)) {
+        return {
+          text: "Absolutely — we can help lawncare businesses with clean service pages, stronger descriptions, photo upgrades, and booking or contact sections to help turn visitors into leads.\n\nJust click the Start Service button and we can get your project moving.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') }
+          ]
+        };
       }
 
-      if (msg.includes('service') || msg.includes('what do you do')) {
-        return responses.services;
+      if (hasKeyword(msg, keywordGroups.food)) {
+        return {
+          text: "Yes — Triple C can help food trucks, restaurants, BBQ businesses, and catering brands with cleaner websites, stronger visuals, menus, product sections, and branding that feels more appealing and professional.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Branding', onClick: () => handleUserMessage('Branding') }
+          ]
+        };
       }
 
-      if (msg.includes('digital marketing') || msg.includes('marketing') || msg.includes('sell more')) {
-        return responses.digitalMarketing;
+      if (hasKeyword(msg, keywordGroups.beauty)) {
+        return {
+          text: "Yes — beauty, barber, salon, and spa businesses are a great fit. We can help with booking sections, service lists, polished branding, stronger visuals, and a cleaner professional look.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') }
+          ]
+        };
       }
 
-      if (msg.includes('branding') || msg.includes('logo') || msg.includes('brand colors') || msg.includes('product name')) {
-        return responses.branding;
+      if (hasKeyword(msg, keywordGroups.auto)) {
+        return {
+          text: "Yes — auto businesses like garages, mechanics, detailers, and car wash brands are a strong fit. We can build service pages, contact sections, before-and-after visuals, and a more trustworthy online presence.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Services', onClick: () => handleUserMessage('Services') }
+          ]
+        };
       }
 
-      if (msg.includes('maintenance') || msg.includes('update my site') || msg.includes('edits') || msg.includes('changes')) {
-        return responses.maintenance;
+      if (hasKeyword(msg, keywordGroups.medical)) {
+        return {
+          text: "Yes — service-based businesses like therapy and clinic-style brands can benefit from a cleaner online presence, clear contact flow, mobile-friendly layouts, and a more professional presentation.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Contact Quinn', onClick: goToContact }
+          ]
+        };
       }
 
-      if (msg.includes('consulting') || msg.includes('domain') || msg.includes('hosting') || msg.includes('business email')) {
-        return responses.consulting;
+      if (hasKeyword(msg, keywordGroups.realEstate)) {
+        return {
+          text: "Yes — real estate and property-focused businesses are a good fit too. A clean website can help with credibility, service presentation, lead capture, and making the brand feel more established.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') }
+          ]
+        };
       }
 
-      if (msg.includes('business card') || msg.includes('digital card')) {
-        return responses.businessCards;
+      if (hasKeyword(msg, keywordGroups.pricing)) {
+        return {
+          text: "Basic websites with no features typically start around $300. Most projects usually range from $500–$900 depending on features and scope.\n\nMonthly maintenance plans are available too, and pricing can vary depending on the size of the project."
+        };
       }
 
-      if (msg.includes('contact') || msg.includes('phone') || msg.includes('email')) {
-        return responses.contact;
+      if (hasKeyword(msg, keywordGroups.services)) {
+        return {
+          text: "Triple C offers:\n• Web design\n• Digital marketing support\n• Branding\n• Digital business cards\n• Website maintenance\n• Online business consulting\n\nThe main focus is helping small businesses look cleaner, more professional, and more established online."
+        };
       }
 
-      if (msg.includes('start') || msg.includes('project') || msg.includes('quote') || msg.includes('demo') || msg.includes('website request')) {
+      if (hasKeyword(msg, keywordGroups.branding)) {
+        return {
+          text: "Triple C can help keep everything consistent with your brand colors and overall look.\n\nThat can include:\n• brand color consistency\n• digital and physical business cards\n• logo work\n• product naming ideas\n• making your site and brand feel more unified",
+          actions: [
+            { label: 'Digital Business Cards', onClick: () => handleUserMessage('Digital Business Cards') },
+            { label: 'Start Service', onClick: goToNewSite }
+          ]
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.businessCards)) {
+        return {
+          text: "Triple C can create digital business cards and physical business card designs that match your branding and make your business look more polished and current.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite }
+          ]
+        };
+      }
+
+      if (msg.includes('digital marketing') || msg.includes('marketing')) {
+        return {
+          text: "Triple C can help market your business by improving your photos, descriptions, and overall presentation so your site looks more appealing and helps sell your business or products better.\n\nThat can include stronger wording, cleaner layouts, upgraded visuals, and effects that make the site feel more polished."
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.maintenance)) {
+        return {
+          text: "Maintenance can include:\n• text changes\n• image swaps\n• new sections\n• pricing updates\n• layout improvements\n• general cleanup\n• ongoing monthly support\n\nIt’s built for businesses that want to keep their site current without handling everything themselves.",
+          actions: [
+            { label: 'Request Changes', onClick: goToChanges },
+            { label: 'Contact Quinn', onClick: goToContact }
+          ]
+        };
+      }
+
+      if (msg.includes('consulting') || msg.includes('online business consulting')) {
+        return {
+          text: "Online business consulting can include:\n• helping your business get online\n• helping choose domains and hosting\n• setting up a website and business email\n• improving your digital presence\n• helping shape a better online strategy"
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.hosting)) {
+        return {
+          text: "Yes — Triple C can help with domains, hosting, and business email setup.\n\nThat includes helping you choose the right setup so your business has a cleaner and more professional online foundation.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite }
+          ]
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.timeline)) {
+        return {
+          text: "Most websites usually take around 3 days to 1 week depending on the size and features needed.\n\nYou’ll also get updates as the project moves along so you can stay in the loop during the build."
+        };
+      }
+
+      if (msg.includes('small business') || msg.includes('who do you work with') || msg.includes('big company') || msg.includes('chains')) {
+        return {
+          text: "Triple C mainly focuses on small businesses rather than big companies or chains.\n\nThe goal is to help smaller businesses look premium, professional, and more established online."
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.contact)) {
+        return {
+          text: "You can contact Quinn directly at:\nPhone: 901-569-8890\nEmail: qcoxbusiness@outlook.com\n\nIf you already know the kind of site you want, use the Website Request form and send a demo or reference of the style you want.",
+          actions: [
+            { label: 'Email Quinn', onClick: goToContact },
+            { label: 'Start Service', onClick: goToNewSite }
+          ]
+        };
+      }
+
+      if (hasKeyword(msg, keywordGroups.start) || hasKeyword(msg, keywordGroups.booking)) {
         showLeadForm();
-        return responses.startProject + "\n\n" + responses.leadPrompt;
+        return {
+          text: "If you want to get started, the best move is to click Start Service and fill out the Website Request form.\n\nIf you'd rather talk first, contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.\n\nYou can also fill out the short lead form below and I’ll prepare a summary.",
+          actions: [
+            { label: 'Start Service', onClick: goToNewSite },
+            { label: 'Contact Quinn', onClick: goToContact }
+          ]
+        };
       }
 
       if (msg.includes('hello') || msg.includes('hi')) {
-        return "Hi, I’m here to help with services, pricing, branding, digital business cards, maintenance, and getting your project started.";
+        return {
+          text: "Hi, I’m here to help with services, pricing, branding, digital business cards, maintenance, domains and hosting, and getting your project started."
+        };
       }
 
-      return "I can help with services, website pricing, branding, digital business cards, maintenance, online business consulting, and getting your project started. Try one of the quick buttons below or ask me a specific question.";
+      return {
+        text: "I can help with services, website pricing, branding, digital business cards, maintenance, domains and hosting, online business consulting, and getting your project started.\n\nYou can also tell me what kind of business you have, like lawncare, food truck, salon, therapy, or auto service.",
+        actions: [
+          { label: 'Services', onClick: () => handleUserMessage('Services') },
+          { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') },
+          { label: 'Start Service', onClick: goToNewSite }
+        ]
+      };
     }
 
     function handleUserMessage(text) {
       const clean = text.trim();
       if (!clean) return;
       addMessage(clean, 'user');
-      const reply = getResponse(clean);
-      setTimeout(() => addMessage(reply, 'bot'), 240);
+      const reply = buildReply(clean);
+      setTimeout(() => {
+        addMessage(reply.text, 'bot');
+        if (reply.actions) addActionButtons(reply.actions);
+      }, 220);
     }
 
     function sendLeadSummary() {
@@ -2435,7 +2615,7 @@ If you'd like, I can also collect your contact info here and prepare a lead summ
       const need = leadFields.need.value.trim();
 
       if (!name || !business || !email || !phone || !need) {
-        addMessage("Please fill out all lead fields so I can prepare the summary correctly.");
+        addMessage("Please fill out all the lead fields so I can prepare the summary correctly.");
         return;
       }
 
@@ -2455,7 +2635,7 @@ Source:
 Website chatbox`
       );
 
-      addMessage("Thanks — I prepared a lead summary. Your email app will open so this can be sent to Quinn.", 'bot');
+      addMessage("Thanks — I prepared the lead summary. Your email app will open so it can be sent to Quinn.", 'bot');
       window.location.href = `mailto:qcoxbusiness@outlook.com?subject=${subject}&body=${body}`;
     }
 
@@ -2477,13 +2657,12 @@ Website chatbox`
 
     quickButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        const label = btn.dataset.quick || btn.textContent.trim();
-        handleUserMessage(label);
+        handleUserMessage(btn.dataset.quick || btn.textContent.trim());
       });
     });
 
     leadSubmit.addEventListener('click', sendLeadSummary);
   })();
-</script>  
+</script>
 </body>
 </html>
