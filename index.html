@@ -165,20 +165,36 @@
     }
 
     .brand-mark {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       border-radius: 14px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,122,26,0.16));
       border: 1px solid rgba(255,255,255,0.09);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+      padding: 6px;
+      overflow: hidden;
     }
 
-    .brand-mark span {
-      color: var(--accent);
-      font-size: 1.15rem;
-      font-weight: 900;
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 0 6px rgba(255,122,26,0.45))
+        drop-shadow(0 0 14px rgba(255,122,26,0.35))
+        brightness(1.05);
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .brand-mark img:hover {
+      transform: scale(1.05);
+      filter:
+        drop-shadow(0 0 10px rgba(255,140,50,0.65))
+        drop-shadow(0 0 22px rgba(255,122,26,0.55))
+        brightness(1.1);
     }
 
     .brand-sub {
@@ -974,7 +990,7 @@
   <header class="topbar">
     <div class="container nav">
       <div class="brand">
-        <div class="brand-mark"><span>CCC</span></div>
+        <div class="brand-mark"><img src="logo-orange.png" alt="Triple C Development logo" /></div>
         <div>
           <div>Triple C</div>
           <div class="brand-sub">Website Development</div>
@@ -1977,7 +1993,7 @@ ${formData.requestedChanges}`;
   <textarea name="requestedChanges"></textarea>
 </form>
 
-<!-- Triple C Smart Assistant -->
+  <!-- Triple C Smart Assistant -->
 <style>
   .tc-chat-wrap {
     position: fixed;
@@ -2450,7 +2466,9 @@ ${formData.requestedChanges}`;
 
       if (hasKeyword(msg, keywordGroups.lawncare)) {
         return {
-          text: "Absolutely — we can help lawncare businesses with clean service pages, stronger descriptions, photo upgrades, and booking or contact sections to help turn visitors into leads.\n\nJust click the Start Service button and we can get your project moving.",
+          text: "Absolutely — we can help lawncare businesses with clean service pages, stronger descriptions, photo upgrades, and booking or contact sections to help turn visitors into leads.
+
+Just click the Start Service button and we can get your project moving.",
           actions: [
             { label: 'Start Service', onClick: goToNewSite },
             { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') }
@@ -2510,19 +2528,36 @@ ${formData.requestedChanges}`;
 
       if (hasKeyword(msg, keywordGroups.pricing)) {
         return {
-          text: "Basic websites with no features typically start around $300. Most projects usually range from $500–$900 depending on features and scope.\n\nMonthly maintenance plans are available too, and pricing can vary depending on the size of the project."
+          text: "Basic websites with no features typically start around $300. Most projects usually range from $500–$900 depending on features and scope.
+
+Monthly maintenance plans are available too, and pricing can vary depending on the size of the project."
         };
       }
 
       if (hasKeyword(msg, keywordGroups.services)) {
         return {
-          text: "Triple C offers:\n• Web design\n• Digital marketing support\n• Branding\n• Digital business cards\n• Website maintenance\n• Online business consulting\n\nThe main focus is helping small businesses look cleaner, more professional, and more established online."
+          text: "Triple C offers:
+• Web design
+• Digital marketing support
+• Branding
+• Digital business cards
+• Website maintenance
+• Online business consulting
+
+The main focus is helping small businesses look cleaner, more professional, and more established online."
         };
       }
 
       if (hasKeyword(msg, keywordGroups.branding)) {
         return {
-          text: "Triple C can help keep everything consistent with your brand colors and overall look.\n\nThat can include:\n• brand color consistency\n• digital and physical business cards\n• logo work\n• product naming ideas\n• making your site and brand feel more unified",
+          text: "Triple C can help keep everything consistent with your brand colors and overall look.
+
+That can include:
+• brand color consistency
+• digital and physical business cards
+• logo work
+• product naming ideas
+• making your site and brand feel more unified",
           actions: [
             { label: 'Digital Business Cards', onClick: () => handleUserMessage('Digital Business Cards') },
             { label: 'Start Service', onClick: goToNewSite }
@@ -2541,13 +2576,24 @@ ${formData.requestedChanges}`;
 
       if (msg.includes('digital marketing') || msg.includes('marketing')) {
         return {
-          text: "Triple C can help market your business by improving your photos, descriptions, and overall presentation so your site looks more appealing and helps sell your business or products better.\n\nThat can include stronger wording, cleaner layouts, upgraded visuals, and effects that make the site feel more polished."
+          text: "Triple C can help market your business by improving your photos, descriptions, and overall presentation so your site looks more appealing and helps sell your business or products better.
+
+That can include stronger wording, cleaner layouts, upgraded visuals, and effects that make the site feel more polished."
         };
       }
 
       if (hasKeyword(msg, keywordGroups.maintenance)) {
         return {
-          text: "Maintenance can include:\n• text changes\n• image swaps\n• new sections\n• pricing updates\n• layout improvements\n• general cleanup\n• ongoing monthly support\n\nIt’s built for businesses that want to keep their site current without handling everything themselves.",
+          text: "Maintenance can include:
+• text changes
+• image swaps
+• new sections
+• pricing updates
+• layout improvements
+• general cleanup
+• ongoing monthly support
+
+It’s built for businesses that want to keep their site current without handling everything themselves.",
           actions: [
             { label: 'Request Changes', onClick: goToChanges },
             { label: 'Contact Quinn', onClick: goToContact }
@@ -2557,13 +2603,20 @@ ${formData.requestedChanges}`;
 
       if (msg.includes('consulting') || msg.includes('online business consulting')) {
         return {
-          text: "Online business consulting can include:\n• helping your business get online\n• helping choose domains and hosting\n• setting up a website and business email\n• improving your digital presence\n• helping shape a better online strategy"
+          text: "Online business consulting can include:
+• helping your business get online
+• helping choose domains and hosting
+• setting up a website and business email
+• improving your digital presence
+• helping shape a better online strategy"
         };
       }
 
       if (hasKeyword(msg, keywordGroups.hosting)) {
         return {
-          text: "Yes — Triple C can help with domains, hosting, and business email setup.\n\nThat includes helping you choose the right setup so your business has a cleaner and more professional online foundation.",
+          text: "Yes — Triple C can help with domains, hosting, and business email setup.
+
+That includes helping you choose the right setup so your business has a cleaner and more professional online foundation.",
           actions: [
             { label: 'Start Service', onClick: goToNewSite }
           ]
@@ -2572,19 +2625,27 @@ ${formData.requestedChanges}`;
 
       if (hasKeyword(msg, keywordGroups.timeline)) {
         return {
-          text: "Most websites usually take around 3 days to 1 week depending on the size and features needed.\n\nYou’ll also get updates as the project moves along so you can stay in the loop during the build."
+          text: "Most websites usually take around 3 days to 1 week depending on the size and features needed.
+
+You’ll also get updates as the project moves along so you can stay in the loop during the build."
         };
       }
 
       if (msg.includes('small business') || msg.includes('who do you work with') || msg.includes('big company') || msg.includes('chains')) {
         return {
-          text: "Triple C mainly focuses on small businesses rather than big companies or chains.\n\nThe goal is to help smaller businesses look premium, professional, and more established online."
+          text: "Triple C mainly focuses on small businesses rather than big companies or chains.
+
+The goal is to help smaller businesses look premium, professional, and more established online."
         };
       }
 
       if (hasKeyword(msg, keywordGroups.contact)) {
         return {
-          text: "You can contact Quinn directly at:\nPhone: 901-569-8890\nEmail: qcoxbusiness@outlook.com\n\nIf you already know the kind of site you want, use the Website Request form and send a demo or reference of the style you want.",
+          text: "You can contact Quinn directly at:
+Phone: 901-569-8890
+Email: qcoxbusiness@outlook.com
+
+If you already know the kind of site you want, use the Website Request form and send a demo or reference of the style you want.",
           actions: [
             { label: 'Email Quinn', onClick: goToContact },
             { label: 'Start Service', onClick: goToNewSite }
@@ -2595,7 +2656,11 @@ ${formData.requestedChanges}`;
       if (hasKeyword(msg, keywordGroups.start) || hasKeyword(msg, keywordGroups.booking)) {
         showLeadForm();
         return {
-          text: "If you want to get started, the best move is to click Start Service and fill out the Website Request form.\n\nIf you'd rather talk first, contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.\n\nYou can also fill out the short lead form below and I’ll submit your request through the site.",
+          text: "If you want to get started, the best move is to click Start Service and fill out the Website Request form.
+
+If you'd rather talk first, contact Quinn directly at 901-569-8890 or qcoxbusiness@outlook.com.
+
+You can also fill out the short lead form below and I’ll submit your request through the site.",
           actions: [
             { label: 'Start Service', onClick: goToNewSite },
             { label: 'Contact Quinn', onClick: goToContact }
@@ -2610,7 +2675,9 @@ ${formData.requestedChanges}`;
       }
 
       return {
-        text: "I can help with services, website pricing, branding, digital business cards, maintenance, domains and hosting, online business consulting, and getting your project started.\n\nYou can also tell me what kind of business you have, like lawncare, food truck, salon, therapy, or auto service.",
+        text: "I can help with services, website pricing, branding, digital business cards, maintenance, domains and hosting, online business consulting, and getting your project started.
+
+You can also tell me what kind of business you have, like lawncare, food truck, salon, therapy, or auto service.",
         actions: [
           { label: 'Services', onClick: () => handleUserMessage('Services') },
           { label: 'Website Pricing', onClick: () => handleUserMessage('Website Pricing') },
@@ -2660,7 +2727,7 @@ ${formData.requestedChanges}`;
       .then((response) => {
         if (!response.ok) throw new Error("Submission failed");
 
-        addMessage("Perfect — your request was sent directly to Quinn. He’ll reach out soon.", "bot");
+        addMessage("Perfect — your request was sent directly to Triple C Development. We’ll reach out soon.", "bot");
 
         leadFields.name.value = "";
         leadFields.business.value = "";
