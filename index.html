@@ -804,6 +804,161 @@
 
     .option-chip span { color: #222222; line-height: 1.5; font-size: 0.88rem; }
 
+
+
+    .goal-grid,
+    .template-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .goal-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .template-family-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .template-family {
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,0.34);
+    }
+
+    .template-family-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: end;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .template-family-header h4 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+    }
+
+    .template-family-header p {
+      margin: 0;
+      color: #222222;
+      line-height: 1.65;
+    }
+
+    .template-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .goal-card,
+    .template-card {
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.62);
+      padding: 18px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .goal-card:hover,
+    .template-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+      border-color: rgba(255,122,26,0.45);
+    }
+
+    .goal-card.active,
+    .template-card.active {
+      border-color: rgba(255,122,26,0.65);
+      box-shadow: 0 0 0 4px rgba(255,122,26,0.12);
+      background: rgba(255,255,255,0.82);
+    }
+
+    .goal-card button,
+    .template-card button {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .goal-card h4,
+    .template-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .goal-card p,
+    .template-card p {
+      margin: 0;
+      color: #222222;
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .template-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .template-meta span {
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255,122,26,0.10);
+      border: 1px solid rgba(255,122,26,0.20);
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: #8f470f;
+    }
+
+    .template-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .template-list li {
+      display: flex;
+      gap: 10px;
+      align-items: start;
+      color: #202226;
+      line-height: 1.55;
+      font-size: 0.9rem;
+    }
+
+    .template-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 0.48rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,122,26,0.12);
+      flex: none;
+    }
+
+    .selected-template-box {
+      margin-top: 16px;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.52);
+      padding: 18px;
+    }
+
+    .selected-template-box h4 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .selected-template-box p {
+      margin: 0 0 12px;
+      color: #222222;
+      line-height: 1.7;
+    }
+
     .summary-box { padding: 20px; margin-top: 16px; }
     .summary-box h4 { margin: 0 0 14px; font-size: 1rem; }
     .summary-list { display: grid; gap: 10px; font-size: 0.95rem; }
@@ -935,7 +1090,9 @@
       .grid-3,
       .option-grid,
       .process-grid,
-      .trust-grid { grid-template-columns: 1fr; }
+      .trust-grid,
+      .goal-grid,
+      .template-grid { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; }
       .hero h1 { max-width: none; }
     }
@@ -1143,6 +1300,7 @@
       </div>
     </section>
 
+
     <section id="new-site" class="view">
       <div class="container section" style="padding-top: 44px;">
         <div class="builder-wrap">
@@ -1154,19 +1312,33 @@
               </div>
               <div class="preview-body">
                 <div class="preview-header">
-                  <div class="preview-badge">Brand Preview</div>
+                  <div class="preview-badge">Package Preview</div>
                   <h3 class="preview-title" id="previewBusinessName">Your Business Name</h3>
-                  <p class="preview-text">A clean, professional site preview updates here as your client choices are selected.</p>
+                  <p class="preview-text" id="previewIntroText">Choose a business goal, pick a website package, and your preview will update live.</p>
                   <div class="preview-actions">
-                    <button class="preview-btn-primary" id="previewPrimaryBtn" type="button" onclick="goToHomeContacts()">Book / Contact</button>
+                    <button class="preview-btn-primary" id="previewPrimaryBtn" type="button" onclick="goToHomeContacts()">Contact Us</button>
                     <button class="preview-btn-secondary" type="button" onclick="openPreviewAssistant()">Learn More</button>
                   </div>
                 </div>
 
                 <div class="preview-section">
-                  <h4>Selected Features</h4>
+                  <h4>Selected Package</h4>
+                  <div class="feature-pills" id="selectedPackagePills">
+                    <span>No package selected yet</span>
+                  </div>
+                </div>
+
+                <div class="preview-section">
+                  <h4>Included Features</h4>
                   <div class="feature-pills" id="featurePills">
-                    <span>No features selected yet</span>
+                    <span>Select a template to view included features</span>
+                  </div>
+                </div>
+
+                <div class="preview-section">
+                  <h4>Add-On Upgrades</h4>
+                  <div class="feature-pills" id="addonPills">
+                    <span>No add-ons selected</span>
                   </div>
                 </div>
 
@@ -1177,17 +1349,18 @@
                   </div>
                 </div>
 
-                <div class="preview-footer" id="previewFooter">Footer / accent area preview</div>
+                <div class="preview-footer" id="previewFooter">Secondary accent footer preview</div>
               </div>
             </div>
 
             <div class="summary-box">
               <h4>Live Project Summary</h4>
               <div class="summary-list" id="summaryList">
+                <div><strong>Business Goal:</strong> Not selected</div>
+                <div><strong>Package:</strong> Not selected</div>
                 <div><strong>Primary:</strong> Orange</div>
                 <div><strong>Secondary:</strong> Charcoal</div>
-                <div><strong>Third Color:</strong> White</div>
-                <div><strong>Selected Features:</strong> None yet</div>
+                <div><strong>Add-Ons:</strong> None yet</div>
               </div>
             </div>
           </aside>
@@ -1195,20 +1368,36 @@
           <div class="builder-panel">
             <button class="back-btn" type="button" onclick="showView('home')" style="margin-bottom:16px; color:#222; border-color:rgba(0,0,0,0.16);">← Back to Home</button>
             <h2>Website Request Builder</h2>
-            <p class="subtext">Choose your color direction, select the features you need, then send your website request to our team. This version uses a prefilled email when the form is submitted to <strong>qcoxbusiness@outlook.com</strong>.</p>
+            <p class="subtext">Build your request like trim levels on a car. First choose the main goal of the website, then select a package level, review what is included, choose your primary and secondary colors, add any upgrades, and submit your project through the form below.</p>
 
             <form id="newSiteForm" name="website-request" method="POST" data-netlify="true" netlify-honeypot="bot-field">
               <input type="hidden" name="form-name" value="website-request">
               <p hidden>
                 <label>Don’t fill this out: <input name="bot-field"></label>
               </p>
-              <input type="hidden" name="selectedFeatures" id="selectedFeaturesField">
+              <input type="hidden" name="businessGoal" id="businessGoalField">
+              <input type="hidden" name="selectedPackageFamily" id="selectedPackageFamilyField">
+              <input type="hidden" name="selectedTrimLevel" id="selectedTrimLevelField">
+              <input type="hidden" name="selectedTemplateName" id="selectedTemplateNameField">
+              <input type="hidden" name="includedFeatures" id="includedFeaturesField">
+              <input type="hidden" name="selectedAddOns" id="selectedAddOnsField">
               <input type="hidden" name="primaryColor" id="primaryColorField">
               <input type="hidden" name="secondaryColor" id="secondaryColorField">
-              <input type="hidden" name="thirdColor" id="thirdColorField">
               <input type="hidden" name="generatedCode" id="generatedCodeField">
+
               <div class="form-section">
-                <h3>1. Choose your color direction</h3>
+                <h3>1. What does your website mainly need to do?</h3>
+                <div class="goal-grid" id="businessGoalOptions"></div>
+              </div>
+
+              <div class="form-section">
+                <h3>2. Choose your website package</h3>
+                <p class="helper" style="margin-bottom:14px;">Each level includes more structure and features than the one before it. Click select on any template to load its included features into the live preview.</p>
+                <div class="template-family-stack" id="templateFamilies"></div>
+              </div>
+
+              <div class="form-section">
+                <h3>3. Choose your color direction</h3>
                 <div class="color-group">
                   <div>
                     <label style="display:block;margin-bottom:10px;font-weight:700;">Primary Color</label>
@@ -1218,20 +1407,16 @@
                     <label style="display:block;margin-bottom:10px;font-weight:700;">Secondary Color</label>
                     <div class="color-row" id="secondaryColors"></div>
                   </div>
-                  <div>
-                    <label style="display:block;margin-bottom:10px;font-weight:700;">Third Color</label>
-                    <div class="color-row" id="thirdColors"></div>
-                  </div>
                 </div>
               </div>
 
               <div class="form-section">
-                <h3>2. Select the website options you want</h3>
-                <div class="option-grid" id="featureOptions"></div>
+                <h3>4. Optional add-ons for additional cost</h3>
+                <div class="option-grid" id="addOnOptions"></div>
               </div>
 
               <div class="form-section">
-                <h3>3. Tell us about your project</h3>
+                <h3>5. Tell us about your project</h3>
                 <div class="grid-2">
                   <div class="field">
                     <label for="contactName">Primary Contact Name</label>
@@ -1261,12 +1446,13 @@
               <div class="form-actions">
                 <button class="submit-btn" type="submit">Submit This Website to Our Team</button>
               </div>
-              <div class="helper">This uses your visitor's email app to open a prefilled message with their selections.</div>
+              <div class="helper">This still submits through your connected Netlify form with the selected package, included features, add-ons, colors, and project details.</div>
             </form>
           </div>
         </div>
       </div>
     </section>
+
 
     <section id="changes" class="view">
       <div class="container section" style="padding-top: 44px;">
@@ -1340,6 +1526,7 @@
     <p id="toastMessage">Our team will reach out as soon as possible.</p>
   </div>
 
+
   <script>
     const colorSets = {
       primary: [
@@ -1365,33 +1552,203 @@
         { name: 'Dusty Rose', value: '#c69797' }, { name: 'Lavender Gray', value: '#b7b0c8' }, { name: 'Clay', value: '#b3846a' },
         { name: 'Pearl Gray', value: '#e5e7eb' }, { name: 'Off White', value: '#f5f4f1' }, { name: 'Beige', value: '#e7dbc9' },
         { name: 'Soft Black', value: '#2d2d2d' }, { name: 'Blue Gray', value: '#94a3b8' }, { name: 'Olive Gray', value: '#8b8f6a' }
-      ],
-      third: [
-        { name: 'White', value: '#ffffff' }, { name: 'Off White', value: '#f5f4f1' }, { name: 'Black', value: '#141414' },
-        { name: 'Light Gray', value: '#e9e9ec' }, { name: 'Warm Gray', value: '#d7d0c8' }, { name: 'Sand', value: '#dcc8ac' },
-        { name: 'Silver', value: '#bcc0c7' }, { name: 'Cool Gray', value: '#cfd6dd' }, { name: 'Mist', value: '#eef2f3' },
-        { name: 'Soft Beige', value: '#ede5d8' }, { name: 'Pearl', value: '#f8f8f6' }, { name: 'Pale Blue', value: '#e7eff7' }
       ]
     };
 
-    const featureChoices = [
-      { id: 'multi-page', title: 'Multiple Pages', desc: 'Home, about, services, contact, and more.' },
-      { id: 'custom-branding', title: 'Custom Branding', desc: 'Logo styling, polished brand direction, and stronger visual identity.' },
-      { id: 'contact-info', title: 'Contact Information Section', desc: 'Clickable contact details, inquiry area, and business info block.' },
-      { id: 'booking', title: 'Booking Integration', desc: 'Appointment requests, scheduling links, or booking tools.' },
-      { id: 'gallery', title: 'Gallery / Portfolio', desc: 'Show past work, images, before-and-after content, or featured projects.' },
-      { id: 'testimonials', title: 'Testimonials', desc: 'Add review sections to build trust and credibility.' },
-      { id: 'google-maps', title: 'Google Maps / Directions', desc: 'Address block and direct route support for local businesses.' },
-      { id: 'mobile-optimization', title: 'Mobile Optimization', desc: 'Refined mobile layout and responsive cleanup.' },
-      { id: 'seo', title: 'Basic SEO Setup', desc: 'Improve titles, descriptions, and local search readiness.' },
-      { id: 'forms', title: 'Advanced Inquiry Forms', desc: 'Project requests, quote forms, and service intake forms.' }
+    const businessGoals = [
+      {
+        id: 'booking',
+        title: 'Booking-Based Business',
+        desc: 'Best for appointments, reservations, consultations, or any business that mainly needs people to book.'
+      },
+      {
+        id: 'service',
+        title: 'Service-Based Business',
+        desc: 'Best for contractors, agencies, detailers, consultants, and businesses that need to explain services and generate leads.'
+      },
+      {
+        id: 'informational',
+        title: 'Informational / Brand Presence',
+        desc: 'Best for businesses that mainly want people to learn about them, view photos, and contact them.'
+      }
+    ];
+
+    const templatePackages = [
+      {
+        family: 'Basic',
+        familyDesc: 'A simpler starting point for businesses that need a clean online presence without a lot of extra complexity.',
+        templates: [
+          {
+            id: 'basic-starter',
+            name: 'Basic Starter',
+            trim: 'Starter',
+            level: 'Basic',
+            intensity: 'Entry',
+            bestFor: 'Clean starter presence',
+            included: [
+              'Single-page layout',
+              'Hero section with generic placeholders',
+              'Basic contact section',
+              'Mobile-friendly structure',
+              'Simple call-to-action button'
+            ]
+          },
+          {
+            id: 'basic-plus',
+            name: 'Basic Plus',
+            trim: 'Plus',
+            level: 'Basic',
+            intensity: 'Mid',
+            bestFor: 'More content with a cleaner flow',
+            included: [
+              'Everything in Basic Starter',
+              'Services overview section',
+              'Stronger spacing and layout polish',
+              'Featured information blocks',
+              'Basic gallery / image placeholders'
+            ]
+          },
+          {
+            id: 'basic-premium',
+            name: 'Basic Premium',
+            trim: 'Premium',
+            level: 'Basic',
+            intensity: 'High',
+            bestFor: 'Simple but more complete',
+            included: [
+              'Everything in Basic Plus',
+              'Expanded homepage sections',
+              'Testimonials placeholder section',
+              'More polished footer and CTA flow',
+              'Better visual hierarchy throughout'
+            ]
+          }
+        ]
+      },
+      {
+        family: 'Advanced',
+        familyDesc: 'A stronger business-ready setup with better structure, more content opportunities, and more complete built-in functionality.',
+        templates: [
+          {
+            id: 'advanced-starter',
+            name: 'Advanced Starter',
+            trim: 'Starter',
+            level: 'Advanced',
+            intensity: 'Entry',
+            bestFor: 'Businesses that need more than a basic site',
+            included: [
+              'Multi-section homepage',
+              'Stronger services presentation',
+              'Contact info block and lead flow',
+              'Gallery or portfolio placeholders',
+              'Built-in mobile optimization'
+            ]
+          },
+          {
+            id: 'advanced-plus',
+            name: 'Advanced Plus',
+            trim: 'Plus',
+            level: 'Advanced',
+            intensity: 'Mid',
+            bestFor: 'Businesses wanting a more premium feel',
+            included: [
+              'Everything in Advanced Starter',
+              'Testimonials placeholder section',
+              'Advanced inquiry section',
+              'More conversion-focused layout',
+              'Basic SEO-ready page structure'
+            ]
+          },
+          {
+            id: 'advanced-premium',
+            name: 'Advanced Premium',
+            trim: 'Premium',
+            level: 'Advanced',
+            intensity: 'High',
+            bestFor: 'Businesses wanting a stronger online sales tool',
+            included: [
+              'Everything in Advanced Plus',
+              'Additional content sections',
+              'More premium section transitions',
+              'Better lead-capture positioning',
+              'Stronger built-in design polish'
+            ]
+          }
+        ]
+      },
+      {
+        family: 'Expert',
+        familyDesc: 'The most complete package line for businesses that want the most polished and most built-out starting point.',
+        templates: [
+          {
+            id: 'expert-starter',
+            name: 'Expert Starter',
+            trim: 'Starter',
+            level: 'Expert',
+            intensity: 'Entry',
+            bestFor: 'Premium layout with stronger depth',
+            included: [
+              'High-end homepage structure',
+              'Multi-section business presentation',
+              'Stronger visual hierarchy',
+              'Lead-focused contact flow',
+              'Higher-end generic imagery placeholders'
+            ]
+          },
+          {
+            id: 'expert-plus',
+            name: 'Expert Plus',
+            trim: 'Plus',
+            level: 'Expert',
+            intensity: 'Mid',
+            bestFor: 'A more complete premium business site',
+            included: [
+              'Everything in Expert Starter',
+              'Expanded feature sections',
+              'More refined CTA placement',
+              'Enhanced trust-building sections',
+              'More advanced content layout support'
+            ]
+          },
+          {
+            id: 'expert-premium',
+            name: 'Expert Premium',
+            trim: 'Premium',
+            level: 'Expert',
+            intensity: 'High',
+            bestFor: 'Most advanced plug-and-play request level',
+            included: [
+              'Everything in Expert Plus',
+              'Most complete layout preset',
+              'Premium placeholder content structure',
+              'Highest built-in design polish',
+              'Most complete trim-level starting point'
+            ]
+          }
+        ]
+      }
+    ];
+
+    const addOnChoices = [
+      { id: 'extra-page', title: 'Extra Page', desc: 'Add another page beyond the starting package structure.' },
+      { id: 'booking-integration', title: 'Booking Integration', desc: 'Appointment links, scheduling setup, or booking flow support.' },
+      { id: 'advanced-form', title: 'Advanced Inquiry Form', desc: 'More detailed quote, intake, or contact form setup.' },
+      { id: 'gallery', title: 'Gallery / Portfolio Upgrade', desc: 'Expanded image gallery or portfolio presentation.' },
+      { id: 'testimonials', title: 'Testimonials Upgrade', desc: 'Dedicated reviews or trust-building section.' },
+      { id: 'google-maps', title: 'Google Maps / Directions', desc: 'Location, route support, and local business contact enhancement.' },
+      { id: 'seo', title: 'Basic SEO Setup', desc: 'Titles, descriptions, and better local search readiness.' },
+      { id: 'branding', title: 'Branding / Logo Cleanup', desc: 'Additional visual polish beyond the selected package.' },
+      { id: 'maintenance', title: 'Monthly Maintenance', desc: 'Ongoing edits and support after the build is delivered.' }
     ];
 
     const selectionState = {
       primary: colorSets.primary[0],
       secondary: colorSets.secondary[0],
-      third: colorSets.third[0],
-      features: []
+      goal: '',
+      packageFamily: '',
+      template: null,
+      includedFeatures: [],
+      addOns: []
     };
 
     function showView(id) {
@@ -1450,27 +1807,115 @@
       });
     }
 
-    function renderFeatures() {
-      const wrap = document.getElementById('featureOptions');
+    function renderBusinessGoals() {
+      const wrap = document.getElementById('businessGoalOptions');
       if (!wrap) return;
-      featureChoices.forEach(feature => {
+      wrap.innerHTML = '';
+
+      businessGoals.forEach(goal => {
+        const card = document.createElement('div');
+        card.className = 'goal-card';
+        card.innerHTML = `
+          <h4>${goal.title}</h4>
+          <p>${goal.desc}</p>
+          <button class="card-action" type="button">Select Goal</button>
+        `;
+
+        const btn = card.querySelector('button');
+        btn.addEventListener('click', () => {
+          selectionState.goal = goal.title;
+          document.querySelectorAll('.goal-card').forEach(el => el.classList.remove('active'));
+          card.classList.add('active');
+          updatePreview();
+        });
+
+        wrap.appendChild(card);
+      });
+    }
+
+    function renderTemplates() {
+      const wrap = document.getElementById('templateFamilies');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+
+      templatePackages.forEach(group => {
+        const family = document.createElement('div');
+        family.className = 'template-family';
+
+        const cards = group.templates.map(template => `
+          <div class="template-card" data-template-id="${template.id}">
+            <h4>${template.name}</h4>
+            <p>${template.bestFor}</p>
+            <div class="template-meta">
+              <span>${template.level}</span>
+              <span>${template.trim}</span>
+              <span>${template.intensity}</span>
+            </div>
+            <ul class="template-list">
+              ${template.included.slice(0, 5).map(item => `<li>${item}</li>`).join('')}
+            </ul>
+            <button class="card-action" type="button">Select Template</button>
+          </div>
+        `).join('');
+
+        family.innerHTML = `
+          <div class="template-family-header">
+            <div>
+              <h4>${group.family} Series</h4>
+              <p>${group.familyDesc}</p>
+            </div>
+          </div>
+          <div class="template-grid">
+            ${cards}
+          </div>
+        `;
+
+        family.querySelectorAll('.template-card').forEach(card => {
+          const templateId = card.getAttribute('data-template-id');
+          const template = group.templates.find(item => item.id === templateId);
+          const btn = card.querySelector('button');
+
+          btn.addEventListener('click', () => {
+            selectionState.packageFamily = group.family;
+            selectionState.template = template;
+            selectionState.includedFeatures = [...template.included];
+            document.querySelectorAll('.template-card').forEach(el => el.classList.remove('active'));
+            card.classList.add('active');
+            updatePreview();
+          });
+        });
+
+        wrap.appendChild(family);
+      });
+    }
+
+    function renderAddOns() {
+      const wrap = document.getElementById('addOnOptions');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+
+      addOnChoices.forEach(item => {
         const label = document.createElement('label');
         label.className = 'option-chip';
         label.innerHTML = `
-          <input type="checkbox" value="${feature.id}" />
+          <input type="checkbox" value="${item.id}" />
           <div>
-            <strong>${feature.title}</strong>
-            <span>${feature.desc}</span>
+            <strong>${item.title}</strong>
+            <span>${item.desc}</span>
           </div>
         `;
+
         label.querySelector('input').addEventListener('change', (e) => {
           if (e.target.checked) {
-            selectionState.features.push(feature.title);
+            if (!selectionState.addOns.includes(item.title)) {
+              selectionState.addOns.push(item.title);
+            }
           } else {
-            selectionState.features = selectionState.features.filter(item => item !== feature.title);
+            selectionState.addOns = selectionState.addOns.filter(addOn => addOn !== item.title);
           }
           updatePreview();
         });
+
         wrap.appendChild(label);
       });
     }
@@ -1478,7 +1923,7 @@
     function updatePreview() {
       document.documentElement.style.setProperty('--primary-preview', selectionState.primary.value);
       document.documentElement.style.setProperty('--secondary-preview', selectionState.secondary.value);
-      document.documentElement.style.setProperty('--third-preview', selectionState.third.value);
+      document.documentElement.style.setProperty('--third-preview', '#ffffff');
 
       const businessName = document.getElementById('businessName')?.value.trim() || 'Your Business Name';
       const name = document.getElementById('contactName')?.value.trim() || '';
@@ -1488,28 +1933,82 @@
       const previewBusinessName = document.getElementById('previewBusinessName');
       const previewFooter = document.getElementById('previewFooter');
       const previewPrimaryBtn = document.getElementById('previewPrimaryBtn');
+      const previewIntroText = document.getElementById('previewIntroText');
+      const selectedPackagePills = document.getElementById('selectedPackagePills');
       const featurePills = document.getElementById('featurePills');
+      const addonPills = document.getElementById('addonPills');
       const previewContactBlock = document.getElementById('previewContactBlock');
       const summaryList = document.getElementById('summaryList');
 
-      const selectedFeaturesField = document.getElementById('selectedFeaturesField');
+      const businessGoalField = document.getElementById('businessGoalField');
+      const selectedPackageFamilyField = document.getElementById('selectedPackageFamilyField');
+      const selectedTrimLevelField = document.getElementById('selectedTrimLevelField');
+      const selectedTemplateNameField = document.getElementById('selectedTemplateNameField');
+      const includedFeaturesField = document.getElementById('includedFeaturesField');
+      const selectedAddOnsField = document.getElementById('selectedAddOnsField');
       const primaryColorField = document.getElementById('primaryColorField');
       const secondaryColorField = document.getElementById('secondaryColorField');
-      const thirdColorField = document.getElementById('thirdColorField');
 
       if (previewBusinessName) previewBusinessName.textContent = businessName;
-      if (previewFooter) previewFooter.textContent = `${selectionState.secondary.name} + ${selectionState.third.name} footer accent area`;
-      if (previewPrimaryBtn) previewPrimaryBtn.textContent = selectionState.features.includes('Booking Integration') ? 'Book Now' : 'Contact Us';
+
+      if (previewIntroText) {
+        if (selectionState.template) {
+          previewIntroText.textContent = `${selectionState.template.name} selected. ${selectionState.template.bestFor}.`;
+        } else {
+          previewIntroText.textContent = 'Choose a business goal, pick a website package, and your preview will update live.';
+        }
+      }
+
+      if (previewFooter) {
+        previewFooter.textContent = `${selectionState.secondary.name} footer accent preview`;
+      }
+
+      if (previewPrimaryBtn) {
+        previewPrimaryBtn.textContent = selectionState.goal === 'Booking-Based Business' || selectionState.addOns.includes('Booking Integration')
+          ? 'Book Now'
+          : 'Contact Us';
+      }
+
+      if (selectedPackagePills) {
+        selectedPackagePills.innerHTML = '';
+        const pills = [];
+        if (selectionState.goal) pills.push(selectionState.goal);
+        if (selectionState.packageFamily) pills.push(`${selectionState.packageFamily} Series`);
+        if (selectionState.template) pills.push(selectionState.template.name);
+
+        if (!pills.length) {
+          selectedPackagePills.innerHTML = '<span>No package selected yet</span>';
+        } else {
+          pills.forEach(item => {
+            const pill = document.createElement('span');
+            pill.textContent = item;
+            selectedPackagePills.appendChild(pill);
+          });
+        }
+      }
 
       if (featurePills) {
         featurePills.innerHTML = '';
-        if (selectionState.features.length === 0) {
-          featurePills.innerHTML = '<span>No features selected yet</span>';
+        if (!selectionState.includedFeatures.length) {
+          featurePills.innerHTML = '<span>Select a template to view included features</span>';
         } else {
-          selectionState.features.forEach(feature => {
+          selectionState.includedFeatures.forEach(feature => {
             const pill = document.createElement('span');
             pill.textContent = feature;
             featurePills.appendChild(pill);
+          });
+        }
+      }
+
+      if (addonPills) {
+        addonPills.innerHTML = '';
+        if (!selectionState.addOns.length) {
+          addonPills.innerHTML = '<span>No add-ons selected</span>';
+        } else {
+          selectionState.addOns.forEach(addOn => {
+            const pill = document.createElement('span');
+            pill.textContent = addOn;
+            addonPills.appendChild(pill);
           });
         }
       }
@@ -1524,27 +2023,22 @@
 
       if (summaryList) {
         summaryList.innerHTML = `
+          <div><strong>Business Goal:</strong> ${selectionState.goal || 'Not selected'}</div>
+          <div><strong>Package:</strong> ${selectionState.template ? `${selectionState.template.name} (${selectionState.packageFamily} Series)` : 'Not selected'}</div>
           <div><strong>Primary:</strong> ${selectionState.primary.name}</div>
           <div><strong>Secondary:</strong> ${selectionState.secondary.name}</div>
-          <div><strong>Third Color:</strong> ${selectionState.third.name}</div>
-          <div><strong>Selected Features:</strong> ${selectionState.features.length ? selectionState.features.join(', ') : 'None yet'}</div>
+          <div><strong>Add-Ons:</strong> ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None yet'}</div>
         `;
       }
 
-      if (selectedFeaturesField) {
-        selectedFeaturesField.value = selectionState.features.length
-          ? selectionState.features.join(', ')
-          : 'None selected';
-      }
-      if (primaryColorField) {
-        primaryColorField.value = selectionState.primary.name;
-      }
-      if (secondaryColorField) {
-        secondaryColorField.value = selectionState.secondary.name;
-      }
-      if (thirdColorField) {
-        thirdColorField.value = selectionState.third.name;
-      }
+      if (businessGoalField) businessGoalField.value = selectionState.goal || 'Not selected';
+      if (selectedPackageFamilyField) selectedPackageFamilyField.value = selectionState.packageFamily || 'Not selected';
+      if (selectedTrimLevelField) selectedTrimLevelField.value = selectionState.template ? selectionState.template.trim : 'Not selected';
+      if (selectedTemplateNameField) selectedTemplateNameField.value = selectionState.template ? selectionState.template.name : 'Not selected';
+      if (includedFeaturesField) includedFeaturesField.value = selectionState.includedFeatures.length ? selectionState.includedFeatures.join(', ') : 'None selected';
+      if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
+      if (primaryColorField) primaryColorField.value = selectionState.primary.name;
+      if (secondaryColorField) secondaryColorField.value = selectionState.secondary.name;
     }
 
     function showToast(message) {
@@ -1557,51 +2051,6 @@
       window.toastTimer = setTimeout(() => toast.classList.remove('show'), 5000);
     }
 
-    function buildWebsiteRequestEmailBody(formData) {
-      return `New Website Request
-
-` +
-        `Primary Contact Name: ${formData.contactName}
-` +
-        `Business Name: ${formData.businessName}
-` +
-        `Primary Phone Number: ${formData.phoneNumber}
-` +
-        `Primary Email: ${formData.emailAddress}
-
-` +
-        `Primary Color: ${selectionState.primary.name}
-` +
-        `Secondary Color: ${selectionState.secondary.name}
-` +
-        `Third Color: ${selectionState.third.name}
-` +
-        `Selected Features: ${selectionState.features.join(', ') || 'None selected'}
-
-` +
-        `Business Description:
-${formData.businessDescription}`;
-    }
-
-    function buildChangeRequestEmailBody(formData) {
-      return `Website Change Request
-
-` +
-        `Business Name: ${formData.businessName}
-` +
-        `Primary Name: ${formData.primaryName}
-` +
-        `Primary Contact Number: ${formData.phone}
-` +
-        `Primary Email: ${formData.email}
-
-` +
-        `Requested Changes:
-${formData.requestedChanges}`;
-    }
-
-    
-
     function escapeHtml(value) {
       return String(value || '')
         .replace(/&/g, '&amp;')
@@ -1609,14 +2058,6 @@ ${formData.requestedChanges}`;
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
-    }
-
-    function slugify(value) {
-      return String(value || 'starter-site')
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '') || 'starter-site';
     }
 
     function generateServicesMarkup(description) {
@@ -1638,8 +2079,8 @@ ${formData.requestedChanges}`;
     }
 
     function generateFeatureCards() {
-      const selected = selectionState.features.length
-        ? selectionState.features
+      const selected = selectionState.includedFeatures.length
+        ? selectionState.includedFeatures.concat(selectionState.addOns)
         : ['Custom Website Build'];
 
       return selected
@@ -1655,15 +2096,17 @@ ${formData.requestedChanges}`;
       const description = escapeHtml(formData.businessDescription || 'Describe your business here.');
       const primary = selectionState.primary.value;
       const secondary = selectionState.secondary.value;
-      const third = selectionState.third.value;
+      const third = '#ffffff';
       const servicesMarkup = generateServicesMarkup(formData.businessDescription || '');
       const featureCards = generateFeatureCards();
 
-      const bookingButton = selectionState.features.includes('Booking Integration')
+      const bookingButton = selectionState.goal === 'Booking-Based Business' || selectionState.addOns.includes('Booking Integration')
         ? '<a class="btn btn-primary" href="#contact">Book Now</a>'
         : '<a class="btn btn-primary" href="#contact">Contact Us</a>';
 
-      const gallerySection = selectionState.features.includes('Gallery / Portfolio')
+      const gallerySection = selectionState.includedFeatures.includes('Basic gallery / image placeholders')
+        || selectionState.includedFeatures.includes('Gallery or portfolio placeholders')
+        || selectionState.addOns.includes('Gallery / Portfolio Upgrade')
         ? `
       <section class="section alt">
         <div class="container">
@@ -1680,7 +2123,8 @@ ${formData.requestedChanges}`;
       </section>`
         : '';
 
-      const testimonialSection = selectionState.features.includes('Testimonials')
+      const testimonialSection = selectionState.includedFeatures.includes('Testimonials placeholder section')
+        || selectionState.addOns.includes('Testimonials Upgrade')
         ? `
       <section class="section">
         <div class="container">
@@ -1849,7 +2293,7 @@ ${formData.requestedChanges}`;
   <section class="hero">
     <div class="container">
       <div class="hero-card">
-        <div class="eyebrow">Professional Website</div>
+        <div class="eyebrow">${selectionState.template ? escapeHtml(selectionState.template.name) : 'Professional Website'}</div>
         <h1>${business}</h1>
         <p>${description}</p>
         <div class="hero-actions">
@@ -1878,6 +2322,7 @@ ${formData.requestedChanges}`;
       </div>
       <div class="info-card">
         <p><strong>Primary Contact:</strong> ${contact}</p>
+        <p><strong>Website Goal:</strong> ${escapeHtml(selectionState.goal || 'General business presence')}</p>
         <p>${description}</p>
         <ul>${servicesMarkup}</ul>
       </div>
@@ -1920,23 +2365,20 @@ ${formData.requestedChanges}`;
 </html>`;
     }
 
-    function downloadTextFile(filename, content) {
-      const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    }
-
-
     document.getElementById('newSiteForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const form = e.target;
+
+      if (!selectionState.goal) {
+        showToast('Please select the main goal of the website before submitting.');
+        return;
+      }
+
+      if (!selectionState.template) {
+        showToast('Please select a website package before submitting.');
+        return;
+      }
 
       const formData = {
         contactName: document.getElementById('contactName').value,
@@ -1947,7 +2389,6 @@ ${formData.requestedChanges}`;
       };
 
       const starterHtml = generateStarterHtml(formData);
-
       const generatedCodeField = document.getElementById('generatedCodeField');
       if (generatedCodeField) {
         generatedCodeField.value = starterHtml;
@@ -2002,10 +2443,12 @@ ${formData.requestedChanges}`;
 
     makeColorButtons('primaryColors', 'primary');
     makeColorButtons('secondaryColors', 'secondary');
-    makeColorButtons('thirdColors', 'third');
-    renderFeatures();
+    renderBusinessGoals();
+    renderTemplates();
+    renderAddOns();
     updatePreview();
   </script>
+
   <!-- NETLIFY FORM DETECTION (DO NOT REMOVE) -->
 <form name="website-request" method="POST" data-netlify="true" hidden>
   <input type="hidden" name="form-name" value="website-request">
@@ -2014,10 +2457,14 @@ ${formData.requestedChanges}`;
   <input type="text" name="phoneNumber">
   <input type="email" name="emailAddress">
   <textarea name="businessDescription"></textarea>
-  <input type="text" name="selectedFeatures">
+  <input type="text" name="businessGoal">
+  <input type="text" name="selectedPackageFamily">
+  <input type="text" name="selectedTrimLevel">
+  <input type="text" name="selectedTemplateName">
+  <textarea name="includedFeatures"></textarea>
+  <textarea name="selectedAddOns"></textarea>
   <input type="text" name="primaryColor">
   <input type="text" name="secondaryColor">
-  <input type="text" name="thirdColor">
   <textarea name="generatedCode"></textarea>
 </form>
 
