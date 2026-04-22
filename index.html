@@ -1251,59 +1251,467 @@
       font-weight: 700;
     }
 
-    .preview-mockup-grid {
+    .preview-experience {
       display: grid;
-      grid-template-columns: 1fr 86px;
-      gap: 12px;
+      gap: 14px;
       margin-top: 14px;
+    }
+
+    .preview-stage {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #dfe3e8;
+      border-radius: 22px;
+      padding: 12px;
+      background:
+        radial-gradient(circle at top right, rgba(255,122,26,0.16), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f3f5f8 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .preview-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.42) 32%, transparent 60%);
+      transform: translateX(-120%);
+      animation: previewSweep 7.5s linear infinite;
+    }
+
+    .preview-stage-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .preview-stage-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #4a4f57;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .preview-stage-breadcrumb::before {
+      content: "LIVE";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 7px;
+      border-radius: 999px;
+      background: rgba(255,122,26,0.12);
+      color: #8f470f;
+      border: 1px solid rgba(255,122,26,0.18);
+    }
+
+    .preview-stage-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37,38,43,0.05);
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #333840;
+    }
+
+    .preview-stage-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--primary-preview);
+      box-shadow: 0 0 0 6px rgba(255,122,26,0.12);
+    }
+
+    .preview-shell-grid {
+      display: grid;
+      grid-template-columns: 1fr 104px;
+      gap: 12px;
       align-items: stretch;
     }
 
-    .preview-desktop-mock,
-    .preview-phone-mock {
-      border: 1px solid #e3e5e9;
-      background: linear-gradient(180deg, #fff 0%, #f5f6f9 100%);
-      border-radius: 16px;
-      padding: 12px;
+    .preview-desktop-shell,
+    .preview-mobile-shell {
+      position: relative;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: #ffffff;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.07);
     }
 
-    .preview-desktop-mock .bar,
-    .preview-phone-mock .bar {
-      border-radius: 10px;
-      margin-bottom: 8px;
+    .preview-desktop-shell {
+      padding: 12px;
+      min-height: 332px;
+    }
+
+    .preview-mobile-shell {
+      padding: 8px;
+      min-height: 332px;
+      background: linear-gradient(180deg, #ffffff 0%, #f5f6f9 100%);
+    }
+
+    .preview-shell-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .preview-window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .preview-window-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.16);
+    }
+
+    .preview-mini-url {
+      font-size: 0.72rem;
+      color: #5b626c;
+      background: rgba(37,38,43,0.05);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 999px;
+      padding: 6px 10px;
+      max-width: 58%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-mini-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .preview-mini-nav span {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37,38,43,0.05);
+      border: 1px solid rgba(0,0,0,0.06);
+      color: #333840;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .preview-hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .preview-copy-stack,
+    .preview-media-card,
+    .preview-insight-card,
+    .preview-flow-strip,
+    .preview-mobile-inner {
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .preview-copy-stack {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255,122,26,0.12), rgba(255,255,255,0.96) 58%);
+    }
+
+    .preview-copy-eyebrow {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.75);
+      color: #7c4316;
+      border: 1px solid rgba(255,122,26,0.18);
+      margin-bottom: 10px;
+    }
+
+    .preview-headline-stack {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .preview-headline-line,
+    .preview-subcopy-line,
+    .preview-content-line,
+    .preview-mobile-line {
+      border-radius: 999px;
       background: rgba(0,0,0,0.08);
     }
 
-    .preview-desktop-mock .bar.top,
-    .preview-phone-mock .bar.top {
-      height: 11px;
-      background: var(--secondary-preview);
-      opacity: 0.92;
-    }
-
-    .preview-desktop-mock .bar.hero,
-    .preview-phone-mock .bar.hero {
-      height: 34px;
-      background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.92));
-    }
-
-    .preview-desktop-mock .bar.section { height: 18px; }
-    .preview-desktop-mock .bar.section.short { width: 62%; }
-    .preview-desktop-mock .bar.section.mid { width: 84%; }
-    .preview-desktop-mock .bar.cta,
-    .preview-phone-mock .bar.cta {
+    .preview-headline-line {
       height: 14px;
-      width: 38%;
-      background: rgba(255,122,26,0.26);
+      background: linear-gradient(90deg, var(--secondary-preview), rgba(0,0,0,0.14));
     }
 
-    .preview-phone-mock {
-      padding: 9px;
+    .preview-headline-line.short { width: 72%; }
+    .preview-headline-line.mid { width: 88%; }
+
+    .preview-subcopy-stack,
+    .preview-mobile-copy {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 12px;
     }
 
-    .preview-phone-mock .bar.hero { height: 20px; }
-    .preview-phone-mock .bar.section { height: 9px; }
-    .preview-phone-mock .bar.cta { width: 68%; height: 10px; }
+    .preview-subcopy-line { height: 9px; }
+    .preview-subcopy-line.short { width: 66%; }
+    .preview-subcopy-line.mid { width: 86%; }
+
+    .preview-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .preview-cta-pill,
+    .preview-cta-pill-secondary {
+      display: inline-flex;
+      height: 30px;
+      min-width: 92px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .preview-cta-pill {
+      background: var(--primary-preview);
+      box-shadow: 0 10px 20px rgba(255,122,26,0.18);
+    }
+
+    .preview-cta-pill-secondary {
+      background: rgba(255,255,255,0.84);
+    }
+
+    .preview-metric-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .preview-metric-pill {
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(0,0,0,0.06);
+      display: grid;
+      gap: 5px;
+    }
+
+    .preview-metric-pill strong {
+      font-size: 0.72rem;
+      color: #20242a;
+      letter-spacing: 0.01em;
+    }
+
+    .preview-metric-pill span {
+      width: 80%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.08);
+    }
+
+    .preview-media-card {
+      position: relative;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      background: linear-gradient(160deg, rgba(37,38,43,0.96), rgba(82,89,101,0.74));
+      overflow: hidden;
+    }
+
+    .preview-media-card::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      right: -28px;
+      top: -28px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,122,26,0.65), transparent 70%);
+      opacity: 0.95;
+    }
+
+    .preview-media-panel {
+      height: 118px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(3px);
+    }
+
+    .preview-floating-badge {
+      align-self: end;
+      justify-self: start;
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .preview-content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .preview-section-card,
+    .preview-insight-card {
+      padding: 12px;
+    }
+
+    .preview-section-card {
+      display: grid;
+      gap: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fb 100%);
+    }
+
+    .preview-section-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: rgba(255,122,26,0.10);
+      border: 1px solid rgba(255,122,26,0.16);
+      color: #834214;
+      font-size: 0.68rem;
+      font-weight: 800;
+    }
+
+    .preview-content-line { height: 8px; }
+    .preview-content-line.short { width: 66%; }
+    .preview-content-line.mid { width: 84%; }
+
+    .preview-flow-strip {
+      margin-top: 12px;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .preview-flow-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      color: #1d2025;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .preview-flow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .preview-flow-step {
+      padding: 10px 8px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(0,0,0,0.06);
+      display: grid;
+      gap: 6px;
+      min-height: 72px;
+    }
+
+    .preview-flow-step strong {
+      font-size: 0.68rem;
+      color: #1d2128;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .preview-flow-step span {
+      font-size: 0.72rem;
+      color: #59606a;
+      line-height: 1.45;
+    }
+
+    .preview-mobile-shell::before {
+      content: "";
+      display: block;
+      width: 42px;
+      height: 5px;
+      margin: 0 auto 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.14);
+    }
+
+    .preview-mobile-inner {
+      padding: 10px;
+      display: grid;
+      gap: 9px;
+      min-height: calc(100% - 13px);
+    }
+
+    .preview-mobile-badge {
+      display: inline-flex;
+      padding: 5px 7px;
+      border-radius: 999px;
+      background: rgba(255,122,26,0.12);
+      color: #834214;
+      border: 1px solid rgba(255,122,26,0.16);
+      font-size: 0.62rem;
+      font-weight: 800;
+      width: fit-content;
+    }
+
+    .preview-mobile-line {
+      height: 8px;
+      background: rgba(0,0,0,0.08);
+    }
+
+    .preview-mobile-line.hero {
+      height: 18px;
+      background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.90));
+      border-radius: 12px;
+    }
+
+    .preview-mobile-line.short { width: 68%; }
+    .preview-mobile-line.mid { width: 86%; }
+
+    .preview-mobile-card {
+      border-radius: 14px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+    }
 
     .preview-detail {
       display: grid;
@@ -1314,6 +1722,11 @@
     }
 
     .preview-detail strong { color: #181a1f; }
+
+    @keyframes previewSweep {
+      from { transform: translateX(-120%); }
+      to { transform: translateX(140%); }
+    }
 
     .automation-stack {
       display: grid;
@@ -1388,7 +1801,12 @@
       .trust-grid,
       .goal-grid,
       .template-grid,
-      .page-grid { grid-template-columns: 1fr; }
+      .page-grid,
+      .preview-shell-grid,
+      .preview-content-grid,
+      .preview-flow-steps,
+      .preview-hero-grid,
+      .preview-metric-strip { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; }
       .hero h1 { max-width: none; }
     }
@@ -1628,28 +2046,119 @@
                 </div>
 
                 <div class="preview-section">
-                  <h4>Visual Layout Preview</h4>
-                  <div class="preview-mockup-grid">
-                    <div class="preview-desktop-mock">
-                      <div class="bar top"></div>
-                      <div class="bar hero"></div>
-                      <div class="bar section mid"></div>
-                      <div class="bar section"></div>
-                      <div class="bar section short"></div>
-                      <div class="bar cta"></div>
-                    </div>
-                    <div class="preview-phone-mock">
-                      <div class="bar top"></div>
-                      <div class="bar hero"></div>
-                      <div class="bar section"></div>
-                      <div class="bar section"></div>
-                      <div class="bar cta"></div>
+                  <h4>Premium Live Site Preview</h4>
+                  <div class="preview-experience">
+                    <div class="preview-stage">
+                      <div class="preview-stage-top">
+                        <div class="preview-stage-breadcrumb" id="previewStageBreadcrumb">Expert Preview · Smart Build</div>
+                        <div class="preview-stage-status" id="previewStageStatus">High-converting layout active</div>
+                      </div>
+
+                      <div class="preview-shell-grid">
+                        <div class="preview-desktop-shell">
+                          <div class="preview-shell-top">
+                            <div class="preview-window-dots"><span></span><span></span><span></span></div>
+                            <div class="preview-mini-url" id="previewMiniUrl">premium-site.preview</div>
+                          </div>
+
+                          <div class="preview-mini-nav" id="previewMiniNav">
+                            <span>Home</span>
+                            <span>Services</span>
+                            <span>Contact</span>
+                          </div>
+
+                          <div class="preview-hero-grid">
+                            <div class="preview-copy-stack">
+                              <div class="preview-copy-eyebrow" id="previewCopyEyebrow">Modern Premium · Service Business</div>
+                              <div class="preview-headline-stack">
+                                <div class="preview-headline-line mid" id="previewHeadlineLine1"></div>
+                                <div class="preview-headline-line short" id="previewHeadlineLine2"></div>
+                              </div>
+                              <div class="preview-subcopy-stack">
+                                <div class="preview-subcopy-line mid"></div>
+                                <div class="preview-subcopy-line"></div>
+                                <div class="preview-subcopy-line short"></div>
+                              </div>
+                              <div class="preview-cta-row">
+                                <div class="preview-cta-pill" id="previewPrimaryActionVisual"></div>
+                                <div class="preview-cta-pill-secondary"></div>
+                              </div>
+                              <div class="preview-metric-strip" id="previewMetricStrip">
+                                <div class="preview-metric-pill"><strong>Lead Flow</strong><span></span></div>
+                                <div class="preview-metric-pill"><strong>Trust Layer</strong><span></span></div>
+                                <div class="preview-metric-pill"><strong>Mobile UX</strong><span></span></div>
+                              </div>
+                            </div>
+
+                            <div class="preview-media-card">
+                              <div class="preview-media-panel"></div>
+                              <div class="preview-floating-badge" id="previewFloatingBadge">Premium Structure</div>
+                            </div>
+                          </div>
+
+                          <div class="preview-content-grid" id="previewContentGrid">
+                            <div class="preview-section-card">
+                              <div class="preview-section-chip">Hero</div>
+                              <div class="preview-content-line mid"></div>
+                              <div class="preview-content-line"></div>
+                              <div class="preview-content-line short"></div>
+                            </div>
+                            <div class="preview-section-card">
+                              <div class="preview-section-chip">Services</div>
+                              <div class="preview-content-line mid"></div>
+                              <div class="preview-content-line"></div>
+                              <div class="preview-content-line short"></div>
+                            </div>
+                            <div class="preview-section-card">
+                              <div class="preview-section-chip">CTA</div>
+                              <div class="preview-content-line mid"></div>
+                              <div class="preview-content-line"></div>
+                              <div class="preview-content-line short"></div>
+                            </div>
+                          </div>
+
+                          <div class="preview-flow-strip">
+                            <div class="preview-flow-title">
+                              <span>Lead Experience Preview</span>
+                              <span id="previewFlowMode">Website Only</span>
+                            </div>
+                            <div class="preview-flow-steps" id="previewFlowSteps">
+                              <div class="preview-flow-step"><strong>Discover</strong><span>Client lands and browses.</span></div>
+                              <div class="preview-flow-step"><strong>Submit</strong><span>Lead enters project request.</span></div>
+                              <div class="preview-flow-step"><strong>Respond</strong><span>You follow up fast.</span></div>
+                              <div class="preview-flow-step"><strong>Convert</strong><span>Project moves to build.</span></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="preview-mobile-shell">
+                          <div class="preview-mobile-inner">
+                            <div class="preview-mobile-badge" id="previewMobileBadge">Mobile-First</div>
+                            <div class="preview-mobile-line hero"></div>
+                            <div class="preview-mobile-copy">
+                              <div class="preview-mobile-line mid"></div>
+                              <div class="preview-mobile-line"></div>
+                              <div class="preview-mobile-line short"></div>
+                            </div>
+                            <div class="preview-mobile-card">
+                              <div class="preview-mobile-line mid"></div>
+                              <div class="preview-mobile-line"></div>
+                            </div>
+                            <div class="preview-mobile-card">
+                              <div class="preview-mobile-line mid"></div>
+                              <div class="preview-mobile-line short"></div>
+                            </div>
+                            <div class="preview-cta-pill" id="previewMobileCtaVisual"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div class="preview-detail" id="previewDetail">
                     <div><strong>Tone:</strong> Modern premium</div>
                     <div><strong>Conversion Goal:</strong> Contact / Quote</div>
                     <div><strong>Content Setup:</strong> Guided starter copy</div>
+                    <div><strong>Build Direction:</strong> Premium conversion-focused structure</div>
                   </div>
                 </div>
 
@@ -1933,7 +2442,6 @@
                   <strong>Recommended setup:</strong> for your own business, use <strong>one automation platform + one texting service</strong>. For client projects that want texting as a feature, position it as either <strong>Website + Automation</strong> or <strong>Website + AI Receptionist</strong> instead of trying to custom-build every texting flow from scratch.
                 </div>
               </div>
-</div>
 
               <div class="form-actions">
                 <button class="submit-btn" type="submit">Submit This Website to Our Team</button>
@@ -2464,6 +2972,62 @@
       });
     }
 
+    function getPrimaryCtaLabel() {
+      return selectionState.conversionGoal === 'Booking / Appointments'
+        || selectionState.goal === 'Booking-Based Business'
+        || selectionState.addOns.includes('Booking Integration')
+        ? 'Book Now'
+        : selectionState.conversionGoal === 'Phone Calls'
+          ? 'Call Now'
+          : selectionState.conversionGoal === 'Order / Purchase'
+            ? 'Order Now'
+            : selectionState.conversionGoal === 'Application / Lead Form'
+              ? 'Apply Now'
+              : 'Contact Us';
+    }
+
+    function getPreviewSections() {
+      const pages = selectionState.pages.length ? selectionState.pages : ['Home'];
+      const priority = [];
+      if (pages.includes('Home')) priority.push('Hero');
+      if (pages.includes('Services')) priority.push('Services');
+      if (pages.includes('Service Detail')) priority.push('Featured Service');
+      if (pages.includes('Gallery')) priority.push('Portfolio');
+      if (pages.includes('Reviews')) priority.push('Reviews');
+      if (pages.includes('FAQ')) priority.push('FAQ');
+      if (pages.includes('Booking')) priority.push('Booking');
+      if (pages.includes('Menu / Products')) priority.push('Products');
+      if (pages.includes('Service Areas')) priority.push('Service Areas');
+      if (pages.includes('Contact')) priority.push('Contact');
+      if (!priority.length) priority.push('Hero', 'Services', 'Contact');
+      return priority.slice(0, 6);
+    }
+
+    function getPreviewFlowSteps() {
+      if (selectionState.automationTier === 'Website + AI Receptionist') {
+        return [
+          ['Capture', 'Lead enters through site or text.'],
+          ['Qualify', 'AI asks smart follow-up questions.'],
+          ['Route', 'Best next action gets triggered fast.'],
+          ['Convert', 'Client books or gets guided reply.']
+        ];
+      }
+      if (selectionState.automationTier === 'Website + Automation') {
+        return [
+          ['Capture', 'Lead submits request instantly.'],
+          ['Text Back', 'Auto-reply confirms the inquiry.'],
+          ['Nurture', 'Reminders and review flows run.'],
+          ['Convert', 'You step in with the warm lead.']
+        ];
+      }
+      return [
+        ['Discover', 'Client lands and browses.'],
+        ['Submit', 'Lead enters project request.'],
+        ['Respond', 'You follow up fast.'],
+        ['Convert', 'Project moves to build.']
+      ];
+    }
+
     function renderAddOns() {
       const wrap = document.getElementById('addOnOptions');
       if (!wrap) return;
@@ -2516,6 +3080,20 @@
       const previewNavPills = document.getElementById('previewNavPills');
       const previewDetail = document.getElementById('previewDetail');
       const summaryList = document.getElementById('summaryList');
+      const previewStageBreadcrumb = document.getElementById('previewStageBreadcrumb');
+      const previewStageStatus = document.getElementById('previewStageStatus');
+      const previewMiniUrl = document.getElementById('previewMiniUrl');
+      const previewMiniNav = document.getElementById('previewMiniNav');
+      const previewCopyEyebrow = document.getElementById('previewCopyEyebrow');
+      const previewHeadlineLine1 = document.getElementById('previewHeadlineLine1');
+      const previewHeadlineLine2 = document.getElementById('previewHeadlineLine2');
+      const previewPrimaryActionVisual = document.getElementById('previewPrimaryActionVisual');
+      const previewMobileCtaVisual = document.getElementById('previewMobileCtaVisual');
+      const previewFloatingBadge = document.getElementById('previewFloatingBadge');
+      const previewContentGrid = document.getElementById('previewContentGrid');
+      const previewFlowMode = document.getElementById('previewFlowMode');
+      const previewFlowSteps = document.getElementById('previewFlowSteps');
+      const previewMobileBadge = document.getElementById('previewMobileBadge');
 
       const businessGoalField = document.getElementById('businessGoalField');
       const selectedPackageFamilyField = document.getElementById('selectedPackageFamilyField');
@@ -2552,16 +3130,10 @@
         previewFooter.textContent = `${selectionState.secondary.name} footer accent preview`;
       }
 
+      const primaryCtaLabel = getPrimaryCtaLabel();
+
       if (previewPrimaryBtn) {
-        previewPrimaryBtn.textContent = selectionState.conversionGoal === 'Booking / Appointments'
-          || selectionState.goal === 'Booking-Based Business'
-          || selectionState.addOns.includes('Booking Integration')
-          ? 'Book Now'
-          : selectionState.conversionGoal === 'Phone Calls'
-            ? 'Call Now'
-            : selectionState.conversionGoal === 'Order / Purchase'
-              ? 'Order Now'
-              : 'Contact Us';
+        previewPrimaryBtn.textContent = primaryCtaLabel;
       }
 
       if (selectedPackagePills) {
@@ -2591,11 +3163,104 @@
         });
       }
 
+      const previewSections = getPreviewSections();
+
+      if (previewStageBreadcrumb) {
+        previewStageBreadcrumb.textContent = `${selectionState.template ? selectionState.template.name : 'Premium Preview'} · ${selectionState.packageFamily || 'Smart Build'}`;
+      }
+
+      if (previewStageStatus) {
+        previewStageStatus.textContent = selectionState.automationTier === 'Website + AI Receptionist'
+          ? 'Conversational automation active'
+          : selectionState.automationTier === 'Website + Automation'
+            ? 'Automated follow-up active'
+            : 'High-converting layout active';
+      }
+
+      if (previewMiniUrl) {
+        const slug = businessName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'premium-site';
+        previewMiniUrl.textContent = `${slug}.preview`;
+      }
+
+      if (previewMiniNav) {
+        previewMiniNav.innerHTML = '';
+        (selectionState.pages.length ? selectionState.pages : ['Home']).slice(0, 4).forEach(page => {
+          const pill = document.createElement('span');
+          pill.textContent = page;
+          previewMiniNav.appendChild(pill);
+        });
+      }
+
+      if (previewCopyEyebrow) {
+        previewCopyEyebrow.textContent = `${selectionState.toneDirection} · ${selectionState.businessType}`;
+      }
+
+      if (previewHeadlineLine1) {
+        previewHeadlineLine1.style.width = `${Math.max(62, Math.min(94, (businessName.length * 4.2))) }%`;
+      }
+
+      if (previewHeadlineLine2) {
+        previewHeadlineLine2.style.width = `${selectionState.template ? 74 : 60}%`;
+      }
+
+      if (previewPrimaryActionVisual) {
+        previewPrimaryActionVisual.title = primaryCtaLabel;
+      }
+
+      if (previewMobileCtaVisual) {
+        previewMobileCtaVisual.title = primaryCtaLabel;
+      }
+
+      if (previewFloatingBadge) {
+        previewFloatingBadge.textContent = selectionState.template
+          ? `${selectionState.template.trim} ${selectionState.packageFamily}`
+          : 'Premium Structure';
+      }
+
+      if (previewContentGrid) {
+        previewContentGrid.innerHTML = '';
+        previewSections.slice(0, 3).forEach(section => {
+          const card = document.createElement('div');
+          card.className = 'preview-section-card';
+          card.innerHTML = `
+            <div class="preview-section-chip">${section}</div>
+            <div class="preview-content-line mid"></div>
+            <div class="preview-content-line"></div>
+            <div class="preview-content-line short"></div>
+          `;
+          previewContentGrid.appendChild(card);
+        });
+      }
+
+      if (previewFlowMode) {
+        previewFlowMode.textContent = selectionState.automationTier;
+      }
+
+      if (previewFlowSteps) {
+        previewFlowSteps.innerHTML = '';
+        getPreviewFlowSteps().forEach(([title, desc]) => {
+          const step = document.createElement('div');
+          step.className = 'preview-flow-step';
+          step.innerHTML = `<strong>${title}</strong><span>${desc}</span>`;
+          previewFlowSteps.appendChild(step);
+        });
+      }
+
+      if (previewMobileBadge) {
+        previewMobileBadge.textContent = selectionState.goal === 'Booking-Based Business'
+          ? 'Mobile Booking'
+          : selectionState.goal === 'Service-Based Business'
+            ? 'Mobile Lead Flow'
+            : 'Mobile Brand View';
+      }
+
       if (previewDetail) {
         previewDetail.innerHTML = `
           <div><strong>Tone:</strong> ${selectionState.toneDirection}</div>
           <div><strong>Conversion Goal:</strong> ${selectionState.conversionGoal}</div>
           <div><strong>Content Setup:</strong> ${selectionState.contentMode}</div>
+          <div><strong>Business Type:</strong> ${selectionState.businessType}</div>
+          <div><strong>Page Count:</strong> ${Math.max(selectionState.pages.length, 1)} planned page${Math.max(selectionState.pages.length, 1) === 1 ? '' : 's'}</div>
           <div><strong>Automation:</strong> ${selectionState.automationTier}</div>
         `;
       }
