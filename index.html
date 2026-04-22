@@ -1038,6 +1038,301 @@
       font-size: 0.9rem;
     }
 
+
+
+    .template-visual {
+      margin: 14px 0 12px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #f7f7f8 0%, #eceef2 100%);
+      padding: 12px;
+      min-height: 148px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .template-window {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .template-window-top {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .template-window-top span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.18);
+    }
+
+    .template-layout {
+      display: grid;
+      gap: 8px;
+    }
+
+    .template-hero-bar,
+    .template-nav-bar,
+    .template-section-bar,
+    .template-cta-bar {
+      border-radius: 10px;
+    }
+
+    .template-nav-bar { height: 12px; background: rgba(37,38,43,0.88); }
+    .template-hero-bar { height: 34px; background: linear-gradient(90deg, rgba(255,122,26,0.88), rgba(255,177,115,0.95)); }
+    .template-section-bar { height: 18px; background: rgba(0,0,0,0.08); }
+    .template-section-bar.short { width: 68%; }
+    .template-section-bar.mid { width: 82%; }
+    .template-cta-bar { height: 16px; width: 44%; background: rgba(255,122,26,0.28); }
+
+    .template-shot-row {
+      display: grid;
+      grid-template-columns: 1fr 72px;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .template-phone {
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: #ffffff;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .template-phone-notch {
+      width: 34px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.14);
+      margin: 0 auto 4px;
+    }
+
+    .template-phone .template-hero-bar { height: 22px; }
+    .template-phone .template-section-bar { height: 10px; }
+    .template-phone .template-cta-bar { height: 11px; width: 72%; }
+
+    .template-preview-note,
+    .automation-note {
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,122,26,0.18);
+      background: rgba(255,122,26,0.08);
+      color: #7b4216;
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .template-preview-note strong,
+    .automation-note strong {
+      color: #65330f;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-option-chip {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+    }
+
+    .mini-option-chip input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .mini-option-chip strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.93rem;
+    }
+
+    .automation-tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .automation-tier-card {
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.62);
+      padding: 18px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      cursor: pointer;
+    }
+
+    .automation-tier-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.08);
+      border-color: rgba(255,122,26,0.45);
+    }
+
+    .automation-tier-card.active {
+      border-color: rgba(255,122,26,0.65);
+      box-shadow: 0 0 0 4px rgba(255,122,26,0.12);
+      background: rgba(255,255,255,0.82);
+    }
+
+    .automation-tier-card h4 {
+      margin: 0 0 8px;
+      font-size: 1.03rem;
+    }
+
+    .automation-tier-card p {
+      margin: 0 0 12px;
+      color: #222222;
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+
+    .automation-tier-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .automation-tier-card li {
+      display: flex;
+      gap: 10px;
+      align-items: start;
+      color: #202226;
+      line-height: 1.5;
+      font-size: 0.88rem;
+    }
+
+    .automation-tier-card li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 0.46rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255,122,26,0.12);
+      flex: none;
+    }
+
+    .preview-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .preview-nav span {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.62);
+      color: #181818;
+      border: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .preview-mockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 86px;
+      gap: 12px;
+      margin-top: 14px;
+      align-items: stretch;
+    }
+
+    .preview-desktop-mock,
+    .preview-phone-mock {
+      border: 1px solid #e3e5e9;
+      background: linear-gradient(180deg, #fff 0%, #f5f6f9 100%);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .preview-desktop-mock .bar,
+    .preview-phone-mock .bar {
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: rgba(0,0,0,0.08);
+    }
+
+    .preview-desktop-mock .bar.top,
+    .preview-phone-mock .bar.top {
+      height: 11px;
+      background: var(--secondary-preview);
+      opacity: 0.92;
+    }
+
+    .preview-desktop-mock .bar.hero,
+    .preview-phone-mock .bar.hero {
+      height: 34px;
+      background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.92));
+    }
+
+    .preview-desktop-mock .bar.section { height: 18px; }
+    .preview-desktop-mock .bar.section.short { width: 62%; }
+    .preview-desktop-mock .bar.section.mid { width: 84%; }
+    .preview-desktop-mock .bar.cta,
+    .preview-phone-mock .bar.cta {
+      height: 14px;
+      width: 38%;
+      background: rgba(255,122,26,0.26);
+    }
+
+    .preview-phone-mock {
+      padding: 9px;
+    }
+
+    .preview-phone-mock .bar.hero { height: 20px; }
+    .preview-phone-mock .bar.section { height: 9px; }
+    .preview-phone-mock .bar.cta { width: 68%; height: 10px; }
+
+    .preview-detail {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 0.84rem;
+      color: #2a2d31;
+    }
+
+    .preview-detail strong { color: #181a1f; }
+
+    .automation-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .automation-item {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.46);
+      border: 1px solid rgba(0,0,0,0.10);
+    }
+
+    .automation-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1092,7 +1387,8 @@
       .process-grid,
       .trust-grid,
       .goal-grid,
-      .template-grid { grid-template-columns: 1fr; }
+      .template-grid,
+      .page-grid { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; }
       .hero h1 { max-width: none; }
     }
@@ -1326,6 +1622,35 @@
                   <div class="feature-pills" id="selectedPackagePills">
                     <span>No package selected yet</span>
                   </div>
+                  <div class="preview-nav" id="previewNavPills">
+                    <span>Home</span>
+                  </div>
+                </div>
+
+                <div class="preview-section">
+                  <h4>Visual Layout Preview</h4>
+                  <div class="preview-mockup-grid">
+                    <div class="preview-desktop-mock">
+                      <div class="bar top"></div>
+                      <div class="bar hero"></div>
+                      <div class="bar section mid"></div>
+                      <div class="bar section"></div>
+                      <div class="bar section short"></div>
+                      <div class="bar cta"></div>
+                    </div>
+                    <div class="preview-phone-mock">
+                      <div class="bar top"></div>
+                      <div class="bar hero"></div>
+                      <div class="bar section"></div>
+                      <div class="bar section"></div>
+                      <div class="bar cta"></div>
+                    </div>
+                  </div>
+                  <div class="preview-detail" id="previewDetail">
+                    <div><strong>Tone:</strong> Modern premium</div>
+                    <div><strong>Conversion Goal:</strong> Contact / Quote</div>
+                    <div><strong>Content Setup:</strong> Guided starter copy</div>
+                  </div>
                 </div>
 
                 <div class="preview-section">
@@ -1358,6 +1683,7 @@
               <div class="summary-list" id="summaryList">
                 <div><strong>Business Goal:</strong> Not selected</div>
                 <div><strong>Package:</strong> Not selected</div>
+                <div><strong>Pages:</strong> Home</div>
                 <div><strong>Primary:</strong> Orange</div>
                 <div><strong>Secondary:</strong> Charcoal</div>
                 <div><strong>Add-Ons:</strong> None yet</div>
@@ -1381,6 +1707,19 @@
               <input type="hidden" name="selectedTemplateName" id="selectedTemplateNameField">
               <input type="hidden" name="includedFeatures" id="includedFeaturesField">
               <input type="hidden" name="selectedAddOns" id="selectedAddOnsField">
+              <input type="hidden" name="selectedPages" id="selectedPagesField">
+              <input type="hidden" name="pageCountEstimate" id="pageCountEstimateField">
+              <input type="hidden" name="businessType" id="businessTypeField">
+              <input type="hidden" name="toneDirection" id="toneDirectionField">
+              <input type="hidden" name="contentMode" id="contentModeField">
+              <input type="hidden" name="conversionGoal" id="conversionGoalField">
+              <input type="hidden" name="automationRequested" id="automationRequestedField">
+              <input type="hidden" name="automationTier" id="automationTierField">
+              <input type="hidden" name="automationFeatures" id="automationFeaturesField">
+              <input type="hidden" name="aiReceptionistRequested" id="aiReceptionistRequestedField">
+              <input type="hidden" name="automationSummary" id="automationSummaryField">
+              <input type="hidden" name="referenceExamples" id="referenceExamplesField">
+              <input type="hidden" name="generatedBlueprint" id="generatedBlueprintField">
               <input type="hidden" name="primaryColor" id="primaryColorField">
               <input type="hidden" name="secondaryColor" id="secondaryColorField">
               <input type="hidden" name="generatedCode" id="generatedCodeField">
@@ -1397,7 +1736,68 @@
               </div>
 
               <div class="form-section">
-                <h3>3. Choose your color direction</h3>
+                <h3>3. Choose your site pages</h3>
+                <p class="helper" style="margin-bottom:14px;">Pick the pages you want built into the first version so your submission already reads like a real site map instead of a vague request.</p>
+                <div class="page-grid" id="pageOptions"></div>
+              </div>
+
+              <div class="form-section">
+                <h3>4. Brand direction and content setup</h3>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="businessTypeSelect">Business Type</label>
+                    <select id="businessTypeSelect" name="businessTypeSelect">
+                      <option value="Service Business">Service Business</option>
+                      <option value="Food / Restaurant">Food / Restaurant</option>
+                      <option value="Beauty / Personal Care">Beauty / Personal Care</option>
+                      <option value="Auto / Detailing">Auto / Detailing</option>
+                      <option value="Fitness / Health">Fitness / Health</option>
+                      <option value="Home Services / Trades">Home Services / Trades</option>
+                      <option value="Retail / Product Brand">Retail / Product Brand</option>
+                      <option value="Professional / Consulting">Professional / Consulting</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="toneDirectionSelect">Tone / Visual Direction</label>
+                    <select id="toneDirectionSelect" name="toneDirectionSelect">
+                      <option value="Modern Premium">Modern Premium</option>
+                      <option value="Bold High Energy">Bold High Energy</option>
+                      <option value="Luxury Clean">Luxury Clean</option>
+                      <option value="Friendly Local">Friendly Local</option>
+                      <option value="Industrial Strong">Industrial Strong</option>
+                      <option value="Minimal Sleek">Minimal Sleek</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="contentModeSelect">Content Source</label>
+                    <select id="contentModeSelect" name="contentModeSelect">
+                      <option value="Write starter copy for me">Write starter copy for me</option>
+                      <option value="Use my existing business info">Use my existing business info</option>
+                      <option value="I will send final copy later">I will send final copy later</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="conversionGoalSelect">Primary Conversion Goal</label>
+                    <select id="conversionGoalSelect" name="conversionGoalSelect">
+                      <option value="Contact / Quote Request">Contact / Quote Request</option>
+                      <option value="Phone Calls">Phone Calls</option>
+                      <option value="Booking / Appointments">Booking / Appointments</option>
+                      <option value="Order / Purchase">Order / Purchase</option>
+                      <option value="Application / Lead Form">Application / Lead Form</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="referenceExamples">Reference Sites or Style Notes</label>
+                  <textarea id="referenceExamples" name="referenceExamples" placeholder="Paste example websites, describe layouts you like, or explain the type of business vibe you want."></textarea>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <h3>5. Choose your color direction</h3>
                 <div class="color-group">
                   <div>
                     <label style="display:block;margin-bottom:10px;font-weight:700;">Primary Color</label>
@@ -1411,12 +1811,12 @@
               </div>
 
               <div class="form-section">
-                <h3>4. Optional add-ons for additional cost</h3>
+                <h3>6. Optional add-ons for additional cost</h3>
                 <div class="option-grid" id="addOnOptions"></div>
               </div>
 
               <div class="form-section">
-                <h3>5. Tell us about your project</h3>
+                <h3>7. Tell us about your project</h3>
                 <div class="grid-2">
                   <div class="field">
                     <label for="contactName">Primary Contact Name</label>
@@ -1441,12 +1841,104 @@
                   <label for="businessDescription">What business is this for? (Please be as descriptive as possible)</label>
                   <textarea id="businessDescription" name="businessDescription" required placeholder="Tell us about your business, the services you offer, your ideal customers, and the type of impression you want your website to create."></textarea>
                 </div>
+                <div class="field">
+                  <label for="assetChecklist">What assets do you already have?</label>
+                  <textarea id="assetChecklist" name="assetChecklist" placeholder="Examples: logo, color palette, photos, reviews, service list, pricing, booking link, social links, menu, hours, address."></textarea>
+                </div>
+                <div class="field">
+                  <label for="launchDeadline">Desired Launch Timing</label>
+                  <select id="launchDeadline" name="launchDeadline">
+                    <option value="No rush / flexible">No rush / flexible</option>
+                    <option value="Within 1 week">Within 1 week</option>
+                    <option value="Within 2 weeks">Within 2 weeks</option>
+                    <option value="This month">This month</option>
+                    <option value="Specific date discussed later">Specific date discussed later</option>
+                  </select>
+                </div>
               </div>
+
+              <div class="form-section">
+                <h3>8. Automation and follow-up setup</h3>
+                <div class="automation-tier-grid" id="automationTierGrid">
+                  <div class="automation-tier-card active" data-tier="Website Only">
+                    <h4>Website Only</h4>
+                    <p>Best if the client just needs a clean site and standard contact forms with no texting system attached.</p>
+                    <ul>
+                      <li>Standard form submission</li>
+                      <li>No client-facing text workflows</li>
+                      <li>Best for low-maintenance builds</li>
+                    </ul>
+                  </div>
+                  <div class="automation-tier-card" data-tier="Website + Automation">
+                    <h4>Website + Automation</h4>
+                    <p>Best for clients who want leads to get instant replies, reminders, review requests, or follow-up texts after submitting.</p>
+                    <ul>
+                      <li>Instant lead reply text</li>
+                      <li>Reminder and follow-up texts</li>
+                      <li>Review request and nurture flows</li>
+                    </ul>
+                  </div>
+                  <div class="automation-tier-card" data-tier="Website + AI Receptionist">
+                    <h4>Website + AI Receptionist</h4>
+                    <p>Best for clients who want more conversational texting, lead qualification, or after-hours message handling.</p>
+                    <ul>
+                      <li>Conversational reply handling</li>
+                      <li>Lead qualification by text</li>
+                      <li>Better fit for higher-ticket automation clients</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="automation-stack">
+                  <div class="automation-item">
+                    <strong>Best streamlined setup for your own business</strong>
+                    Keep your site lean: website form submission → one automation flow → text/email follow-up. That avoids stacking a bunch of different subscriptions.
+                  </div>
+                  <label class="mini-option-chip">
+                    <input type="checkbox" id="automationRequestedCheckbox" name="automationRequestedCheckbox" />
+                    <div>
+                      <strong>I want this lead to enter an automated follow-up flow</strong>
+                      <span>Use this for instant confirmation texts, quote reminders, onboarding texts, or review requests.</span>
+                    </div>
+                  </label>
+                  <label class="mini-option-chip">
+                    <input type="checkbox" id="automationInstantReplyCheckbox" name="automationInstantReplyCheckbox" />
+                    <div>
+                      <strong>Instant reply text after form submit</strong>
+                      <span>Best for fast response so the client knows the request was received right away.</span>
+                    </div>
+                  </label>
+                  <label class="mini-option-chip">
+                    <input type="checkbox" id="automationReviewFlowCheckbox" name="automationReviewFlowCheckbox" />
+                    <div>
+                      <strong>Review request / follow-up text flow</strong>
+                      <span>Good for clients who want text-based review requests or ongoing follow-up after service is complete.</span>
+                    </div>
+                  </label>
+                  <label class="mini-option-chip">
+                    <input type="checkbox" id="automationAIAgentCheckbox" name="automationAIAgentCheckbox" />
+                    <div>
+                      <strong>Client wants conversational AI texting</strong>
+                      <span>Use this only when they want more than reminders — like qualification, FAQ handling, or AI receptionist behavior.</span>
+                    </div>
+                  </label>
+                  <label class="mini-option-chip">
+                    <input type="checkbox" id="smsConsentCheckbox" name="smsConsentCheckbox" />
+                    <div>
+                      <strong>Client agrees to receive project-related text updates</strong>
+                      <span>Use this only if you plan to send quote follow-ups, reminders, or onboarding texts after they submit.</span>
+                    </div>
+                  </label>
+                </div>
+                <div class="automation-note">
+                  <strong>Recommended setup:</strong> for your own business, use <strong>one automation platform + one texting service</strong>. For client projects that want texting as a feature, position it as either <strong>Website + Automation</strong> or <strong>Website + AI Receptionist</strong> instead of trying to custom-build every texting flow from scratch.
+                </div>
+              </div>
+</div>
 
               <div class="form-actions">
                 <button class="submit-btn" type="submit">Submit This Website to Our Team</button>
               </div>
-              <div class="helper">This still submits through your connected Netlify form with the selected package, included features, add-ons, colors, and project details.</div>
+              <div class="helper">This now submits through your connected Netlify form with package data, selected pages, tone, conversion goal, automation flags, a starter blueprint, and generated starter code.</div>
             </form>
           </div>
         </div>
@@ -1741,6 +2233,21 @@
       { id: 'maintenance', title: 'Monthly Maintenance', desc: 'Ongoing edits and support after the build is delivered.' }
     ];
 
+    const pageChoices = [
+      { id: 'home-page', title: 'Home', desc: 'Main landing page and first impression.' },
+      { id: 'about-page', title: 'About', desc: 'Business story, trust, and background.' },
+      { id: 'services-page', title: 'Services', desc: 'Main service overview page.' },
+      { id: 'service-detail-page', title: 'Service Detail', desc: 'A deeper page for a major service.' },
+      { id: 'gallery-page', title: 'Gallery', desc: 'Photos, portfolio, or project examples.' },
+      { id: 'reviews-page', title: 'Reviews', desc: 'Testimonials and trust-building.' },
+      { id: 'faq-page', title: 'FAQ', desc: 'Common questions and objections.' },
+      { id: 'contact-page', title: 'Contact', desc: 'Contact form, info, and next step.' },
+      { id: 'booking-page', title: 'Booking', desc: 'Scheduling or appointment page.' },
+      { id: 'menu-products-page', title: 'Menu / Products', desc: 'Product list, menu, or item showcase.' },
+      { id: 'service-areas-page', title: 'Service Areas', desc: 'Cities, regions, or local coverage.' },
+      { id: 'custom-page', title: 'Custom Page', desc: 'A custom page to be scoped later.' }
+    ];
+
     const selectionState = {
       primary: colorSets.primary[0],
       secondary: colorSets.secondary[0],
@@ -1748,7 +2255,15 @@
       packageFamily: '',
       template: null,
       includedFeatures: [],
-      addOns: []
+      addOns: [],
+      pages: ['Home', 'Contact'],
+      businessType: 'Service Business',
+      toneDirection: 'Modern Premium',
+      contentMode: 'Write starter copy for me',
+      conversionGoal: 'Contact / Quote Request',
+      automationRequested: false,
+      automationTier: 'Website Only',
+      automationFeatures: []
     };
 
     function showView(id) {
@@ -1851,6 +2366,28 @@
               <span>${template.trim}</span>
               <span>${template.intensity}</span>
             </div>
+            <div class="template-visual">
+              <div class="template-shot-row">
+                <div class="template-window">
+                  <div class="template-window-top"><span></span><span></span><span></span></div>
+                  <div class="template-layout">
+                    <div class="template-nav-bar"></div>
+                    <div class="template-hero-bar"></div>
+                    <div class="template-section-bar mid"></div>
+                    <div class="template-section-bar"></div>
+                    <div class="template-section-bar short"></div>
+                    <div class="template-cta-bar"></div>
+                  </div>
+                </div>
+                <div class="template-phone">
+                  <div class="template-phone-notch"></div>
+                  <div class="template-hero-bar"></div>
+                  <div class="template-section-bar"></div>
+                  <div class="template-section-bar short"></div>
+                  <div class="template-cta-bar"></div>
+                </div>
+              </div>
+            </div>
             <ul class="template-list">
               ${template.included.slice(0, 5).map(item => `<li>${item}</li>`).join('')}
             </ul>
@@ -1886,6 +2423,44 @@
         });
 
         wrap.appendChild(family);
+      });
+    }
+
+    function renderPageOptions() {
+      const wrap = document.getElementById('pageOptions');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+
+      pageChoices.forEach(item => {
+        const label = document.createElement('label');
+        label.className = 'mini-option-chip';
+        const checked = selectionState.pages.includes(item.title) ? 'checked' : '';
+        label.innerHTML = `
+          <input type="checkbox" value="${item.title}" ${checked} />
+          <div>
+            <strong>${item.title}</strong>
+            <span>${item.desc}</span>
+          </div>
+        `;
+
+        label.querySelector('input').addEventListener('change', (e) => {
+          if (e.target.checked) {
+            if (!selectionState.pages.includes(item.title)) {
+              selectionState.pages.push(item.title);
+            }
+          } else {
+            selectionState.pages = selectionState.pages.filter(page => page !== item.title);
+          }
+
+          if (!selectionState.pages.length) {
+            selectionState.pages = ['Home'];
+            label.querySelector('input').checked = true;
+          }
+
+          updatePreview();
+        });
+
+        wrap.appendChild(label);
       });
     }
 
@@ -1938,6 +2513,8 @@
       const featurePills = document.getElementById('featurePills');
       const addonPills = document.getElementById('addonPills');
       const previewContactBlock = document.getElementById('previewContactBlock');
+      const previewNavPills = document.getElementById('previewNavPills');
+      const previewDetail = document.getElementById('previewDetail');
       const summaryList = document.getElementById('summaryList');
 
       const businessGoalField = document.getElementById('businessGoalField');
@@ -1946,6 +2523,18 @@
       const selectedTemplateNameField = document.getElementById('selectedTemplateNameField');
       const includedFeaturesField = document.getElementById('includedFeaturesField');
       const selectedAddOnsField = document.getElementById('selectedAddOnsField');
+      const selectedPagesField = document.getElementById('selectedPagesField');
+      const pageCountEstimateField = document.getElementById('pageCountEstimateField');
+      const businessTypeField = document.getElementById('businessTypeField');
+      const toneDirectionField = document.getElementById('toneDirectionField');
+      const contentModeField = document.getElementById('contentModeField');
+      const conversionGoalField = document.getElementById('conversionGoalField');
+      const automationRequestedField = document.getElementById('automationRequestedField');
+      const automationTierField = document.getElementById('automationTierField');
+      const automationFeaturesField = document.getElementById('automationFeaturesField');
+      const aiReceptionistRequestedField = document.getElementById('aiReceptionistRequestedField');
+      const automationSummaryField = document.getElementById('automationSummaryField');
+      const referenceExamplesField = document.getElementById('referenceExamplesField');
       const primaryColorField = document.getElementById('primaryColorField');
       const secondaryColorField = document.getElementById('secondaryColorField');
 
@@ -1964,9 +2553,15 @@
       }
 
       if (previewPrimaryBtn) {
-        previewPrimaryBtn.textContent = selectionState.goal === 'Booking-Based Business' || selectionState.addOns.includes('Booking Integration')
+        previewPrimaryBtn.textContent = selectionState.conversionGoal === 'Booking / Appointments'
+          || selectionState.goal === 'Booking-Based Business'
+          || selectionState.addOns.includes('Booking Integration')
           ? 'Book Now'
-          : 'Contact Us';
+          : selectionState.conversionGoal === 'Phone Calls'
+            ? 'Call Now'
+            : selectionState.conversionGoal === 'Order / Purchase'
+              ? 'Order Now'
+              : 'Contact Us';
       }
 
       if (selectedPackagePills) {
@@ -1985,6 +2580,24 @@
             selectedPackagePills.appendChild(pill);
           });
         }
+      }
+
+      if (previewNavPills) {
+        previewNavPills.innerHTML = '';
+        (selectionState.pages.length ? selectionState.pages : ['Home']).slice(0, 6).forEach(page => {
+          const pill = document.createElement('span');
+          pill.textContent = page;
+          previewNavPills.appendChild(pill);
+        });
+      }
+
+      if (previewDetail) {
+        previewDetail.innerHTML = `
+          <div><strong>Tone:</strong> ${selectionState.toneDirection}</div>
+          <div><strong>Conversion Goal:</strong> ${selectionState.conversionGoal}</div>
+          <div><strong>Content Setup:</strong> ${selectionState.contentMode}</div>
+          <div><strong>Automation:</strong> ${selectionState.automationTier}</div>
+        `;
       }
 
       if (featurePills) {
@@ -2025,9 +2638,11 @@
         summaryList.innerHTML = `
           <div><strong>Business Goal:</strong> ${selectionState.goal || 'Not selected'}</div>
           <div><strong>Package:</strong> ${selectionState.template ? `${selectionState.template.name} (${selectionState.packageFamily} Series)` : 'Not selected'}</div>
+          <div><strong>Pages:</strong> ${selectionState.pages.length ? selectionState.pages.join(', ') : 'Home'}</div>
           <div><strong>Primary:</strong> ${selectionState.primary.name}</div>
           <div><strong>Secondary:</strong> ${selectionState.secondary.name}</div>
           <div><strong>Add-Ons:</strong> ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None yet'}</div>
+          <div><strong>Automation:</strong> ${selectionState.automationTier}</div>
         `;
       }
 
@@ -2036,7 +2651,22 @@
       if (selectedTrimLevelField) selectedTrimLevelField.value = selectionState.template ? selectionState.template.trim : 'Not selected';
       if (selectedTemplateNameField) selectedTemplateNameField.value = selectionState.template ? selectionState.template.name : 'Not selected';
       if (includedFeaturesField) includedFeaturesField.value = selectionState.includedFeatures.length ? selectionState.includedFeatures.join(', ') : 'None selected';
+      const referenceExamples = document.getElementById('referenceExamples')?.value.trim() || '';
       if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
+      if (selectedPagesField) selectedPagesField.value = selectionState.pages.length ? selectionState.pages.join(', ') : 'Home';
+      if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(selectionState.pages.length, 1));
+      if (businessTypeField) businessTypeField.value = selectionState.businessType;
+      if (toneDirectionField) toneDirectionField.value = selectionState.toneDirection;
+      if (contentModeField) contentModeField.value = selectionState.contentMode;
+      if (conversionGoalField) conversionGoalField.value = selectionState.conversionGoal;
+      if (automationRequestedField) automationRequestedField.value = selectionState.automationRequested ? 'Yes' : 'No';
+      if (automationTierField) automationTierField.value = selectionState.automationTier;
+      if (automationFeaturesField) automationFeaturesField.value = selectionState.automationFeatures.length ? selectionState.automationFeatures.join(', ') : 'None selected';
+      if (aiReceptionistRequestedField) aiReceptionistRequestedField.value = selectionState.automationFeatures.includes('Conversational AI Texting') || selectionState.automationTier === 'Website + AI Receptionist' ? 'Yes' : 'No';
+      if (automationSummaryField) automationSummaryField.value = selectionState.automationRequested
+        ? `${selectionState.automationTier} | Features: ${selectionState.automationFeatures.length ? selectionState.automationFeatures.join(', ') : 'General automated follow-up'} | SMS consent: ${document.getElementById('smsConsentCheckbox')?.checked ? 'Yes' : 'No'}.`
+        : `${selectionState.automationTier} | No automated follow-up requested yet.`;
+      if (referenceExamplesField) referenceExamplesField.value = referenceExamples || 'None provided';
       if (primaryColorField) primaryColorField.value = selectionState.primary.name;
       if (secondaryColorField) secondaryColorField.value = selectionState.secondary.name;
     }
@@ -2088,6 +2718,29 @@
         .join('');
     }
 
+    function generateBlueprint(formData) {
+      const parts = [
+        `Business: ${formData.businessName || 'Business Name'}`,
+        `Contact: ${formData.contactName || 'Primary Contact'}`,
+        `Business Type: ${selectionState.businessType}`,
+        `Goal: ${selectionState.goal || 'Not selected'}`,
+        `Template: ${selectionState.template ? selectionState.template.name : 'Not selected'}`,
+        `Pages: ${selectionState.pages.length ? selectionState.pages.join(', ') : 'Home'}`,
+        `Tone: ${selectionState.toneDirection}`,
+        `Conversion Goal: ${selectionState.conversionGoal}`,
+        `Content Mode: ${selectionState.contentMode}`,
+        `Add-Ons: ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None'}`,
+        `Automation Requested: ${selectionState.automationRequested ? 'Yes' : 'No'}`,
+        `Automation Tier: ${selectionState.automationTier}`,
+        `Automation Features: ${selectionState.automationFeatures.length ? selectionState.automationFeatures.join(', ') : 'None selected'}`,
+        `Reference Sites / Notes: ${formData.referenceExamples || 'None provided'}`,
+        `Assets on Hand: ${formData.assetChecklist || 'Not listed yet'}`,
+        `Desired Launch Timing: ${formData.launchDeadline || 'Flexible'}`
+      ];
+
+      return parts.join(' | ');
+    }
+
     function generateStarterHtml(formData) {
       const business = escapeHtml(formData.businessName || 'Business Name');
       const contact = escapeHtml(formData.contactName || 'Primary Contact');
@@ -2099,6 +2752,12 @@
       const third = '#ffffff';
       const servicesMarkup = generateServicesMarkup(formData.businessDescription || '');
       const featureCards = generateFeatureCards();
+      const pageLinks = (selectionState.pages.length ? selectionState.pages : ['Home'])
+        .slice(0, 6)
+        .map(page => `<a href="#${page.toLowerCase().replace(/[^a-z0-9]+/g, '-')}">${escapeHtml(page)}</a>`)
+        .join('');
+      const toneNote = escapeHtml(selectionState.toneDirection || 'Modern Premium');
+      const conversionNote = escapeHtml(selectionState.conversionGoal || 'Contact / Quote Request');
 
       const bookingButton = selectionState.goal === 'Booking-Based Business' || selectionState.addOns.includes('Booking Integration')
         ? '<a class="btn btn-primary" href="#contact">Book Now</a>'
@@ -2293,9 +2952,10 @@
   <section class="hero">
     <div class="container">
       <div class="hero-card">
-        <div class="eyebrow">${selectionState.template ? escapeHtml(selectionState.template.name) : 'Professional Website'}</div>
+        <div class="eyebrow">${selectionState.template ? escapeHtml(selectionState.template.name) : 'Professional Website'} · ${toneNote}</div>
         <h1>${business}</h1>
         <p>${description}</p>
+        <p><strong>Primary Goal:</strong> ${conversionNote}</p>
         <div class="hero-actions">
           ${bookingButton}
           <a class="btn btn-secondary" href="#features">Learn More</a>
@@ -2385,13 +3045,20 @@
         businessName: document.getElementById('businessName').value,
         phoneNumber: document.getElementById('phoneNumber').value,
         emailAddress: document.getElementById('emailAddress').value,
-        businessDescription: document.getElementById('businessDescription').value
+        businessDescription: document.getElementById('businessDescription').value,
+        referenceExamples: document.getElementById('referenceExamples')?.value || '',
+        assetChecklist: document.getElementById('assetChecklist')?.value || '',
+        launchDeadline: document.getElementById('launchDeadline')?.value || 'No rush / flexible'
       };
 
       const starterHtml = generateStarterHtml(formData);
       const generatedCodeField = document.getElementById('generatedCodeField');
+      const generatedBlueprintField = document.getElementById('generatedBlueprintField');
       if (generatedCodeField) {
         generatedCodeField.value = starterHtml;
+      }
+      if (generatedBlueprintField) {
+        generatedBlueprintField.value = generateBlueprint(formData);
       }
 
       const payload = new FormData(form);
@@ -2436,15 +3103,86 @@
       }
     });
 
-    ['contactName', 'businessName', 'phoneNumber', 'emailAddress'].forEach(id => {
+    ['contactName', 'businessName', 'phoneNumber', 'emailAddress', 'referenceExamples'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', updatePreview);
     });
+
+    ['businessTypeSelect', 'toneDirectionSelect', 'contentModeSelect', 'conversionGoalSelect'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => {
+          if (id === 'businessTypeSelect') selectionState.businessType = el.value;
+          if (id === 'toneDirectionSelect') selectionState.toneDirection = el.value;
+          if (id === 'contentModeSelect') selectionState.contentMode = el.value;
+          if (id === 'conversionGoalSelect') selectionState.conversionGoal = el.value;
+          updatePreview();
+        });
+      }
+    });
+
+    document.getElementById('automationRequestedCheckbox')?.addEventListener('change', (e) => {
+      selectionState.automationRequested = e.target.checked;
+      if (!e.target.checked && selectionState.automationTier !== 'Website Only') {
+        selectionState.automationTier = 'Website Only';
+        document.querySelectorAll('.automation-tier-card').forEach(el => el.classList.toggle('active', el.getAttribute('data-tier') === 'Website Only'));
+      }
+      syncAutomationFeatures();
+      updatePreview();
+    });
+
+    document.querySelectorAll('.automation-tier-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.automation-tier-card').forEach(el => el.classList.remove('active'));
+        card.classList.add('active');
+        selectionState.automationTier = card.getAttribute('data-tier') || 'Website Only';
+        const wantsAutomation = selectionState.automationTier !== 'Website Only';
+        selectionState.automationRequested = wantsAutomation || document.getElementById('automationRequestedCheckbox')?.checked;
+        const reqBox = document.getElementById('automationRequestedCheckbox');
+        if (reqBox && wantsAutomation) reqBox.checked = true;
+        const aiBox = document.getElementById('automationAIAgentCheckbox');
+        if (aiBox && selectionState.automationTier === 'Website + AI Receptionist') aiBox.checked = true;
+        syncAutomationFeatures();
+        updatePreview();
+      });
+    });
+
+    function syncAutomationFeatures() {
+      const features = [];
+      if (document.getElementById('automationInstantReplyCheckbox')?.checked) features.push('Instant Reply Text');
+      if (document.getElementById('automationReviewFlowCheckbox')?.checked) features.push('Review / Follow-Up Flow');
+      if (document.getElementById('automationAIAgentCheckbox')?.checked) features.push('Conversational AI Texting');
+      selectionState.automationFeatures = features;
+      if (document.getElementById('automationAIAgentCheckbox')?.checked && selectionState.automationTier === 'Website + Automation') {
+        selectionState.automationTier = 'Website + AI Receptionist';
+        document.querySelectorAll('.automation-tier-card').forEach(el => el.classList.toggle('active', el.getAttribute('data-tier') === 'Website + AI Receptionist'));
+      }
+      if (!selectionState.automationRequested && selectionState.automationTier === 'Website Only') {
+        document.querySelectorAll('.automation-tier-card').forEach(el => el.classList.toggle('active', el.getAttribute('data-tier') === 'Website Only'));
+      }
+    }
+
+    ['automationInstantReplyCheckbox','automationReviewFlowCheckbox','automationAIAgentCheckbox'].forEach(id => {
+      document.getElementById(id)?.addEventListener('change', () => {
+        if (id === 'automationAIAgentCheckbox' && document.getElementById(id)?.checked) {
+          selectionState.automationTier = 'Website + AI Receptionist';
+          document.querySelectorAll('.automation-tier-card').forEach(el => el.classList.toggle('active', el.getAttribute('data-tier') === 'Website + AI Receptionist'));
+          const reqBox = document.getElementById('automationRequestedCheckbox');
+          if (reqBox) reqBox.checked = true;
+          selectionState.automationRequested = true;
+        }
+        syncAutomationFeatures();
+        updatePreview();
+      });
+    });
+
+    document.getElementById('smsConsentCheckbox')?.addEventListener('change', updatePreview);
 
     makeColorButtons('primaryColors', 'primary');
     makeColorButtons('secondaryColors', 'secondary');
     renderBusinessGoals();
     renderTemplates();
+    renderPageOptions();
     renderAddOns();
     updatePreview();
   </script>
@@ -2463,6 +3201,19 @@
   <input type="text" name="selectedTemplateName">
   <textarea name="includedFeatures"></textarea>
   <textarea name="selectedAddOns"></textarea>
+  <textarea name="selectedPages"></textarea>
+  <input type="text" name="pageCountEstimate">
+  <input type="text" name="businessType">
+  <input type="text" name="toneDirection">
+  <input type="text" name="contentMode">
+  <input type="text" name="conversionGoal">
+  <input type="text" name="automationRequested">
+  <input type="text" name="automationTier">
+  <input type="text" name="automationFeatures">
+  <input type="text" name="aiReceptionistRequested">
+  <textarea name="automationSummary"></textarea>
+  <textarea name="referenceExamples"></textarea>
+  <textarea name="generatedBlueprint"></textarea>
   <input type="text" name="primaryColor">
   <input type="text" name="secondaryColor">
   <textarea name="generatedCode"></textarea>
