@@ -1916,6 +1916,7 @@
               <input type="hidden" name="automationSummary" id="automationSummaryField">
               <input type="hidden" name="referenceExamples" id="referenceExamplesField">
               <input type="hidden" name="generatedBlueprint" id="generatedBlueprintField">
+              <input type="hidden" name="base44Prompt" id="base44PromptField">
               <input type="hidden" name="primaryColor" id="primaryColorField">
               <input type="hidden" name="secondaryColor" id="secondaryColorField">
               <input type="hidden" name="generatedCode" id="generatedCodeField">
@@ -2753,6 +2754,9 @@
             if (!selectionState.addOns.includes(item.title)) {
               selectionState.addOns.push(item.title);
             }
+            if (item.title === 'Extra Page' && !selectionState.pageSections['Extra Page']) {
+              selectionState.pageSections['Extra Page'] = ['Custom Content Section', 'Additional Details Section', 'Closing Call-To-Action'];
+            }
           } else {
             selectionState.addOns = selectionState.addOns.filter(addOn => addOn !== item.title);
           }
@@ -2768,7 +2772,8 @@
         'Home': 'Main Page',
         'Services': 'Offerings',
         'Menu': 'Food / Items',
-        'Booking': 'Conversion'
+        'Booking': 'Conversion',
+        'Extra Page': 'Add-On Page'
       };
       return map[page] || 'Page';
     }
@@ -2780,6 +2785,7 @@
       }
       const map = {
         'Home': 'Main landing page with hero, brand positioning, and primary CTA.',
+        'Extra Page': 'Additional custom page created from the Extra Page add-on.',
         'Services': 'Service overview page with packages, pricing, and stronger explanations.',
         'Menu': 'Food or product page with categories, items, and pricing.',
         'Booking': 'Conversion page built around contact, scheduling, or reservations.'
@@ -2788,6 +2794,16 @@
     }
 
     function getPagePreviewLines(page) {
+      if (page === 'Extra Page') {
+        return `
+          <div class="line top"></div>
+          <div class="line hero"></div>
+          <div class="line card"></div>
+          <div class="line mid"></div>
+          <div class="line short"></div>
+          <div class="line cta"></div>
+        `;
+      }
       if (page === 'Menu') {
         return `
           <div class="line top"></div>
@@ -2828,6 +2844,26 @@
       `;
     }
 
+    function getEffectivePreviewPages() {
+      const pages = selectionState.pages.length ? [...selectionState.pages] : ['Home'];
+      if (selectionState.addOns.includes('Extra Page')) {
+        if (!pages.includes('Extra Page')) pages.push('Extra Page');
+      }
+      return pages;
+    }
+
+    function getBase44Prompt(formData) {
+      const pages = (selectionState.pages.length ? selectionState.pages : ['Home']).map(page => {
+        const sections = (selectionState.pageSections[page] || []).length ? (selectionState.pageSections[page] || []).join(', ') : 'Use polished starter sections';
+        return `- ${page}: ${sections}`;
+      }).join('\n');
+
+      const premium = selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'None selected';
+      const addOns = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
+
+      return `Build a premium small-business website with a clean, modern, mobile-first design.\n\nBusiness name: ${formData.businessName || 'Business Name'}\nBusiness type: ${selectionState.businessType}\nBrand tone: ${selectionState.toneDirection}\nPrimary conversion goal: ${selectionState.conversionGoal}\n\nCore pages and sections:\n${pages}\n${selectionState.addOns.includes('Extra Page') ? '- Extra Page: Create one additional custom page that matches the site style and supports the business needs.\n' : ''}\nBrand colors:\n- Primary: ${selectionState.primary.name}\n- Secondary: ${selectionState.secondary.name}\n\nBusiness description:\n${formData.businessDescription || 'Use a polished starter business description.'}\n\nAssets already available:\n${formData.assetChecklist || 'Not listed yet'}\n\nReference style notes:\n${formData.referenceExamples || 'None provided'}\n\nPremium features requested:\n${premium}\n\nOptional add-ons:\n${addOns}\n\nContent direction:\n${selectionState.contentMode}\n\nRequirements:\n- responsive desktop and mobile design\n- premium visual hierarchy\n- strong call-to-action placement\n- clean spacing\n- sections should feel polished and business-ready\n- use real section structure, not generic filler blocks\n- do not create unnecessary extra pages\n- use the requested pages only unless Extra Page is selected\n- make the design conversion-focused`;
+    }
+
     function updatePreview() {
       document.documentElement.style.setProperty('--primary-preview', selectionState.primary.value);
       document.documentElement.style.setProperty('--secondary-preview', selectionState.secondary.value);
@@ -2865,6 +2901,7 @@
       const automationRequestedField = document.getElementById('automationRequestedField');
       const automationSummaryField = document.getElementById('automationSummaryField');
       const referenceExamplesField = document.getElementById('referenceExamplesField');
+      const base44PromptField = document.getElementById('base44PromptField');
       const primaryColorField = document.getElementById('primaryColorField');
       const secondaryColorField = document.getElementById('secondaryColorField');
 
@@ -2914,7 +2951,7 @@
 
       if (previewNavPills) {
         previewNavPills.innerHTML = '';
-        (selectionState.pages.length ? selectionState.pages : ['Home']).slice(0, 6).forEach(page => {
+        getEffectivePreviewPages().slice(0, 6).forEach(page => {
           const pill = document.createElement('span');
           pill.textContent = page;
           previewNavPills.appendChild(pill);
@@ -2923,7 +2960,7 @@
 
       const previewPageTrack = document.getElementById('previewPageTrack');
       if (previewPageTrack) {
-        const pages = selectionState.pages.length ? selectionState.pages : ['Home'];
+        const pages = getEffectivePreviewPages();
         previewPageTrack.innerHTML = pages.map(page => `
           <div class="preview-page-card">
             <div class="preview-page-head">
@@ -2985,7 +3022,7 @@
         summaryList.innerHTML = `
           <div><strong>Business Goal:</strong> ${selectionState.goal || 'Not selected'}</div>
           <div><strong>Package:</strong> ${selectionState.template ? `${selectionState.template.name} (${selectionState.packageFamily} Series)` : 'Not selected'}</div>
-          <div><strong>Pages:</strong> ${selectionState.pages.length ? selectionState.pages.map(page => `${page} (${(selectionState.pageSections[page] || []).length})`).join(', ') : 'Home'}</div>
+          <div><strong>Pages:</strong> ${getEffectivePreviewPages().map(page => `${page} (${page === 'Extra Page' ? 'custom' : ((selectionState.pageSections[page] || []).length)})`).join(', ')}</div>
           <div><strong>Primary:</strong> ${selectionState.primary.name}</div>
           <div><strong>Secondary:</strong> ${selectionState.secondary.name}</div>
           <div><strong>Add-Ons:</strong> ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None yet'}</div>
@@ -3000,7 +3037,7 @@
       if (includedFeaturesField) includedFeaturesField.value = selectionState.includedFeatures.length ? selectionState.includedFeatures.join(', ') : 'None selected';
       const referenceExamples = document.getElementById('referenceExamples')?.value.trim() || '';
       if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
-      if (selectedPagesField) selectedPagesField.value = selectionState.pages.length ? selectionState.pages.map(page => `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ') : 'Home';
+      if (selectedPagesField) selectedPagesField.value = getEffectivePreviewPages().map(page => page === 'Extra Page' ? 'Extra Page: Additional custom page from add-on' : `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ');
       if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(selectionState.pages.length, 1));
       if (businessTypeField) businessTypeField.value = selectionState.businessType;
       if (toneDirectionField) toneDirectionField.value = selectionState.toneDirection;
@@ -3009,6 +3046,13 @@
       if (automationRequestedField) automationRequestedField.value = selectionState.automationRequested ? 'Yes' : 'No';
       if (automationSummaryField) automationSummaryField.value = selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'No premium features selected';
       if (referenceExamplesField) referenceExamplesField.value = referenceExamples || 'None provided';
+      const currentFormData = {
+        businessName,
+        businessDescription: document.getElementById('businessDescription')?.value.trim() || '',
+        referenceExamples,
+        assetChecklist: document.getElementById('assetChecklist')?.value.trim() || ''
+      };
+      if (base44PromptField) base44PromptField.value = getBase44Prompt(currentFormData);
       if (primaryColorField) primaryColorField.value = selectionState.primary.name;
       if (secondaryColorField) secondaryColorField.value = selectionState.secondary.name;
     }
@@ -3067,7 +3111,7 @@
         `Business Type: ${selectionState.businessType}`,
         `Goal: ${selectionState.goal || 'Not selected'}`,
         `Template: ${selectionState.template ? selectionState.template.name : 'Not selected'}`,
-        `Pages: ${selectionState.pages.length ? selectionState.pages.map(page => `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ') : 'Home'}`,
+        `Pages: ${getEffectivePreviewPages().map(page => page === 'Extra Page' ? 'Extra Page: Additional custom page from add-on' : `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ')}`,
         `Tone: ${selectionState.toneDirection}`,
         `Conversion Goal: ${selectionState.conversionGoal}`,
         `Content Mode: ${selectionState.contentMode}`,
@@ -3394,11 +3438,15 @@
       const starterHtml = generateStarterHtml(formData);
       const generatedCodeField = document.getElementById('generatedCodeField');
       const generatedBlueprintField = document.getElementById('generatedBlueprintField');
+      const base44PromptField = document.getElementById('base44PromptField');
       if (generatedCodeField) {
         generatedCodeField.value = starterHtml;
       }
       if (generatedBlueprintField) {
         generatedBlueprintField.value = generateBlueprint(formData);
+      }
+      if (base44PromptField) {
+        base44PromptField.value = getBase44Prompt(formData);
       }
 
       const payload = new FormData(form);
@@ -3505,6 +3553,7 @@
   <textarea name="automationSummary"></textarea>
   <textarea name="referenceExamples"></textarea>
   <textarea name="generatedBlueprint"></textarea>
+  <textarea name="base44Prompt"></textarea>
   <input type="text" name="primaryColor">
   <input type="text" name="secondaryColor">
   <textarea name="generatedCode"></textarea>
