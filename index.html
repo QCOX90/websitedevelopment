@@ -519,9 +519,18 @@
     .builder-wrap,
     .form-wrap {
       display: grid;
-      grid-template-columns: 0.88fr 1.12fr;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
       gap: 24px;
       align-items: start;
+    }
+
+    .builder-wrap > *,
+    .form-wrap > *,
+    .mini-site,
+    .builder-panel,
+    .preview-body,
+    .preview-section {
+      min-width: 0;
     }
 
     .builder-panel,
@@ -1165,6 +1174,143 @@
       font-size: 0.93rem;
     }
 
+    .core-page-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .core-page-card {
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.56);
+      overflow: hidden;
+    }
+
+    .core-page-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      cursor: pointer;
+    }
+
+    .core-page-head input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+      transform: scale(1.12);
+      flex: none;
+    }
+
+    .core-page-head strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .core-page-head span {
+      color: #222222;
+      line-height: 1.55;
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .core-page-toggle {
+      margin-left: auto;
+      color: #8f470f;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-top: 2px;
+      flex: none;
+    }
+
+    .core-page-body {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 16px 18px 18px;
+      display: none;
+      background: rgba(255,255,255,0.40);
+    }
+
+    .core-page-card.open .core-page-body {
+      display: block;
+    }
+
+    .section-chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .section-chip {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.09);
+      background: #fff;
+      cursor: pointer;
+      min-width: 0;
+    }
+
+    .section-chip input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      transform: scale(1.04);
+      flex: none;
+    }
+
+    .section-chip strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.88rem;
+    }
+
+    .section-chip span {
+      color: #4b5563;
+      line-height: 1.45;
+      font-size: 0.79rem;
+      display: block;
+    }
+
+    .premium-feature-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .premium-feature-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 15px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.52);
+      cursor: pointer;
+    }
+
+    .premium-feature-card input {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      transform: scale(1.12);
+      flex: none;
+    }
+
+    .premium-feature-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .premium-feature-card span {
+      color: #222222;
+      line-height: 1.55;
+      font-size: 0.88rem;
+      display: block;
+    }
+
     .preview-nav {
       display: flex;
       flex-wrap: wrap;
@@ -1239,17 +1385,22 @@
 
     .preview-page-scroller {
       margin-top: 14px;
+      width: 100%;
+      max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-      padding-bottom: 6px;
+      padding: 0 2px 8px;
       scrollbar-width: thin;
       scrollbar-color: rgba(255,122,26,0.45) rgba(0,0,0,0.06);
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     .preview-page-track {
-      display: flex;
+      display: inline-flex;
       gap: 12px;
-      width: max-content;
+      width: auto;
+      min-width: max-content;
     }
 
     .preview-page-card {
@@ -1416,7 +1567,8 @@
       .trust-grid,
       .goal-grid,
       .template-grid,
-      .page-grid { grid-template-columns: 1fr; }
+      .page-grid,
+      .section-chip-grid { grid-template-columns: 1fr; }
       .nav { align-items: flex-start; flex-direction: column; }
       .hero h1 { max-width: none; }
     }
@@ -1780,9 +1932,9 @@
               </div>
 
               <div class="form-section">
-                <h3>3. Choose your site pages</h3>
-                <p class="helper" style="margin-bottom:14px;">Pick the pages you want built into the first version so your submission already reads like a real site map instead of a vague request.</p>
-                <div class="page-grid" id="pageOptions"></div>
+                <h3>3. Core pages and sections</h3>
+                <p class="helper" style="margin-bottom:14px;">Keep the site simple and strong. Choose the core pages you want, then turn on the sections that should live inside each one.</p>
+                <div class="core-page-stack" id="pageOptions"></div>
               </div>
 
               <div class="form-section">
@@ -1902,27 +2054,9 @@
               </div>
 
               <div class="form-section">
-                <h3>8. Automation and follow-up setup</h3>
-                <div class="automation-stack">
-                  <div class="automation-item">
-                    <strong>Streamlined setup recommendation</strong>
-                    Use this site form with one automation flow behind it: Netlify form submission → Make webhook → text/email follow-up. That keeps you from needing a bunch of different accounts.
-                  </div>
-                  <label class="mini-option-chip">
-                    <input type="checkbox" id="automationRequestedCheckbox" name="automationRequestedCheckbox" />
-                    <div>
-                      <strong>I want this lead to enter an automated follow-up flow</strong>
-                      <span>This prepares the submission for auto text/email follow-up, internal lead tracking, and a build summary handoff.</span>
-                    </div>
-                  </label>
-                  <label class="mini-option-chip">
-                    <input type="checkbox" id="smsConsentCheckbox" name="smsConsentCheckbox" />
-                    <div>
-                      <strong>Client agrees to receive project-related text updates</strong>
-                      <span>Use this only if you plan to send quote follow-ups, reminders, or onboarding texts after they submit.</span>
-                    </div>
-                  </label>
-                </div>
+                <h3>8. Premium features</h3>
+                <p class="helper" style="margin-bottom:14px;">Optional upgrades that make the site feel more high-end and help the business capture, respond to, and convert leads faster.</p>
+                <div class="premium-feature-grid" id="premiumFeatureOptions"></div>
               </div>
 
               <div class="form-actions">
@@ -2223,18 +2357,51 @@
     ];
 
     const pageChoices = [
-      { id: 'home-page', title: 'Home', desc: 'Main landing page and first impression.' },
-      { id: 'about-page', title: 'About', desc: 'Business story, trust, and background.' },
-      { id: 'services-page', title: 'Services', desc: 'Main service overview page.' },
-      { id: 'service-detail-page', title: 'Service Detail', desc: 'A deeper page for a major service.' },
-      { id: 'gallery-page', title: 'Gallery', desc: 'Photos, portfolio, or project examples.' },
-      { id: 'reviews-page', title: 'Reviews', desc: 'Testimonials and trust-building.' },
-      { id: 'faq-page', title: 'FAQ', desc: 'Common questions and objections.' },
-      { id: 'contact-page', title: 'Contact', desc: 'Contact form, info, and next step.' },
-      { id: 'booking-page', title: 'Booking', desc: 'Scheduling or appointment page.' },
-      { id: 'menu-products-page', title: 'Menu / Products', desc: 'Product list, menu, or item showcase.' },
-      { id: 'service-areas-page', title: 'Service Areas', desc: 'Cities, regions, or local coverage.' },
-      { id: 'custom-page', title: 'Custom Page', desc: 'A custom page to be scoped later.' }
+      {
+        id: 'home-page',
+        title: 'Home',
+        desc: 'Main landing page with the main first impression and strongest call to action.',
+        sections: [
+          { id: 'hero', title: 'Hero Section', desc: 'Main headline, subheadline, and primary button.' },
+          { id: 'about', title: 'About Us Section', desc: 'Quick company background and trust builder.' },
+          { id: 'testimonials', title: 'Testimonials Section', desc: 'Customer reviews and proof.' },
+          { id: 'faq', title: 'FAQ Section', desc: 'Common questions and objections.' },
+          { id: 'cta', title: 'Call-To-Action Section', desc: 'Final push to call, book, or submit.' }
+        ]
+      },
+      {
+        id: 'services-page',
+        title: 'Services',
+        desc: 'Core service page that explains what the business offers.',
+        sections: [
+          { id: 'service-list', title: 'Service List', desc: 'Overview of services or packages.' },
+          { id: 'service-pricing', title: 'Packages / Pricing', desc: 'Show pricing tiers or package options.' },
+          { id: 'service-detail', title: 'Service Details', desc: 'Explain what is included and how it works.' },
+          { id: 'service-proof', title: 'Results / Before & After', desc: 'Images or proof of quality where needed.' }
+        ]
+      },
+      {
+        id: 'menu-page',
+        title: 'Menu',
+        desc: 'Best for food, product, or item-based businesses that need a clean list with pricing.',
+        sections: [
+          { id: 'menu-categories', title: 'Menu Categories', desc: 'Separate items into clear categories.' },
+          { id: 'menu-items', title: 'Food / Product Items', desc: 'List the items people can browse.' },
+          { id: 'menu-pricing', title: 'Pricing', desc: 'Show pricing clearly next to each item.' },
+          { id: 'menu-featured', title: 'Featured Items', desc: 'Highlight best sellers or specials.' }
+        ]
+      },
+      {
+        id: 'booking-page',
+        title: 'Booking',
+        desc: 'Main conversion page for contact, appointments, reservations, or inquiries.',
+        sections: [
+          { id: 'booking-form', title: 'Booking / Contact Form', desc: 'Main form for inquiries or appointments.' },
+          { id: 'booking-calendar', title: 'Calendar / Scheduling', desc: 'Appointment or reservation tool area.' },
+          { id: 'booking-info', title: 'Contact Info', desc: 'Phone, email, hours, and location.' },
+          { id: 'booking-cta', title: 'Booking CTA Banner', desc: 'Strong closing action to get the lead to convert.' }
+        ]
+      }
     ];
 
     const selectionState = {
@@ -2245,11 +2412,18 @@
       template: null,
       includedFeatures: [],
       addOns: [],
-      pages: ['Home', 'Contact'],
+      pages: ['Home', 'Services', 'Booking'],
+      pageSections: {
+        'Home': ['Hero Section', 'About Us Section', 'Testimonials Section', 'Call-To-Action Section'],
+        'Services': ['Service List', 'Packages / Pricing', 'Service Details'],
+        'Menu': ['Menu Categories', 'Food / Product Items', 'Pricing'],
+        'Booking': ['Booking / Contact Form', 'Contact Info', 'Booking CTA Banner']
+      },
       businessType: 'Service Business',
       toneDirection: 'Modern Premium',
       contentMode: 'Write starter copy for me',
       conversionGoal: 'Contact / Quote Request',
+      premiumFeatures: [],
       automationRequested: false
     };
 
@@ -2419,35 +2593,142 @@
       wrap.innerHTML = '';
 
       pageChoices.forEach(item => {
-        const label = document.createElement('label');
-        label.className = 'mini-option-chip';
-        const checked = selectionState.pages.includes(item.title) ? 'checked' : '';
-        label.innerHTML = `
-          <input type="checkbox" value="${item.title}" ${checked} />
-          <div>
-            <strong>${item.title}</strong>
-            <span>${item.desc}</span>
+        const card = document.createElement('div');
+        const isChecked = selectionState.pages.includes(item.title);
+        card.className = 'core-page-card' + (isChecked ? ' open' : '');
+
+        const sectionMarkup = item.sections.map(section => {
+          const checked = (selectionState.pageSections[item.title] || []).includes(section.title) ? 'checked' : '';
+          return `
+            <label class="section-chip">
+              <input type="checkbox" value="${section.title}" ${checked} />
+              <div>
+                <strong>${section.title}</strong>
+                <span>${section.desc}</span>
+              </div>
+            </label>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="core-page-head">
+            <input type="checkbox" value="${item.title}" ${isChecked ? 'checked' : ''} />
+            <div>
+              <strong>${item.title}</strong>
+              <span>${item.desc}</span>
+            </div>
+            <div class="core-page-toggle">Sections</div>
+          </div>
+          <div class="core-page-body">
+            <div class="section-chip-grid">
+              ${sectionMarkup}
+            </div>
           </div>
         `;
 
-        label.querySelector('input').addEventListener('change', (e) => {
+        const pageCheckbox = card.querySelector('.core-page-head input');
+        const pageHead = card.querySelector('.core-page-head');
+
+        pageHead.addEventListener('click', (e) => {
+          if (e.target.tagName !== 'INPUT') {
+            card.classList.toggle('open');
+          }
+        });
+
+        pageCheckbox.addEventListener('change', (e) => {
           if (e.target.checked) {
             if (!selectionState.pages.includes(item.title)) {
               selectionState.pages.push(item.title);
             }
+            if (!selectionState.pageSections[item.title]?.length) {
+              selectionState.pageSections[item.title] = item.sections.slice(0, Math.min(3, item.sections.length)).map(section => section.title);
+            }
+            card.classList.add('open');
           } else {
             selectionState.pages = selectionState.pages.filter(page => page !== item.title);
+            if (!selectionState.pages.length) {
+              selectionState.pages = ['Home'];
+              pageCheckbox.checked = true;
+            } else {
+              selectionState.pageSections[item.title] = [];
+            }
           }
-
-          if (!selectionState.pages.length) {
-            selectionState.pages = ['Home'];
-            label.querySelector('input').checked = true;
-          }
-
+          syncPageSectionInputs(card, item.title);
           updatePreview();
         });
 
-        wrap.appendChild(label);
+        card.querySelectorAll('.section-chip input').forEach(sectionInput => {
+          sectionInput.addEventListener('change', (e) => {
+            if (!selectionState.pages.includes(item.title)) {
+              selectionState.pages.push(item.title);
+              pageCheckbox.checked = true;
+              card.classList.add('open');
+            }
+
+            const current = new Set(selectionState.pageSections[item.title] || []);
+            if (e.target.checked) {
+              current.add(e.target.value);
+            } else {
+              current.delete(e.target.value);
+            }
+
+            if (!current.size) {
+              current.add(item.sections[0].title);
+              const firstInput = card.querySelector('.section-chip input');
+              if (firstInput) firstInput.checked = true;
+            }
+
+            selectionState.pageSections[item.title] = Array.from(current);
+            updatePreview();
+          });
+        });
+
+        wrap.appendChild(card);
+        syncPageSectionInputs(card, item.title);
+      });
+    }
+
+    function syncPageSectionInputs(card, pageTitle) {
+      const active = selectionState.pages.includes(pageTitle);
+      card.querySelectorAll('.section-chip input').forEach(input => {
+        input.disabled = !active;
+      });
+    }
+
+    function renderPremiumFeatures() {
+      const wrap = document.getElementById('premiumFeatureOptions');
+      if (!wrap) return;
+
+      const featureChoices = [
+        { id: 'followup-texts', title: 'Follow-Up Texts to New Leads', desc: 'Automatically reply to people after they submit a form so they know the business got their request.' },
+        { id: 'missed-call-text', title: 'Automated Missed Call Text Back', desc: 'If a call gets missed, automatically send a text so the lead is not lost.' },
+        { id: 'review-requests', title: 'Review Request Text Flow', desc: 'Send a text after service asking the customer to leave a review.' },
+        { id: 'appointment-reminders', title: 'Appointment Reminder Texts', desc: 'Reduce no-shows with reminders before bookings or appointments.' },
+        { id: 'ai-chat', title: 'AI Chat / Receptionist Upgrade', desc: 'A more advanced option for businesses that want conversational lead handling.' }
+      ];
+
+      wrap.innerHTML = featureChoices.map(item => `
+        <label class="premium-feature-card">
+          <input type="checkbox" value="${item.title}" ${selectionState.premiumFeatures.includes(item.title) ? 'checked' : ''} />
+          <div>
+            <strong>${item.title}</strong>
+            <span>${item.desc}</span>
+          </div>
+        </label>
+      `).join('');
+
+      wrap.querySelectorAll('input').forEach(input => {
+        input.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            if (!selectionState.premiumFeatures.includes(e.target.value)) {
+              selectionState.premiumFeatures.push(e.target.value);
+            }
+          } else {
+            selectionState.premiumFeatures = selectionState.premiumFeatures.filter(item => item !== e.target.value);
+          }
+          selectionState.automationRequested = selectionState.premiumFeatures.length > 0;
+          updatePreview();
+        });
       });
     }
 
@@ -2485,51 +2766,39 @@
     function getPagePreviewType(page) {
       const map = {
         'Home': 'Main Page',
-        'About': 'Story',
         'Services': 'Offerings',
-        'Service Detail': 'Detail Page',
-        'Gallery': 'Portfolio',
-        'Reviews': 'Trust',
-        'FAQ': 'Answers',
-        'Contact': 'Contact',
-        'Booking': 'Conversion',
-        'Menu / Products': 'Catalog',
-        'Service Areas': 'Local SEO',
-        'Custom Page': 'Custom'
+        'Menu': 'Food / Items',
+        'Booking': 'Conversion'
       };
       return map[page] || 'Page';
     }
 
     function getPagePreviewCaption(page) {
+      const sections = selectionState.pageSections[page] || [];
+      if (sections.length) {
+        return sections.slice(0, 3).join(' • ');
+      }
       const map = {
-        'Home': 'Main landing page with hero, positioning, trust, and the primary call to action.',
-        'About': 'Brand story, business background, and reasons to trust the company.',
-        'Services': 'Overview of core services with clean sectioned layout and CTA support.',
-        'Service Detail': 'Focused page for one key service with stronger explanation and conversion.',
-        'Gallery': 'Image-heavy layout for project photos, menu visuals, or before-and-afters.',
-        'Reviews': 'Social proof page built to strengthen trust and support conversion.',
-        'FAQ': 'Question-and-answer layout that reduces objections before contact.',
-        'Contact': 'Fast contact flow with phone, email, form, and location details.',
-        'Booking': 'Appointment-focused page built around the main booking action.',
-        'Menu / Products': 'Structured product or menu layout for offers, items, and highlights.',
-        'Service Areas': 'Location coverage page designed to show regions, cities, and reach.',
-        'Custom Page': 'Custom layout page to be scoped around a special feature or business need.'
+        'Home': 'Main landing page with hero, brand positioning, and primary CTA.',
+        'Services': 'Service overview page with packages, pricing, and stronger explanations.',
+        'Menu': 'Food or product page with categories, items, and pricing.',
+        'Booking': 'Conversion page built around contact, scheduling, or reservations.'
       };
       return map[page] || 'Structured premium page preview.';
     }
 
     function getPagePreviewLines(page) {
-      if (page === 'Gallery' || page === 'Menu / Products') {
+      if (page === 'Menu') {
         return `
           <div class="line top"></div>
           <div class="line hero"></div>
           <div class="line card"></div>
           <div class="line card"></div>
-          <div class="line short"></div>
+          <div class="line card"></div>
           <div class="line cta"></div>
         `;
       }
-      if (page === 'Contact' || page === 'Booking') {
+      if (page === 'Booking') {
         return `
           <div class="line top"></div>
           <div class="line hero"></div>
@@ -2539,13 +2808,13 @@
           <div class="line cta"></div>
         `;
       }
-      if (page === 'Reviews' || page === 'FAQ') {
+      if (page === 'Services') {
         return `
           <div class="line top"></div>
           <div class="line hero"></div>
           <div class="line card"></div>
-          <div class="line"></div>
-          <div class="line"></div>
+          <div class="line mid"></div>
+          <div class="line short"></div>
           <div class="line cta"></div>
         `;
       }
@@ -2674,6 +2943,7 @@
           <div><strong>Tone:</strong> ${selectionState.toneDirection}</div>
           <div><strong>Conversion Goal:</strong> ${selectionState.conversionGoal}</div>
           <div><strong>Content Setup:</strong> ${selectionState.contentMode}</div>
+          <div><strong>Premium Features:</strong> ${selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'Standard website build'}</div>
         `;
       }
 
@@ -2715,10 +2985,11 @@
         summaryList.innerHTML = `
           <div><strong>Business Goal:</strong> ${selectionState.goal || 'Not selected'}</div>
           <div><strong>Package:</strong> ${selectionState.template ? `${selectionState.template.name} (${selectionState.packageFamily} Series)` : 'Not selected'}</div>
-          <div><strong>Pages:</strong> ${selectionState.pages.length ? selectionState.pages.join(', ') : 'Home'}</div>
+          <div><strong>Pages:</strong> ${selectionState.pages.length ? selectionState.pages.map(page => `${page} (${(selectionState.pageSections[page] || []).length})`).join(', ') : 'Home'}</div>
           <div><strong>Primary:</strong> ${selectionState.primary.name}</div>
           <div><strong>Secondary:</strong> ${selectionState.secondary.name}</div>
           <div><strong>Add-Ons:</strong> ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None yet'}</div>
+          <div><strong>Premium Features:</strong> ${selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'None selected'}</div>
         `;
       }
 
@@ -2729,16 +3000,14 @@
       if (includedFeaturesField) includedFeaturesField.value = selectionState.includedFeatures.length ? selectionState.includedFeatures.join(', ') : 'None selected';
       const referenceExamples = document.getElementById('referenceExamples')?.value.trim() || '';
       if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
-      if (selectedPagesField) selectedPagesField.value = selectionState.pages.length ? selectionState.pages.join(', ') : 'Home';
+      if (selectedPagesField) selectedPagesField.value = selectionState.pages.length ? selectionState.pages.map(page => `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ') : 'Home';
       if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(selectionState.pages.length, 1));
       if (businessTypeField) businessTypeField.value = selectionState.businessType;
       if (toneDirectionField) toneDirectionField.value = selectionState.toneDirection;
       if (contentModeField) contentModeField.value = selectionState.contentMode;
       if (conversionGoalField) conversionGoalField.value = selectionState.conversionGoal;
       if (automationRequestedField) automationRequestedField.value = selectionState.automationRequested ? 'Yes' : 'No';
-      if (automationSummaryField) automationSummaryField.value = selectionState.automationRequested
-        ? `Netlify form → Make webhook → text/email follow-up. SMS consent: ${document.getElementById('smsConsentCheckbox')?.checked ? 'Yes' : 'No'}.`
-        : 'No automation requested';
+      if (automationSummaryField) automationSummaryField.value = selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'No premium features selected';
       if (referenceExamplesField) referenceExamplesField.value = referenceExamples || 'None provided';
       if (primaryColorField) primaryColorField.value = selectionState.primary.name;
       if (secondaryColorField) secondaryColorField.value = selectionState.secondary.name;
@@ -2798,7 +3067,7 @@
         `Business Type: ${selectionState.businessType}`,
         `Goal: ${selectionState.goal || 'Not selected'}`,
         `Template: ${selectionState.template ? selectionState.template.name : 'Not selected'}`,
-        `Pages: ${selectionState.pages.length ? selectionState.pages.join(', ') : 'Home'}`,
+        `Pages: ${selectionState.pages.length ? selectionState.pages.map(page => `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ') : 'Home'}`,
         `Tone: ${selectionState.toneDirection}`,
         `Conversion Goal: ${selectionState.conversionGoal}`,
         `Content Mode: ${selectionState.contentMode}`,
@@ -3192,13 +3461,6 @@
       }
     });
 
-    document.getElementById('automationRequestedCheckbox')?.addEventListener('change', (e) => {
-      selectionState.automationRequested = e.target.checked;
-      updatePreview();
-    });
-
-    document.getElementById('smsConsentCheckbox')?.addEventListener('change', updatePreview);
-
     const previewPageScroller = document.getElementById('previewPageScroller');
     if (previewPageScroller) {
       previewPageScroller.addEventListener('wheel', (e) => {
@@ -3215,6 +3477,7 @@
     renderTemplates();
     renderPageOptions();
     renderAddOns();
+    renderPremiumFeatures();
     updatePreview();
   </script>
 
