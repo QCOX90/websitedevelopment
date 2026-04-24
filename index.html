@@ -1545,49 +1545,75 @@
       }
     }
 
-    @media (max-width: 760px) {
-      .tech-bg {
-        opacity: 0.28;
-      }
-      .hero { padding-top: 56px; }
-      .hero-copy,
-      .hero-panel,
-      .service-card,
-      .builder-panel,
-      .form-panel,
-      .mini-site,
-      .process-card,
-      .trust-card,
-      .footer-card { padding: 22px; }
-      .service-grid,
-      .grid-2,
-      .grid-3,
-      .option-grid,
-      .process-grid,
-      .trust-grid,
-      .goal-grid,
-      .template-grid,
-      .page-grid,
-      .section-chip-grid { grid-template-columns: 1fr; }
-.nav {
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
+ @media (max-width: 760px) {
+  .tech-bg {
+    opacity: 0.28;
+  }
+  .hero { padding-top: 56px; }
+  .hero-copy,
+  .hero-panel,
+  .service-card,
+  .builder-panel,
+  .form-panel,
+  .mini-site,
+  .process-card,
+  .trust-card,
+  .footer-card { padding: 22px; }
+  .service-grid,
+  .grid-2,
+  .grid-3,
+  .option-grid,
+  .process-grid,
+  .trust-grid,
+  .goal-grid,
+  .template-grid,
+  .page-grid,
+  .section-chip-grid { grid-template-columns: 1fr; }
 
-.nav-links {
-  flex-wrap: nowrap;
-  gap: 8px;
-}
+  /* FIXED NAV BAR FOR MOBILE */
+  .nav {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 8px;
+  }
 
-.nav-links button {
-  padding: 8px 12px;
-  font-size: 0.85rem;
-  white-space: nowrap;
+  .brand {
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 74px;
+    height: 74px;
+  }
+
+  .brand-mark img {
+    width: 180%;
+    height: 180%;
+  }
+
+  /* hides "Triple C Website Development" text on mobile */
+  .brand > div:last-child {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    flex: 0 0 auto;
+  }
+
+  .nav-links button {
+    padding: 7px 8px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  .hero h1 { max-width: none; }
 }
-      
-      .hero h1 { max-width: none; }
-    }
   </style>
 </head>
 <body>
