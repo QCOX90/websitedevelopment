@@ -1569,7 +1569,23 @@
       .template-grid,
       .page-grid,
       .section-chip-grid { grid-template-columns: 1fr; }
-      .nav { align-items: flex-start; flex-direction: column; }
+.nav {
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav-links {
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.nav-links button {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+      
       .hero h1 { max-width: none; }
     }
   </style>
