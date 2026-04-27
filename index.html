@@ -1512,6 +1512,37 @@
       margin-bottom: 6px;
     }
 
+
+    /* ADDED: home services section and progressive website-request flow */
+    .hero-copy { text-align: center; }
+    .hero-copy p { max-width: 760px; margin-left: auto; margin-right: auto; }
+    .hero-actions,
+    .tag-row { justify-content: center; }
+    .service-mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .service-mini-card { background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 2px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 24px; transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease; }
+    .service-mini-card:hover { transform: translateY(-3px); box-shadow: 0 24px 46px rgba(0,0,0,0.12); border-color: rgba(255,122,26,0.55); }
+    .service-mini-card h3 { margin: 0 0 10px; font-size: 1.08rem; }
+    .service-mini-card p { margin: 0; color: #222; line-height: 1.65; }
+    #newSiteForm .form-section.flow-step { display: none; animation: fadeUp 0.35s ease both; }
+    #newSiteForm .form-section.flow-step.available { display: block; }
+    .step-helper { margin: 8px 0 16px; padding-left: 20px; color: #222; line-height: 1.7; }
+    .brand-example-panel, .extra-page-panel, .layout-scroll-panel { margin-top: 14px; border: 1px solid rgba(0,0,0,0.10); border-radius: 20px; background: rgba(255,255,255,0.50); padding: 16px; }
+    .brand-example-panel { display: none; }
+    .brand-example-panel.show { display: block; }
+    .extra-page-list { display: grid; gap: 12px; margin-top: 12px; }
+    .layout-option-track { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+    .layout-option-card { width: 238px; flex: 0 0 238px; border: 1px solid rgba(0,0,0,0.12); border-radius: 20px; background: rgba(255,255,255,0.70); padding: 14px; cursor: pointer; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; text-align:left; color:#17181c; }
+    .layout-option-card.active, .layout-option-card:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(0,0,0,0.08); border-color: rgba(255,122,26,0.65); }
+    .layout-option-card h4 { margin: 0 0 8px; }
+    .layout-option-card p { margin: 0 0 12px; color: #222; line-height: 1.55; font-size: 0.88rem; }
+    .layout-mini { display: grid; gap: 7px; border: 1px solid rgba(0,0,0,0.10); border-radius: 14px; background:#fff; padding: 10px; }
+    .layout-mini span { display: block; height: 11px; border-radius: 999px; background: rgba(0,0,0,0.10); }
+    .layout-mini .hero-line { height: 34px; background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.9)); }
+    .layout-mini .dark-line { background: var(--secondary-preview); opacity: 0.9; }
+    .layout-mini .short-line { width: 58%; }
+    .layout-mini .mid-line { width: 78%; }
+    @media (max-width: 760px) { .service-mini-grid { grid-template-columns: 1fr; } }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: translateY(0); }
@@ -1706,6 +1737,23 @@
               <span>Existing clients can request website updates, content revisions, and ongoing design help from one clean form.</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="container section">
+        <div class="section-heading">
+          <div>
+            <h2>Our services</h2>
+            <p>More than just websites — Triple C helps small businesses look cleaner, sharper, and more professional everywhere customers see them.</p>
+          </div>
+        </div>
+        <div class="service-mini-grid">
+          <article class="service-mini-card"><h3>Branding</h3><p>Clean brand direction, colors, wording, and visual consistency so the business feels more established.</p></article>
+          <article class="service-mini-card"><h3>Logo Creation</h3><p>Professional logo concepts and refinements that can be used across websites, social pages, cards, and graphics.</p></article>
+          <article class="service-mini-card"><h3>Graphic Design</h3><p>Product graphics, apparel graphics, giveaway graphics, social posts, and branded promotional visuals.</p></article>
+          <article class="service-mini-card"><h3>Website Packages & Launching</h3><p>Modern website builds with mobile-friendly layouts, strong calls to action, launch support, and clean presentation.</p></article>
+          <article class="service-mini-card"><h3>Maintenance</h3><p>Ongoing updates, text changes, image swaps, new sections, pricing edits, cleanup, and website support.</p></article>
+          <article class="service-mini-card"><h3>AI Integration</h3><p>Smart add-ons such as lead follow-ups, automated responses, review request flows, and AI-style customer support tools.</p></article>
         </div>
       </div>
 
@@ -1962,25 +2010,30 @@
               <input type="hidden" name="primaryColor" id="primaryColorField">
               <input type="hidden" name="secondaryColor" id="secondaryColorField">
               <input type="hidden" name="generatedCode" id="generatedCodeField">
+              <input type="hidden" name="brandColorExamples" id="brandColorExamplesField">
+              <input type="hidden" name="selectedLayoutStyle" id="selectedLayoutStyleField">
+              <input type="hidden" name="customExtraPages" id="customExtraPagesField">
 
-              <div class="form-section">
+              <div class="form-section flow-step available" data-step="1">
                 <h3>1. What does your website mainly need to do?</h3>
+                <ul class="step-helper"><li>Choose the main purpose of the website.</li><li>This helps shape the package, preview, and final quote.</li><li>The next question opens after you select a goal.</li></ul>
                 <div class="goal-grid" id="businessGoalOptions"></div>
               </div>
 
-              <div class="form-section">
+              <div class="form-section flow-step" data-step="2">
                 <h3>2. Choose your website package</h3>
-                <p class="helper" style="margin-bottom:14px;">Each level includes more structure and features than the one before it. Click select on any template to load its included features into the live preview.</p>
+                <ul class="step-helper"><li>6 total package levels: 2 Basic, 2 Advanced, and 2 Expert.</li><li>Each package shows included features in bullet form.</li><li>The preview updates when a package is selected.</li></ul>
                 <div class="template-family-stack" id="templateFamilies"></div>
               </div>
 
-              <div class="form-section">
-                <h3>3. Core pages and sections</h3>
-                <p class="helper" style="margin-bottom:14px;">Keep the site simple and strong. Choose the core pages you want, then turn on the sections that should live inside each one.</p>
+              <div class="form-section flow-step" data-step="3">
+                <h3>3. Core pages, sections, and page ideas</h3>
+                <p class="helper" style="margin-bottom:14px;">Choose the main pages, then describe what you want on each page. You can also add custom extra pages here.</p>
                 <div class="core-page-stack" id="pageOptions"></div>
+                <div class="extra-page-panel"><strong>Add an extra page idea</strong><p class="helper">Use this for a page that is not listed above, like Merch, Catering, Gallery, FAQ, Locations, Packages, or anything custom.</p><div class="extra-page-list" id="extraPageList"></div><button class="card-action" type="button" id="addExtraPageBtn">+ Add Extra Page</button></div>
               </div>
 
-              <div class="form-section">
+              <div class="form-section flow-step" data-step="4">
                 <h3>4. Brand direction and content setup</h3>
                 <div class="grid-2">
                   <div class="field">
@@ -2035,7 +2088,7 @@
                 </div>
               </div>
 
-              <div class="form-section">
+              <div class="form-section flow-step" data-step="5">
                 <h3>5. Choose your color direction</h3>
                 <div class="color-group">
                   <div>
@@ -2047,15 +2100,17 @@
                     <div class="color-row" id="secondaryColors"></div>
                   </div>
                 </div>
+                <button class="card-action" type="button" id="brandColorExampleBtn">I have examples of my brand colors</button>
+                <div class="brand-example-panel" id="brandColorExamplePanel"><div class="field" style="margin-bottom:0;"><label for="brandColorExamplesInput">Enter your brand colors or paste examples</label><textarea id="brandColorExamplesInput" name="brandColorExamplesInput" placeholder="Example: orange #ff7a1a, black, cream, or paste notes like ‘same colors as my logo / Instagram page.’"></textarea></div></div>
               </div>
 
-              <div class="form-section">
+              <div class="form-section flow-step" data-step="6">
                 <h3>6. Optional add-ons for additional cost</h3>
                 <div class="option-grid" id="addOnOptions"></div>
               </div>
 
-              <div class="form-section">
-                <h3>7. Tell us about your project</h3>
+              <div class="form-section flow-step" data-step="8">
+                <h3>8. Final project details</h3>
                 <div class="grid-2">
                   <div class="field">
                     <label for="contactName">Primary Contact Name</label>
@@ -2096,10 +2151,11 @@
                 </div>
               </div>
 
-              <div class="form-section">
-                <h3>8. Premium features</h3>
+              <div class="form-section flow-step" data-step="7">
+                <h3>7. Premium features and visual layout style</h3>
                 <p class="helper" style="margin-bottom:14px;">Optional upgrades that make the site feel more high-end and help the business capture, respond to, and convert leads faster.</p>
                 <div class="premium-feature-grid" id="premiumFeatureOptions"></div>
+                <div class="layout-scroll-panel"><h3 style="margin-top:0;">Choose a visual layout direction</h3><p class="helper">Scroll sideways and choose the closest starting style. This does not lock the design in forever — it just helps guide the first draft.</p><div class="layout-option-track" id="layoutStyleOptions"></div></div>
               </div>
 
               <div class="form-actions">
@@ -2232,163 +2288,21 @@
     ];
 
     const templatePackages = [
-      {
-        family: 'Basic',
-        familyDesc: 'A simpler starting point for businesses that need a clean online presence without a lot of extra complexity.',
-        templates: [
-          {
-            id: 'basic-starter',
-            name: 'Basic Starter',
-            trim: 'Starter',
-            level: 'Basic',
-            intensity: 'Entry',
-            bestFor: 'Clean starter presence',
-            included: [
-              'Single-page layout',
-              'Hero section with generic placeholders',
-              'Basic contact section',
-              'Mobile-friendly structure',
-              'Simple call-to-action button'
-            ]
-          },
-          {
-            id: 'basic-plus',
-            name: 'Basic Plus',
-            trim: 'Plus',
-            level: 'Basic',
-            intensity: 'Mid',
-            bestFor: 'More content with a cleaner flow',
-            included: [
-              'Everything in Basic Starter',
-              'Services overview section',
-              'Stronger spacing and layout polish',
-              'Featured information blocks',
-              'Basic gallery / image placeholders'
-            ]
-          },
-          {
-            id: 'basic-premium',
-            name: 'Basic Premium',
-            trim: 'Premium',
-            level: 'Basic',
-            intensity: 'High',
-            bestFor: 'Simple but more complete',
-            included: [
-              'Everything in Basic Plus',
-              'Expanded homepage sections',
-              'Testimonials placeholder section',
-              'More polished footer and CTA flow',
-              'Better visual hierarchy throughout'
-            ]
-          }
-        ]
-      },
-      {
-        family: 'Advanced',
-        familyDesc: 'A stronger business-ready setup with better structure, more content opportunities, and more complete built-in functionality.',
-        templates: [
-          {
-            id: 'advanced-starter',
-            name: 'Advanced Starter',
-            trim: 'Starter',
-            level: 'Advanced',
-            intensity: 'Entry',
-            bestFor: 'Businesses that need more than a basic site',
-            included: [
-              'Multi-section homepage',
-              'Stronger services presentation',
-              'Contact info block and lead flow',
-              'Gallery or portfolio placeholders',
-              'Built-in mobile optimization'
-            ]
-          },
-          {
-            id: 'advanced-plus',
-            name: 'Advanced Plus',
-            trim: 'Plus',
-            level: 'Advanced',
-            intensity: 'Mid',
-            bestFor: 'Businesses wanting a more premium feel',
-            included: [
-              'Everything in Advanced Starter',
-              'Testimonials placeholder section',
-              'Advanced inquiry section',
-              'More conversion-focused layout',
-              'Basic SEO-ready page structure'
-            ]
-          },
-          {
-            id: 'advanced-premium',
-            name: 'Advanced Premium',
-            trim: 'Premium',
-            level: 'Advanced',
-            intensity: 'High',
-            bestFor: 'Businesses wanting a stronger online sales tool',
-            included: [
-              'Everything in Advanced Plus',
-              'Additional content sections',
-              'More premium section transitions',
-              'Better lead-capture positioning',
-              'Stronger built-in design polish'
-            ]
-          }
-        ]
-      },
-      {
-        family: 'Expert',
-        familyDesc: 'The most complete package line for businesses that want the most polished and most built-out starting point.',
-        templates: [
-          {
-            id: 'expert-starter',
-            name: 'Expert Starter',
-            trim: 'Starter',
-            level: 'Expert',
-            intensity: 'Entry',
-            bestFor: 'Premium layout with stronger depth',
-            included: [
-              'High-end homepage structure',
-              'Multi-section business presentation',
-              'Stronger visual hierarchy',
-              'Lead-focused contact flow',
-              'Higher-end generic imagery placeholders'
-            ]
-          },
-          {
-            id: 'expert-plus',
-            name: 'Expert Plus',
-            trim: 'Plus',
-            level: 'Expert',
-            intensity: 'Mid',
-            bestFor: 'A more complete premium business site',
-            included: [
-              'Everything in Expert Starter',
-              'Expanded feature sections',
-              'More refined CTA placement',
-              'Enhanced trust-building sections',
-              'More advanced content layout support'
-            ]
-          },
-          {
-            id: 'expert-premium',
-            name: 'Expert Premium',
-            trim: 'Premium',
-            level: 'Expert',
-            intensity: 'High',
-            bestFor: 'Most advanced plug-and-play request level',
-            included: [
-              'Everything in Expert Plus',
-              'Most complete layout preset',
-              'Premium placeholder content structure',
-              'Highest built-in design polish',
-              'Most complete trim-level starting point'
-            ]
-          }
-        ]
-      }
+      { family: 'Basic', familyDesc: 'Clean starting points for businesses that need a polished online presence without heavy functionality.', templates: [
+        { id: 'basic-starter', name: 'Basic Starter', trim: 'Starter', level: 'Basic', intensity: 'Entry', bestFor: 'Simple one-page starter site', included: ['One-page website layout','Hero section with main call-to-action','About / business overview section','Basic services or highlights section','Contact section with phone and email'] },
+        { id: 'basic-plus', name: 'Basic Plus', trim: 'Plus', level: 'Basic', intensity: 'Standard', bestFor: 'Cleaner one-page site with more business detail', included: ['Everything in Basic Starter','Stronger service/product presentation','Gallery or featured photo area','Testimonials or trust section','More polished homepage flow'] }
+      ]},
+      { family: 'Advanced', familyDesc: 'Better for businesses that need more page structure, stronger lead flow, and a more complete presentation.', templates: [
+        { id: 'advanced-starter', name: 'Advanced Starter', trim: 'Starter', level: 'Advanced', intensity: 'Business', bestFor: 'Small business site with multiple core sections', included: ['Multi-section homepage','Services, menu, or package area','Lead-focused contact flow','Mobile-friendly page structure','Basic SEO-ready setup'] },
+        { id: 'advanced-plus', name: 'Advanced Plus', trim: 'Plus', level: 'Advanced', intensity: 'Premium', bestFor: 'More complete business website with stronger conversion flow', included: ['Everything in Advanced Starter','Expanded content sections','Testimonials / reviews section','Gallery, portfolio, or featured work area','Stronger calls-to-action throughout'] }
+      ]},
+      { family: 'Expert', familyDesc: 'High-end starting points for businesses that want the most polished layout, stronger features, and a premium feel.', templates: [
+        { id: 'expert-starter', name: 'Expert Starter', trim: 'Starter', level: 'Expert', intensity: 'High-End', bestFor: 'Premium site structure with stronger design depth', included: ['High-end homepage structure','Multiple page/section planning support','Trust-building sections','Lead-focused contact or booking flow','Premium visual hierarchy and spacing'] },
+        { id: 'expert-plus', name: 'Expert Plus', trim: 'Plus', level: 'Expert', intensity: 'Most Complete', bestFor: 'Most complete website request level', included: ['Everything in Expert Starter','Most complete layout preset','Advanced feature planning support','Automation / AI integration options','Highest built-in polish and structure'] }
+      ]}
     ];
 
     const addOnChoices = [
-      { id: 'extra-page', title: 'Extra Page', desc: 'Add another page beyond the starting package structure.' },
       { id: 'booking-integration', title: 'Booking Integration', desc: 'Appointment links, scheduling setup, or booking flow support.' },
       { id: 'advanced-form', title: 'Advanced Inquiry Form', desc: 'More detailed quote, intake, or contact form setup.' },
       { id: 'gallery', title: 'Gallery / Portfolio Upgrade', desc: 'Expanded image gallery or portfolio presentation.' },
@@ -2447,6 +2361,18 @@
       }
     ];
 
+
+    const layoutStyles = [
+      { id: 'restaurant-hero', title: 'Restaurant Hero', desc: 'Big header, strong food/service image area, simple menu-style flow.' },
+      { id: 'local-service', title: 'Local Service', desc: 'Trust-first layout with services, reviews, and quick contact buttons.' },
+      { id: 'premium-brand', title: 'Premium Brand', desc: 'Clean luxury spacing, bold headline, strong brand visuals.' },
+      { id: 'portfolio-showcase', title: 'Portfolio Showcase', desc: 'Image-heavy layout for before-and-after work or product visuals.' },
+      { id: 'booking-focused', title: 'Booking Focused', desc: 'Built around appointments, forms, contact blocks, and action buttons.' },
+      { id: 'product-launch', title: 'Product Launch', desc: 'Great for featured products, apparel, sauces, merch, or promotions.' },
+      { id: 'bold-modern', title: 'Bold Modern', desc: 'High-energy sections, strong contrast, and standout calls-to-action.' },
+      { id: 'clean-corporate', title: 'Clean Corporate', desc: 'Professional, simple, structured layout for credibility and clarity.' }
+    ];
+
     const selectionState = {
       primary: colorSets.primary[0],
       secondary: colorSets.secondary[0],
@@ -2467,7 +2393,10 @@
       contentMode: 'Write starter copy for me',
       conversionGoal: 'Contact / Quote Request',
       premiumFeatures: [],
-      automationRequested: false
+      automationRequested: false,
+      layoutStyle: '',
+      customExtraPages: [],
+      brandColorExamples: ''
     };
 
     function showView(id) {
@@ -2735,6 +2664,50 @@
       const active = selectionState.pages.includes(pageTitle);
       card.querySelectorAll('.section-chip input').forEach(input => {
         input.disabled = !active;
+      });
+    }
+
+
+    function unlockFlowSteps() {
+      const step2 = !!selectionState.goal;
+      const step3 = !!selectionState.template;
+      const step4 = step3 && getEffectivePreviewPages().length > 0;
+      const step5 = step4 && !!selectionState.businessType && !!selectionState.toneDirection;
+      const step6 = step5 && !!selectionState.primary && !!selectionState.secondary;
+      const step7 = step6;
+      const step8 = step7 && !!selectionState.layoutStyle;
+      const map = { 1: true, 2: step2, 3: step3, 4: step4, 5: step5, 6: step6, 7: step7, 8: step8 };
+      document.querySelectorAll('#newSiteForm .form-section.flow-step').forEach(section => {
+        const step = Number(section.getAttribute('data-step'));
+        section.classList.toggle('available', !!map[step]);
+      });
+    }
+
+    function renderExtraPages() {
+      const list = document.getElementById('extraPageList');
+      if (!list) return;
+      list.innerHTML = '';
+      selectionState.customExtraPages.forEach((page, index) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'grid-2';
+        wrap.innerHTML = `<div class=\"field\"><label>Extra Page Name</label><input type=\"text\" value=\"${escapeHtml(page.title)}\" placeholder=\"Example: Catering, Merch, Gallery\" data-extra-title=\"${index}\"></div><div class=\"field\"><label>What should be on this page?</label><textarea placeholder=\"Describe the idea for this page\" data-extra-desc=\"${index}\">${escapeHtml(page.desc)}</textarea></div>`;
+        list.appendChild(wrap);
+      });
+      list.querySelectorAll('[data-extra-title]').forEach(input => input.addEventListener('input', () => { const i = Number(input.getAttribute('data-extra-title')); selectionState.customExtraPages[i].title = input.value.trim(); updatePreview(); }));
+      list.querySelectorAll('[data-extra-desc]').forEach(input => input.addEventListener('input', () => { const i = Number(input.getAttribute('data-extra-desc')); selectionState.customExtraPages[i].desc = input.value.trim(); updatePreview(); }));
+    }
+
+    function renderLayoutStyles() {
+      const wrap = document.getElementById('layoutStyleOptions');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      layoutStyles.forEach((layout, index) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'layout-option-card' + (selectionState.layoutStyle === layout.title ? ' active' : '');
+        card.innerHTML = `<h4>${layout.title}</h4><p>${layout.desc}</p><div class=\"layout-mini\" aria-hidden=\"true\"><span class=\"dark-line\"></span><span class=\"hero-line\"></span><span class=\"${index % 2 ? 'mid-line' : ''}\"></span><span class=\"${index % 3 ? 'short-line' : ''}\"></span><span class=\"mid-line\"></span></div>`;
+        card.addEventListener('click', () => { selectionState.layoutStyle = layout.title; document.querySelectorAll('.layout-option-card').forEach(el => el.classList.remove('active')); card.classList.add('active'); updatePreview(); });
+        wrap.appendChild(card);
       });
     }
 
@@ -3022,6 +2995,7 @@
           <div><strong>Tone:</strong> ${selectionState.toneDirection}</div>
           <div><strong>Conversion Goal:</strong> ${selectionState.conversionGoal}</div>
           <div><strong>Content Setup:</strong> ${selectionState.contentMode}</div>
+          <div><strong>Visual Layout:</strong> ${selectionState.layoutStyle || 'Not selected yet'}</div>
           <div><strong>Premium Features:</strong> ${selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'Standard website build'}</div>
         `;
       }
@@ -3068,6 +3042,8 @@
           <div><strong>Primary:</strong> ${selectionState.primary.name}</div>
           <div><strong>Secondary:</strong> ${selectionState.secondary.name}</div>
           <div><strong>Add-Ons:</strong> ${selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None yet'}</div>
+          <div><strong>Visual Layout:</strong> ${selectionState.layoutStyle || 'Not selected yet'}</div>
+          <div><strong>Extra Pages:</strong> ${selectionState.customExtraPages.length ? selectionState.customExtraPages.map(page => page.title || 'Untitled Extra Page').join(', ') : 'None added'}</div>
           <div><strong>Premium Features:</strong> ${selectionState.premiumFeatures.length ? selectionState.premiumFeatures.join(', ') : 'None selected'}</div>
         `;
       }
@@ -3079,7 +3055,7 @@
       if (includedFeaturesField) includedFeaturesField.value = selectionState.includedFeatures.length ? selectionState.includedFeatures.join(', ') : 'None selected';
       const referenceExamples = document.getElementById('referenceExamples')?.value.trim() || '';
       if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
-      if (selectedPagesField) selectedPagesField.value = getEffectivePreviewPages().map(page => page === 'Extra Page' ? 'Extra Page: Additional custom page from add-on' : `${page}: ${(selectionState.pageSections[page] || []).join(', ')}`).join(' | ');
+      if (selectedPagesField) selectedPagesField.value = getEffectivePreviewPages().map(page => selectionState.pageSections[page] ? `${page}: ${(selectionState.pageSections[page] || []).join(', ')}` : `${page}: custom extra page idea`).join(' | ');
       if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(selectionState.pages.length, 1));
       if (businessTypeField) businessTypeField.value = selectionState.businessType;
       if (toneDirectionField) toneDirectionField.value = selectionState.toneDirection;
@@ -3097,6 +3073,13 @@
       if (base44PromptField) base44PromptField.value = getBase44Prompt(currentFormData);
       if (primaryColorField) primaryColorField.value = selectionState.primary.name;
       if (secondaryColorField) secondaryColorField.value = selectionState.secondary.name;
+      const brandColorExamplesField = document.getElementById('brandColorExamplesField');
+      const selectedLayoutStyleField = document.getElementById('selectedLayoutStyleField');
+      const customExtraPagesField = document.getElementById('customExtraPagesField');
+      if (brandColorExamplesField) brandColorExamplesField.value = selectionState.brandColorExamples || 'None provided';
+      if (selectedLayoutStyleField) selectedLayoutStyleField.value = selectionState.layoutStyle || 'Not selected';
+      if (customExtraPagesField) customExtraPagesField.value = selectionState.customExtraPages.length ? selectionState.customExtraPages.map(page => `${page.title || 'Untitled'}: ${page.desc || 'No description yet'}`).join(' | ') : 'None added';
+      unlockFlowSteps();
     }
 
     function showToast(message) {
@@ -3466,6 +3449,11 @@
         return;
       }
 
+      if (!selectionState.layoutStyle) {
+        showToast('Please select a visual layout direction before submitting.');
+        return;
+      }
+
       const formData = {
         contactName: document.getElementById('contactName').value,
         businessName: document.getElementById('businessName').value,
@@ -3533,7 +3521,7 @@
       }
     });
 
-    ['contactName', 'businessName', 'phoneNumber', 'emailAddress', 'referenceExamples'].forEach(id => {
+    ['contactName', 'businessName', 'phoneNumber', 'emailAddress', 'referenceExamples', 'businessDescription'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', updatePreview);
     });
@@ -3549,6 +3537,23 @@
           updatePreview();
         });
       }
+    });
+
+
+    document.getElementById('addExtraPageBtn')?.addEventListener('click', () => {
+      selectionState.customExtraPages.push({ title: '', desc: '' });
+      renderExtraPages();
+      updatePreview();
+    });
+
+    document.getElementById('brandColorExampleBtn')?.addEventListener('click', () => {
+      const panel = document.getElementById('brandColorExamplePanel');
+      if (panel) panel.classList.toggle('show');
+    });
+
+    document.getElementById('brandColorExamplesInput')?.addEventListener('input', (e) => {
+      selectionState.brandColorExamples = e.target.value.trim();
+      updatePreview();
     });
 
     const previewPageScroller = document.getElementById('previewPageScroller');
@@ -3568,6 +3573,8 @@
     renderPageOptions();
     renderAddOns();
     renderPremiumFeatures();
+    renderExtraPages();
+    renderLayoutStyles();
     updatePreview();
   </script>
 
