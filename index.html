@@ -858,7 +858,7 @@
     }
 
     .template-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .goal-card,
@@ -1530,18 +1530,48 @@
     .brand-example-panel { display: none; }
     .brand-example-panel.show { display: block; }
     .extra-page-list { display: grid; gap: 12px; margin-top: 12px; }
-    .layout-option-track { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
-    .layout-option-card { width: 238px; flex: 0 0 238px; border: 1px solid rgba(0,0,0,0.12); border-radius: 20px; background: rgba(255,255,255,0.70); padding: 14px; cursor: pointer; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; text-align:left; color:#17181c; }
+    .extra-page-item { position: relative; border: 1px solid rgba(0,0,0,0.10); border-radius: 18px; background: rgba(255,255,255,0.46); padding: 16px 54px 4px 16px; }
+    .remove-extra-page { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.16); background: #fff; color: #17181c; cursor: pointer; font-weight: 900; line-height: 1; transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+    .remove-extra-page:hover { transform: translateY(-1px); border-color: var(--accent); color: var(--accent); }
+    .layout-option-track { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; overflow: visible; padding-bottom: 0; }
+    .layout-option-card { width: 100%; border: 1px solid rgba(0,0,0,0.12); border-radius: 20px; background: rgba(255,255,255,0.70); padding: 14px; cursor: pointer; transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; text-align:left; color:#17181c; }
     .layout-option-card.active, .layout-option-card:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(0,0,0,0.08); border-color: rgba(255,122,26,0.65); }
     .layout-option-card h4 { margin: 0 0 8px; }
     .layout-option-card p { margin: 0 0 12px; color: #222; line-height: 1.55; font-size: 0.88rem; }
-    .layout-mini { display: grid; gap: 7px; border: 1px solid rgba(0,0,0,0.10); border-radius: 14px; background:#fff; padding: 10px; }
-    .layout-mini span { display: block; height: 11px; border-radius: 999px; background: rgba(0,0,0,0.10); }
+    .layout-mini { display: grid; gap: 7px; border: 1px solid rgba(0,0,0,0.10); border-radius: 14px; background:#fff; padding: 10px; min-height: 118px; }
+    .layout-mini span, .layout-mini div { display: block; border-radius: 999px; background: rgba(0,0,0,0.10); min-height: 11px; }
     .layout-mini .hero-line { height: 34px; background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.9)); }
     .layout-mini .dark-line { background: var(--secondary-preview); opacity: 0.9; }
     .layout-mini .short-line { width: 58%; }
     .layout-mini .mid-line { width: 78%; }
-    @media (max-width: 760px) { .service-mini-grid { grid-template-columns: 1fr; } }
+    .layout-mini .split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; background: transparent; }
+    .layout-mini .split-row span { min-height: 28px; border-radius: 12px; }
+    .live-layout-frame { min-height: 154px; border-radius: 16px; border: 1px solid #e3e5e9; background: linear-gradient(180deg, #fff 0%, #f5f6f9 100%); padding: 12px; display: grid; gap: 8px; }
+    .live-layout-frame .bar { border-radius: 10px; background: rgba(0,0,0,0.08); min-height: 14px; }
+    .live-layout-frame .top { background: var(--secondary-preview); opacity: 0.92; min-height: 11px; }
+    .live-layout-frame .hero { min-height: 42px; background: linear-gradient(90deg, var(--primary-preview), rgba(255,255,255,0.92)); }
+    .live-layout-frame .cta { min-height: 14px; width: 42%; background: rgba(255,122,26,0.26); }
+    .live-layout-frame .short { width: 58%; }
+    .live-layout-frame .mid { width: 82%; }
+    .live-layout-frame .card { min-height: 34px; border-radius: 14px; }
+    .live-layout-frame .grid-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .live-layout-frame .grid-row.two { grid-template-columns: repeat(2, 1fr); }
+    .live-layout-frame .sidebar-row { display: grid; grid-template-columns: 0.65fr 1.35fr; gap: 8px; }
+    .live-layout-frame .sidebar-row.reverse { grid-template-columns: 1.35fr 0.65fr; }
+    .live-layout-frame .split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .live-layout-frame .grid-row div, .live-layout-frame .sidebar-row div, .live-layout-frame .split div { background: rgba(0,0,0,0.08); min-height: 34px; border-radius: 14px; }
+
+    .template-family .template-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .template-family .template-card { padding: 14px; }
+    .template-family .template-card h4 { font-size: 1rem; }
+    .template-family .template-card p { font-size: 0.88rem; line-height: 1.55; }
+    .template-family .template-visual { min-height: 126px; padding: 10px; }
+    .template-family .template-list { gap: 6px; }
+    .template-family .template-list li { font-size: 0.84rem; line-height: 1.45; }
+    .template-family .template-meta { margin: 10px 0; }
+    .template-family .card-action { width: 100%; padding: 13px 12px; }
+
+    @media (max-width: 760px) { .service-mini-grid, .layout-option-track { grid-template-columns: 1fr; } .template-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .template-card { padding: 12px; border-radius: 16px; } .template-shot-row { grid-template-columns: 1fr 50px; gap: 8px; } .template-visual { padding: 8px; min-height: 120px; } .template-list li { font-size: 0.78rem; } .template-meta span { font-size: 0.66rem; padding: 5px 7px; } .template-card .card-action { padding: 12px 10px; width: 100%; } }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
@@ -2155,7 +2185,7 @@
                 <h3>7. Premium features and visual layout style</h3>
                 <p class="helper" style="margin-bottom:14px;">Optional upgrades that make the site feel more high-end and help the business capture, respond to, and convert leads faster.</p>
                 <div class="premium-feature-grid" id="premiumFeatureOptions"></div>
-                <div class="layout-scroll-panel"><h3 style="margin-top:0;">Choose a visual layout direction</h3><p class="helper">Scroll sideways and choose the closest starting style. This does not lock the design in forever — it just helps guide the first draft.</p><div class="layout-option-track" id="layoutStyleOptions"></div></div>
+                <div class="layout-scroll-panel"><h3 style="margin-top:0;">Choose a visual layout direction</h3><p class="helper">Choose a starting style below. The visual preview box on the left updates when a style is selected, so clients can actually see the layout direction.</p><div class="layout-option-track" id="layoutStyleOptions"></div></div>
               </div>
 
               <div class="form-actions">
@@ -2363,14 +2393,14 @@
 
 
     const layoutStyles = [
-      { id: 'restaurant-hero', title: 'Restaurant Hero', desc: 'Big header, strong food/service image area, simple menu-style flow.' },
-      { id: 'local-service', title: 'Local Service', desc: 'Trust-first layout with services, reviews, and quick contact buttons.' },
-      { id: 'premium-brand', title: 'Premium Brand', desc: 'Clean luxury spacing, bold headline, strong brand visuals.' },
-      { id: 'portfolio-showcase', title: 'Portfolio Showcase', desc: 'Image-heavy layout for before-and-after work or product visuals.' },
-      { id: 'booking-focused', title: 'Booking Focused', desc: 'Built around appointments, forms, contact blocks, and action buttons.' },
-      { id: 'product-launch', title: 'Product Launch', desc: 'Great for featured products, apparel, sauces, merch, or promotions.' },
-      { id: 'bold-modern', title: 'Bold Modern', desc: 'High-energy sections, strong contrast, and standout calls-to-action.' },
-      { id: 'clean-corporate', title: 'Clean Corporate', desc: 'Professional, simple, structured layout for credibility and clarity.' }
+      { id: 'restaurant-hero', title: 'Restaurant Hero', desc: 'Big food/service image area, simple menu-style flow.', type: 'restaurant' },
+      { id: 'local-service', title: 'Local Service', desc: 'Trust-first layout with services, reviews, and quick contact buttons.', type: 'service' },
+      { id: 'premium-brand', title: 'Premium Brand', desc: 'Clean luxury spacing with bold brand presentation.', type: 'premium' },
+      { id: 'booking-first', title: 'Booking First', desc: 'Built around appointments, quick action buttons, and lead flow.', type: 'booking' },
+      { id: 'portfolio-showcase', title: 'Portfolio Showcase', desc: 'Image-heavy layout for before-and-after work or product visuals.', type: 'portfolio' },
+      { id: 'product-grid', title: 'Product Grid', desc: 'Best for products, apparel, hot sauces, merch, or featured items.', type: 'products' },
+      { id: 'bold-landing', title: 'Bold Landing Page', desc: 'Strong headline, clear value points, and a focused call-to-action.', type: 'landing' },
+      { id: 'clean-corporate', title: 'Clean Corporate', desc: 'Professional, simple, structured layout for credibility and clarity.', type: 'corporate' }
     ];
 
     const selectionState = {
@@ -2689,10 +2719,21 @@
       list.innerHTML = '';
       selectionState.customExtraPages.forEach((page, index) => {
         const wrap = document.createElement('div');
-        wrap.className = 'grid-2';
-        wrap.innerHTML = `<div class=\"field\"><label>Extra Page Name</label><input type=\"text\" value=\"${escapeHtml(page.title)}\" placeholder=\"Example: Catering, Merch, Gallery\" data-extra-title=\"${index}\"></div><div class=\"field\"><label>What should be on this page?</label><textarea placeholder=\"Describe the idea for this page\" data-extra-desc=\"${index}\">${escapeHtml(page.desc)}</textarea></div>`;
+        wrap.className = 'extra-page-item';
+        wrap.innerHTML = `
+          <button class="remove-extra-page" type="button" aria-label="Remove extra page" data-remove-extra="${index}">×</button>
+          <div class="grid-2">
+            <div class="field"><label>Extra Page Name</label><input type="text" value="${escapeHtml(page.title)}" placeholder="Example: Catering, Merch, Gallery" data-extra-title="${index}"></div>
+            <div class="field"><label>What should be on this page?</label><textarea placeholder="Describe the idea for this page" data-extra-desc="${index}">${escapeHtml(page.desc)}</textarea></div>
+          </div>`;
         list.appendChild(wrap);
       });
+      list.querySelectorAll('[data-remove-extra]').forEach(btn => btn.addEventListener('click', () => {
+        const i = Number(btn.getAttribute('data-remove-extra'));
+        selectionState.customExtraPages.splice(i, 1);
+        renderExtraPages();
+        updatePreview();
+      }));
       list.querySelectorAll('[data-extra-title]').forEach(input => input.addEventListener('input', () => { const i = Number(input.getAttribute('data-extra-title')); selectionState.customExtraPages[i].title = input.value.trim(); updatePreview(); }));
       list.querySelectorAll('[data-extra-desc]').forEach(input => input.addEventListener('input', () => { const i = Number(input.getAttribute('data-extra-desc')); selectionState.customExtraPages[i].desc = input.value.trim(); updatePreview(); }));
     }
@@ -2701,14 +2742,58 @@
       const wrap = document.getElementById('layoutStyleOptions');
       if (!wrap) return;
       wrap.innerHTML = '';
-      layoutStyles.forEach((layout, index) => {
+      layoutStyles.forEach((layout) => {
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'layout-option-card' + (selectionState.layoutStyle === layout.title ? ' active' : '');
-        card.innerHTML = `<h4>${layout.title}</h4><p>${layout.desc}</p><div class=\"layout-mini\" aria-hidden=\"true\"><span class=\"dark-line\"></span><span class=\"hero-line\"></span><span class=\"${index % 2 ? 'mid-line' : ''}\"></span><span class=\"${index % 3 ? 'short-line' : ''}\"></span><span class=\"mid-line\"></span></div>`;
-        card.addEventListener('click', () => { selectionState.layoutStyle = layout.title; document.querySelectorAll('.layout-option-card').forEach(el => el.classList.remove('active')); card.classList.add('active'); updatePreview(); });
+        card.innerHTML = `<h4>${layout.title}</h4><p>${layout.desc}</p>${getLayoutMiniMarkup(layout.type)}`;
+        card.addEventListener('click', () => {
+          selectionState.layoutStyle = layout.title;
+          selectionState.layoutType = layout.type;
+          document.querySelectorAll('.layout-option-card').forEach(el => el.classList.remove('active'));
+          card.classList.add('active');
+          updatePreview();
+        });
         wrap.appendChild(card);
       });
+    }
+
+    function getLayoutMiniMarkup(type) {
+      return `<div class="layout-mini" aria-hidden="true">${getLayoutLines(type, true)}</div>`;
+    }
+
+    function getLayoutLines(type, mini = false) {
+      const cls = mini ? '' : 'bar ';
+      const hero = `<span class="${cls}hero-line hero"></span>`;
+      const top = `<span class="${cls}dark-line top"></span>`;
+      const line = `<span class="${cls}"></span>`;
+      const mid = `<span class="${cls}mid-line mid"></span>`;
+      const short = `<span class="${cls}short-line short"></span>`;
+      const cta = `<span class="${cls}cta"></span>`;
+      const card = `<span class="${cls}card"></span>`;
+      if (type === 'restaurant') return `${top}${hero}${line}${line}${short}${cta}`;
+      if (type === 'service') return `${top}${hero}<div class="grid-row"><div></div><div></div><div></div></div>${mid}${cta}`;
+      if (type === 'premium') return `${top}${hero}${short}<div class="split-row split"><span></span><span></span></div>${mid}${cta}`;
+      if (type === 'booking') return `${top}${hero}<div class="sidebar-row"><div></div><div></div></div>${mid}${cta}`;
+      if (type === 'portfolio') return `${top}${hero}<div class="grid-row"><div></div><div></div><div></div></div><div class="grid-row two"><div></div><div></div></div>${cta}`;
+      if (type === 'products') return `${top}${hero}<div class="grid-row"><div></div><div></div><div></div></div><div class="grid-row"><div></div><div></div><div></div></div>${cta}`;
+      if (type === 'landing') return `${top}${hero}${mid}<div class="split-row split"><span></span><span></span></div>${cta}`;
+      if (type === 'corporate') return `${top}${hero}<div class="sidebar-row reverse"><div></div><div></div></div>${mid}${short}`;
+      return `${top}${hero}${mid}${line}${short}${cta}`;
+    }
+
+    function updateLiveLayoutPreview() {
+      const desktop = document.querySelector('.preview-desktop-mock');
+      const phone = document.querySelector('.preview-phone-mock');
+      const type = selectionState.layoutType || (layoutStyles.find(item => item.title === selectionState.layoutStyle) || {}).type || 'restaurant';
+      if (desktop) {
+        desktop.className = 'preview-desktop-mock live-layout-frame';
+        desktop.innerHTML = getLayoutLines(type, false);
+      }
+      if (phone) {
+        phone.className = 'preview-phone-mock live-layout-frame';
+        phone.innerHTML = getLayoutLines(type, false);
+      }
     }
 
     function renderPremiumFeatures() {
@@ -2861,9 +2946,10 @@
 
     function getEffectivePreviewPages() {
       const pages = selectionState.pages.length ? [...selectionState.pages] : ['Home'];
-      if (selectionState.addOns.includes('Extra Page')) {
-        if (!pages.includes('Extra Page')) pages.push('Extra Page');
-      }
+      selectionState.customExtraPages.forEach((page, index) => {
+        const title = (page.title || `Extra Page ${index + 1}`).trim();
+        if (title && !pages.includes(title)) pages.push(title);
+      });
       return pages;
     }
 
@@ -2900,6 +2986,7 @@
       const previewNavPills = document.getElementById('previewNavPills');
       const previewDetail = document.getElementById('previewDetail');
       const summaryList = document.getElementById('summaryList');
+      updateLiveLayoutPreview();
 
       const businessGoalField = document.getElementById('businessGoalField');
       const selectedPackageFamilyField = document.getElementById('selectedPackageFamilyField');
@@ -3056,7 +3143,7 @@
       const referenceExamples = document.getElementById('referenceExamples')?.value.trim() || '';
       if (selectedAddOnsField) selectedAddOnsField.value = selectionState.addOns.length ? selectionState.addOns.join(', ') : 'None selected';
       if (selectedPagesField) selectedPagesField.value = getEffectivePreviewPages().map(page => selectionState.pageSections[page] ? `${page}: ${(selectionState.pageSections[page] || []).join(', ')}` : `${page}: custom extra page idea`).join(' | ');
-      if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(selectionState.pages.length, 1));
+      if (pageCountEstimateField) pageCountEstimateField.value = String(Math.max(getEffectivePreviewPages().length, 1));
       if (businessTypeField) businessTypeField.value = selectionState.businessType;
       if (toneDirectionField) toneDirectionField.value = selectionState.toneDirection;
       if (contentModeField) contentModeField.value = selectionState.contentMode;
